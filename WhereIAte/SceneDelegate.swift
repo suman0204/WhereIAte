@@ -16,7 +16,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let scene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(windowScene: scene)
+        let MainMapVC = UINavigationController(rootViewController: MainMapViewController())
+        let ListVC = UINavigationController(rootViewController: RegistedRestaurantListViewController())
+        
+        let tabBarController = UITabBarController()
+        tabBarController.setViewControllers([MainMapVC, ListVC], animated: true)
+//        tabBarController.tabBar.tintColor = .white
+        
+        if let items = tabBarController.tabBar.items {
+            items[0].selectedImage = UIImage(systemName: "map")
+            items[0].image = UIImage(systemName: "map")
+            items[0].title = "지도"
+            
+            items[1].selectedImage = UIImage(systemName: "list.bullet")
+            items[1].image = UIImage(systemName: "list.bullet")
+            items[1].title = "리스트"
+            
+        }
+        
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

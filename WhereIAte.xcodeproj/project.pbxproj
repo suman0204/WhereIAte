@@ -13,6 +13,22 @@
 		8B43CE142ACFFE5100E5250C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B43CE122ACFFE5100E5250C /* Main.storyboard */; };
 		8B43CE162ACFFE5200E5250C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B43CE152ACFFE5200E5250C /* Assets.xcassets */; };
 		8B43CE192ACFFE5200E5250C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B43CE172ACFFE5200E5250C /* LaunchScreen.storyboard */; };
+		8B43CE222AD1531700E5250C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE212AD1531700E5250C /* Alamofire */; };
+		8B43CE252AD1541B00E5250C /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE242AD1541B00E5250C /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		8B43CE272AD1541B00E5250C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE262AD1541B00E5250C /* FirebaseCrashlytics */; };
+		8B43CE2A2AD1546800E5250C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE292AD1546800E5250C /* SnapKit */; };
+		8B43CE2C2AD158DD00E5250C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8B43CE2B2AD158DD00E5250C /* .gitignore */; };
+		8B43CE2E2AD1590A00E5250C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B43CE2D2AD1590A00E5250C /* GoogleService-Info.plist */; };
+		8B43CE322AD1B62400E5250C /* MainSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE312AD1B62400E5250C /* MainSearchViewController.swift */; };
+		8B43CE382AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE372AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift */; };
+		8B43CE3D2AD2E71D00E5250C /* KakaoLocalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE3C2AD2E71D00E5250C /* KakaoLocalAPI.swift */; };
+		8B43CE3F2AD2EF9D00E5250C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE3E2AD2EF9D00E5250C /* Network.swift */; };
+		8B43CE412AD2F2E700E5250C /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE402AD2F2E700E5250C /* Restaurant.swift */; };
+		8B43CE432AD3169D00E5250C /* MainSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE422AD3169D00E5250C /* MainSearchViewModel.swift */; };
+		8B43CE462AD3FCE200E5250C /* MainMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE452AD3FCE200E5250C /* MainMapViewController.swift */; };
+		8B43CE492AD3FD1500E5250C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE482AD3FD1500E5250C /* BaseViewController.swift */; };
+		8B43CE4C2AD400F700E5250C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE4B2AD400F700E5250C /* Realm */; };
+		8B43CE4E2AD400F700E5250C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE4D2AD400F700E5250C /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +40,16 @@
 		8B43CE152ACFFE5200E5250C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B43CE182ACFFE5200E5250C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B43CE1A2ACFFE5200E5250C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B43CE2B2AD158DD00E5250C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		8B43CE2D2AD1590A00E5250C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8B43CE312AD1B62400E5250C /* MainSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchViewController.swift; sourceTree = "<group>"; };
+		8B43CE372AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistedRestaurantListViewController.swift; sourceTree = "<group>"; };
+		8B43CE3C2AD2E71D00E5250C /* KakaoLocalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLocalAPI.swift; sourceTree = "<group>"; };
+		8B43CE3E2AD2EF9D00E5250C /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		8B43CE402AD2F2E700E5250C /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		8B43CE422AD3169D00E5250C /* MainSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchViewModel.swift; sourceTree = "<group>"; };
+		8B43CE452AD3FCE200E5250C /* MainMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewController.swift; sourceTree = "<group>"; };
+		8B43CE482AD3FD1500E5250C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +57,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B43CE4E2AD400F700E5250C /* RealmSwift in Frameworks */,
+				8B43CE272AD1541B00E5250C /* FirebaseCrashlytics in Frameworks */,
+				8B43CE2A2AD1546800E5250C /* SnapKit in Frameworks */,
+				8B43CE222AD1531700E5250C /* Alamofire in Frameworks */,
+				8B43CE252AD1541B00E5250C /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				8B43CE4C2AD400F700E5250C /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,9 +94,83 @@
 				8B43CE122ACFFE5100E5250C /* Main.storyboard */,
 				8B43CE152ACFFE5200E5250C /* Assets.xcassets */,
 				8B43CE172ACFFE5200E5250C /* LaunchScreen.storyboard */,
+				8B43CE472AD3FD0400E5250C /* Base */,
+				8B43CE392AD2ACC600E5250C /* Network */,
+				8B43CE332AD1BC7500E5250C /* Scene */,
 				8B43CE1A2ACFFE5200E5250C /* Info.plist */,
+				8B43CE2D2AD1590A00E5250C /* GoogleService-Info.plist */,
+				8B43CE2B2AD158DD00E5250C /* .gitignore */,
 			);
 			path = WhereIAte;
+			sourceTree = "<group>";
+		};
+		8B43CE302AD1B5C400E5250C /* MainSearchView */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE312AD1B62400E5250C /* MainSearchViewController.swift */,
+				8B43CE422AD3169D00E5250C /* MainSearchViewModel.swift */,
+			);
+			path = MainSearchView;
+			sourceTree = "<group>";
+		};
+		8B43CE332AD1BC7500E5250C /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE342AD1BC8100E5250C /* MainTab */,
+				8B43CE352AD1BC9C00E5250C /* ListTab */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		8B43CE342AD1BC8100E5250C /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE442AD3FCCC00E5250C /* MainMapView */,
+				8B43CE302AD1B5C400E5250C /* MainSearchView */,
+			);
+			path = MainTab;
+			sourceTree = "<group>";
+		};
+		8B43CE352AD1BC9C00E5250C /* ListTab */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE362AD1BCBF00E5250C /* RegistedRestaurantListView */,
+			);
+			path = ListTab;
+			sourceTree = "<group>";
+		};
+		8B43CE362AD1BCBF00E5250C /* RegistedRestaurantListView */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE372AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift */,
+			);
+			path = RegistedRestaurantListView;
+			sourceTree = "<group>";
+		};
+		8B43CE392AD2ACC600E5250C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE3C2AD2E71D00E5250C /* KakaoLocalAPI.swift */,
+				8B43CE3E2AD2EF9D00E5250C /* Network.swift */,
+				8B43CE402AD2F2E700E5250C /* Restaurant.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		8B43CE442AD3FCCC00E5250C /* MainMapView */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE452AD3FCE200E5250C /* MainMapViewController.swift */,
+			);
+			path = MainMapView;
+			sourceTree = "<group>";
+		};
+		8B43CE472AD3FD0400E5250C /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE482AD3FD1500E5250C /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,12 +183,21 @@
 				8B43CE052ACFFE5100E5250C /* Sources */,
 				8B43CE062ACFFE5100E5250C /* Frameworks */,
 				8B43CE072ACFFE5100E5250C /* Resources */,
+				8B43CE2F2AD1B0B300E5250C /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = WhereIAte;
+			packageProductDependencies = (
+				8B43CE212AD1531700E5250C /* Alamofire */,
+				8B43CE242AD1541B00E5250C /* FirebaseAnalyticsWithoutAdIdSupport */,
+				8B43CE262AD1541B00E5250C /* FirebaseCrashlytics */,
+				8B43CE292AD1546800E5250C /* SnapKit */,
+				8B43CE4B2AD400F700E5250C /* Realm */,
+				8B43CE4D2AD400F700E5250C /* RealmSwift */,
+			);
 			productName = WhereIAte;
 			productReference = 8B43CE092ACFFE5100E5250C /* WhereIAte.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +226,12 @@
 				Base,
 			);
 			mainGroup = 8B43CE002ACFFE5100E5250C;
+			packageReferences = (
+				8B43CE202AD1531700E5250C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8B43CE232AD1541B00E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				8B43CE282AD1546800E5250C /* XCRemoteSwiftPackageReference "SnapKit" */,
+				8B43CE4A2AD400F700E5250C /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 8B43CE0A2ACFFE5100E5250C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,13 +246,40 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B43CE2C2AD158DD00E5250C /* .gitignore in Resources */,
 				8B43CE192ACFFE5200E5250C /* LaunchScreen.storyboard in Resources */,
 				8B43CE162ACFFE5200E5250C /* Assets.xcassets in Resources */,
+				8B43CE2E2AD1590A00E5250C /* GoogleService-Info.plist in Resources */,
 				8B43CE142ACFFE5100E5250C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8B43CE2F2AD1B0B300E5250C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8B43CE052ACFFE5100E5250C /* Sources */ = {
@@ -140,7 +288,15 @@
 			files = (
 				8B43CE112ACFFE5100E5250C /* ViewController.swift in Sources */,
 				8B43CE0D2ACFFE5100E5250C /* AppDelegate.swift in Sources */,
+				8B43CE492AD3FD1500E5250C /* BaseViewController.swift in Sources */,
 				8B43CE0F2ACFFE5100E5250C /* SceneDelegate.swift in Sources */,
+				8B43CE322AD1B62400E5250C /* MainSearchViewController.swift in Sources */,
+				8B43CE462AD3FCE200E5250C /* MainMapViewController.swift in Sources */,
+				8B43CE412AD2F2E700E5250C /* Restaurant.swift in Sources */,
+				8B43CE3D2AD2E71D00E5250C /* KakaoLocalAPI.swift in Sources */,
+				8B43CE3F2AD2EF9D00E5250C /* Network.swift in Sources */,
+				8B43CE382AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift in Sources */,
+				8B43CE432AD3169D00E5250C /* MainSearchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,13 +443,16 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ZB66AY8DJC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhereIAte/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -314,13 +473,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZB66AY8DJC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhereIAte/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -356,6 +517,74 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B43CE202AD1531700E5250C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		8B43CE232AD1541B00E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		8B43CE282AD1546800E5250C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		8B43CE4A2AD400F700E5250C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.43.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B43CE212AD1531700E5250C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B43CE202AD1531700E5250C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		8B43CE242AD1541B00E5250C /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B43CE232AD1541B00E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		8B43CE262AD1541B00E5250C /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B43CE232AD1541B00E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		8B43CE292AD1546800E5250C /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B43CE282AD1546800E5250C /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		8B43CE4B2AD400F700E5250C /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B43CE4A2AD400F700E5250C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		8B43CE4D2AD400F700E5250C /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B43CE4A2AD400F700E5250C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8B43CE012ACFFE5100E5250C /* Project object */;
 }
