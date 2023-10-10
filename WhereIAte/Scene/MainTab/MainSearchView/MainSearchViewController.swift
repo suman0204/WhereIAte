@@ -59,8 +59,8 @@ extension MainSearchViewController: UISearchBarDelegate {
             return
         }
         
-        viewModel.request(query: query) { result in
-            dump(result)
-        }
+//        viewModel.request(query: query) { result in
+//            dump(result)
+//        }
     }
 }

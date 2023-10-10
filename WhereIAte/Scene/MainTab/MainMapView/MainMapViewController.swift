@@ -11,11 +11,22 @@ import MapKit
 
 class MainMapViewController: BaseViewController {
     
+//    var restaurantReultList: [RestaurantDocument] = []
+    
+    let viewModel = MainSearchViewModel()
+    
     let locationManager = CLLocationManager()
     
     let mainMapView = MKMapView()
   
-    let searchController = UISearchController(searchResultsController: nil)
+//    let mainSearchTableViewController = MainSearchTableViewController()
+//    let searchController = UISearchController(searchResultsController: MainSearchTableViewController())
+//    var searchController = UISearchController(searchResultsController: nil)
+    
+    let mainSearchTableViewController = MainSearchTableViewController()
+
+    var searchController = UISearchController(searchResultsController: nil)
+
 
 //    let restaurantSearchBar = {
 //        let view = UISearchBar()
@@ -30,10 +41,20 @@ class MainMapViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        searchController = UISearchController(searchResultsController: mainSearchTableViewController)
+//        viewModel.resultList.bind { _ in
+//            DispatchQueue.main.async {
+//                self.mainSearchTableViewController.tableView.reloadData()
+//            }
+//        }
         locationManager.delegate = self
         
         checkDeviceLocationAuthorization()
+        
+        searchController.hidesNavigationBarDuringPresentation = false
+//        searchController.obscuresBackgroundDuringPresentation = true
+//        searchController.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
 
     }
     
@@ -172,16 +193,33 @@ extension MainMapViewController {
 extension MainMapViewController: UISearchControllerDelegate, UISearchBarDelegate {
     
     func configureSearchController() {
+        searchController = UISearchController(searchResultsController: mainSearchTableViewController)
+
         searchController.delegate = self
         searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = mainSearchTableViewController
+        
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "식당을 검색해보세요"
         searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
         searchController.searchBar.setShowsCancelButton(true, animated: true)
         
+       
         // UISearchController를 내비게이션 바의 타이틀 뷰로 설정합니다.
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text else { return }
+        viewModel.request(query: query)
+        { result in
+            self.mainSearchTableViewController.restaurantResultList = result.documents
+            self.mainSearchTableViewController.tableView.reloadData()
+        }
+//        mainSearchTableViewController.tableView.reloadData()
+//        print(viewModel.resultList)
+        print("-------------")
+//        print(viewModel.rowCount)
+    }
 }

@@ -29,6 +29,11 @@
 		8B43CE492AD3FD1500E5250C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE482AD3FD1500E5250C /* BaseViewController.swift */; };
 		8B43CE4C2AD400F700E5250C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE4B2AD400F700E5250C /* Realm */; };
 		8B43CE4E2AD400F700E5250C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE4D2AD400F700E5250C /* RealmSwift */; };
+		8B43CE502AD5178400E5250C /* MainSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE4F2AD5178400E5250C /* MainSearchTableViewCell.swift */; };
+		8B43CE522AD517EB00E5250C /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE512AD517EB00E5250C /* BaseTableViewCell.swift */; };
+		8B43CE542AD5212900E5250C /* MainSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE532AD5212900E5250C /* MainSearchTableViewController.swift */; };
+		8B43CE562AD5217D00E5250C /* ReusableViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE552AD5217D00E5250C /* ReusableViewProtocol.swift */; };
+		8B43CE582AD5C3E900E5250C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE572AD5C3E900E5250C /* Observable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +55,11 @@
 		8B43CE422AD3169D00E5250C /* MainSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchViewModel.swift; sourceTree = "<group>"; };
 		8B43CE452AD3FCE200E5250C /* MainMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewController.swift; sourceTree = "<group>"; };
 		8B43CE482AD3FD1500E5250C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		8B43CE4F2AD5178400E5250C /* MainSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchTableViewCell.swift; sourceTree = "<group>"; };
+		8B43CE512AD517EB00E5250C /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		8B43CE532AD5212900E5250C /* MainSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchTableViewController.swift; sourceTree = "<group>"; };
+		8B43CE552AD5217D00E5250C /* ReusableViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableViewProtocol.swift; sourceTree = "<group>"; };
+		8B43CE572AD5C3E900E5250C /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +119,8 @@
 			children = (
 				8B43CE312AD1B62400E5250C /* MainSearchViewController.swift */,
 				8B43CE422AD3169D00E5250C /* MainSearchViewModel.swift */,
+				8B43CE4F2AD5178400E5250C /* MainSearchTableViewCell.swift */,
+				8B43CE532AD5212900E5250C /* MainSearchTableViewController.swift */,
 			);
 			path = MainSearchView;
 			sourceTree = "<group>";
@@ -125,6 +137,7 @@
 		8B43CE342AD1BC8100E5250C /* MainTab */ = {
 			isa = PBXGroup;
 			children = (
+				8B43CE572AD5C3E900E5250C /* Observable.swift */,
 				8B43CE442AD3FCCC00E5250C /* MainMapView */,
 				8B43CE302AD1B5C400E5250C /* MainSearchView */,
 			);
@@ -169,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				8B43CE482AD3FD1500E5250C /* BaseViewController.swift */,
+				8B43CE512AD517EB00E5250C /* BaseTableViewCell.swift */,
+				8B43CE552AD5217D00E5250C /* ReusableViewProtocol.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -286,16 +301,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B43CE582AD5C3E900E5250C /* Observable.swift in Sources */,
 				8B43CE112ACFFE5100E5250C /* ViewController.swift in Sources */,
 				8B43CE0D2ACFFE5100E5250C /* AppDelegate.swift in Sources */,
 				8B43CE492AD3FD1500E5250C /* BaseViewController.swift in Sources */,
 				8B43CE0F2ACFFE5100E5250C /* SceneDelegate.swift in Sources */,
 				8B43CE322AD1B62400E5250C /* MainSearchViewController.swift in Sources */,
 				8B43CE462AD3FCE200E5250C /* MainMapViewController.swift in Sources */,
+				8B43CE502AD5178400E5250C /* MainSearchTableViewCell.swift in Sources */,
 				8B43CE412AD2F2E700E5250C /* Restaurant.swift in Sources */,
 				8B43CE3D2AD2E71D00E5250C /* KakaoLocalAPI.swift in Sources */,
 				8B43CE3F2AD2EF9D00E5250C /* Network.swift in Sources */,
+				8B43CE542AD5212900E5250C /* MainSearchTableViewController.swift in Sources */,
+				8B43CE562AD5217D00E5250C /* ReusableViewProtocol.swift in Sources */,
 				8B43CE382AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift in Sources */,
+				8B43CE522AD517EB00E5250C /* BaseTableViewCell.swift in Sources */,
 				8B43CE432AD3169D00E5250C /* MainSearchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
