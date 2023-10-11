@@ -114,15 +114,15 @@
 			path = WhereIAte;
 			sourceTree = "<group>";
 		};
-		8B43CE302AD1B5C400E5250C /* MainSearchView */ = {
+		8B43CE302AD1B5C400E5250C /* MainSearchTableView */ = {
 			isa = PBXGroup;
 			children = (
-				8B43CE312AD1B62400E5250C /* MainSearchViewController.swift */,
-				8B43CE422AD3169D00E5250C /* MainSearchViewModel.swift */,
-				8B43CE4F2AD5178400E5250C /* MainSearchTableViewCell.swift */,
 				8B43CE532AD5212900E5250C /* MainSearchTableViewController.swift */,
+				8B43CE4F2AD5178400E5250C /* MainSearchTableViewCell.swift */,
+				8B43CE422AD3169D00E5250C /* MainSearchViewModel.swift */,
+				8B43CE312AD1B62400E5250C /* MainSearchViewController.swift */,
 			);
-			path = MainSearchView;
+			path = MainSearchTableView;
 			sourceTree = "<group>";
 		};
 		8B43CE332AD1BC7500E5250C /* Scene */ = {
@@ -139,7 +139,7 @@
 			children = (
 				8B43CE572AD5C3E900E5250C /* Observable.swift */,
 				8B43CE442AD3FCCC00E5250C /* MainMapView */,
-				8B43CE302AD1B5C400E5250C /* MainSearchView */,
+				8B43CE302AD1B5C400E5250C /* MainSearchTableView */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";

@@ -9,6 +9,10 @@ import UIKit
 import CoreLocation
 import MapKit
 
+protocol HandleMapSearch {
+    func dropPinZoomIn(center: CLLocationCoordinate2D, restaurantName: String, retaurantRoadAddress: String)
+}
+
 class MainMapViewController: BaseViewController {
     
 //    var restaurantReultList: [RestaurantDocument] = []
@@ -27,6 +31,15 @@ class MainMapViewController: BaseViewController {
 
     var searchController = UISearchController(searchResultsController: nil)
 
+    let myLocationButton = {
+        let view = UIButton()
+        view.setImage(UIImage(systemName: "location"), for: .normal)
+        view.tintColor = .black
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 25
+        view.addTarget(self, action: #selector(myLoactionButtonClicked), for: .touchUpInside)
+        return view
+    }()
 
 //    let restaurantSearchBar = {
 //        let view = UISearchBar()
@@ -47,7 +60,11 @@ class MainMapViewController: BaseViewController {
 //                self.mainSearchTableViewController.tableView.reloadData()
 //            }
 //        }
+        title = "Where I Ate"
+        mainSearchTableViewController.handleMapSearchDelegate = self
+        
         locationManager.delegate = self
+        mainMapView.delegate = self
         
         checkDeviceLocationAuthorization()
         
@@ -58,10 +75,15 @@ class MainMapViewController: BaseViewController {
 
     }
     
+    @objc private func myLoactionButtonClicked() {
+        mainMapView.showsUserLocation = true
+        mainMapView.setUserTrackingMode(.follow, animated: true)
+    }
+    
     override func configureView() {
         view.backgroundColor = .white
         
-        [mainMapView].forEach {
+        [mainMapView, myLocationButton].forEach {
             view.addSubview($0)
         }
         configureSearchController()
@@ -70,6 +92,12 @@ class MainMapViewController: BaseViewController {
     override func setConstraints() {
         mainMapView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        myLocationButton.snp.makeConstraints { make in
+            make.size.equalTo(50)
+            make.top.equalTo(mainMapView.snp.top).inset(20)
+            make.trailing.equalTo(mainMapView.snp.trailing).inset(20)
         }
     }
 }
@@ -84,6 +112,8 @@ extension MainMapViewController: CLLocationManagerDelegate {
 //            setRegionAndAnnotation(center: coordinate)
             mainMapView.showsUserLocation = true
             mainMapView.setUserTrackingMode(.follow, animated: true)
+            
+            locationManager.stopUpdatingLocation()
         }
     }
     
@@ -96,6 +126,43 @@ extension MainMapViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         print(#function)
         checkDeviceLocationAuthorization() // 권한 설정이 바뀐 것만 인지하기 때문에 checkDevice 메서드를 실행해준다
+    }
+}
+
+extension MainMapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // 현재 위치 표시(점)도 일종에 어노테이션이기 때문에, 이 처리를 안하게 되면, 유저 위치 어노테이션도 변경 된다.
+        // guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
+        guard !(annotation is MKUserLocation) else { return nil }
+
+        
+        // 식별자
+        let identifier = "Custom"
+        
+        // 식별자로 재사용 가능한 AnnotationView가 있나 확인한 뒤 작업을 실행 (if 로직)
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        
+        if annotationView == nil {
+            // 재사용 가능한 식별자를 갖고 어노테이션 뷰를 생성
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            
+            // 콜아웃 버튼을 보이게 함
+            annotationView?.canShowCallout = true
+            // 이미지 변경
+            annotationView?.image = UIImage(systemName: "fork.knife.circle.fill")
+//            annotationView?.image?.size.width = 50
+            annotationView?.image?.withTintColor(.orange)
+            
+            // 상세 버튼 생성 후 액세서리에 추가 (i 모양 버튼)
+            // 버튼을 만들어주면 callout 부분 전체가 버튼 역활을 합니다
+            let button = UIButton()
+            button.setImage(UIImage(systemName: "plus.circle")!, for: .normal)
+            button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+//            let button = UIButton(type: .detailDisclosure)
+            annotationView?.rightCalloutAccessoryView = button
+        }
+        
+        return annotationView
     }
 }
 
@@ -222,4 +289,26 @@ extension MainMapViewController: UISearchControllerDelegate, UISearchBarDelegate
         print("-------------")
 //        print(viewModel.rowCount)
     }
+}
+
+extension MainMapViewController: HandleMapSearch {
+    func dropPinZoomIn(center: CLLocationCoordinate2D, restaurantName: String, retaurantRoadAddress: String) {
+        
+//        if mainMapView.annotations.count != 0 {
+            mainMapView.removeAnnotations(mainMapView.annotations)
+//        }
+        
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta:0.01, longitudeDelta:0.01))
+        mainMapView.setRegion(region, animated: true)
+        
+        //어노테이션 추가
+        let annotation = MKPointAnnotation()
+        annotation.title = restaurantName
+        annotation.subtitle = retaurantRoadAddress
+        annotation.coordinate = center
+        mainMapView.addAnnotation(annotation)
+        
+    }
+    
+    
 }

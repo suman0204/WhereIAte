@@ -22,6 +22,17 @@ struct RestaurantDocument: Decodable {
     let placeName: String
     let placeURL: String
     let roadAddressName, x, y: String
+    
+    var lastCategory: String {
+        let components = categoryName.components(separatedBy: " ")
+
+        if let lastWord = components.last {
+            return lastWord
+        } else {
+            print("nil")
+            return ""
+        }
+    }
 
     enum CodingKeys: String, CodingKey {
         case addressName = "address_name"

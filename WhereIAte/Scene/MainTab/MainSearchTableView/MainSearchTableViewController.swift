@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MainSearchTableViewController: UITableViewController {
     
     var restaurantResultList: [RestaurantDocument] = []
     
     let viewModel = MainSearchViewModel()
+    
+    var handleMapSearchDelegate: HandleMapSearch? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +45,13 @@ class MainSearchTableViewController: UITableViewController {
         cell.setData(data: data)
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = restaurantResultList[indexPath.row]
+        handleMapSearchDelegate?.dropPinZoomIn(center: CLLocationCoordinate2D(latitude: Double(data.y) ?? 0.0, longitude: Double(data.x) ?? 0.0), restaurantName: data.placeName, retaurantRoadAddress: data.roadAddressName)
+        dismiss(animated: true, completion: nil)
+
+    }
 }
 
 
@@ -51,10 +61,8 @@ extension MainSearchTableViewController: UISearchResultsUpdating {
             return
             // 검색어 입력 얼럿 띄우기
         }
-        
-//        viewModel.request(query: query) { result in
-//            self.restaurantResultList = result.documents
-//        }
+        restaurantResultList.removeAll()
+        tableView.reloadData()
     }
     
     

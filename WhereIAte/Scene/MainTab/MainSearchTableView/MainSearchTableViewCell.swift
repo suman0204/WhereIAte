@@ -120,7 +120,7 @@ class MainSearchTableViewCell: BaseTableViewCell {
         
         restaurantCategory.snp.makeConstraints { make in
             make.leading.equalTo(restaurantName.snp.trailing).offset(5)
-//            make.trailing.equalTo(contentView).inset(20)
+//            make.trailing.equalTo(contentView).offset(-20)
             make.bottom.equalTo(restaurantName)
         }
         
@@ -133,7 +133,7 @@ class MainSearchTableViewCell: BaseTableViewCell {
     
     func setData(data: RestaurantDocument) {
         restaurantName.text = data.placeName
-        restaurantCategory.text = data.categoryName
+        restaurantCategory.text = data.lastCategory
         restaurantRoadAddress.text = data.roadAddressName
     }
 }
