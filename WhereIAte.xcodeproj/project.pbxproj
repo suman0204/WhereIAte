@@ -13,10 +13,6 @@
 		8B43CE142ACFFE5100E5250C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B43CE122ACFFE5100E5250C /* Main.storyboard */; };
 		8B43CE162ACFFE5200E5250C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B43CE152ACFFE5200E5250C /* Assets.xcassets */; };
 		8B43CE192ACFFE5200E5250C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B43CE172ACFFE5200E5250C /* LaunchScreen.storyboard */; };
-		8B43CE222AD1531700E5250C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE212AD1531700E5250C /* Alamofire */; };
-		8B43CE252AD1541B00E5250C /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE242AD1541B00E5250C /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		8B43CE272AD1541B00E5250C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE262AD1541B00E5250C /* FirebaseCrashlytics */; };
-		8B43CE2A2AD1546800E5250C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE292AD1546800E5250C /* SnapKit */; };
 		8B43CE2C2AD158DD00E5250C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8B43CE2B2AD158DD00E5250C /* .gitignore */; };
 		8B43CE2E2AD1590A00E5250C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B43CE2D2AD1590A00E5250C /* GoogleService-Info.plist */; };
 		8B43CE322AD1B62400E5250C /* MainSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE312AD1B62400E5250C /* MainSearchViewController.swift */; };
@@ -27,13 +23,23 @@
 		8B43CE432AD3169D00E5250C /* MainSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE422AD3169D00E5250C /* MainSearchViewModel.swift */; };
 		8B43CE462AD3FCE200E5250C /* MainMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE452AD3FCE200E5250C /* MainMapViewController.swift */; };
 		8B43CE492AD3FD1500E5250C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE482AD3FD1500E5250C /* BaseViewController.swift */; };
-		8B43CE4C2AD400F700E5250C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE4B2AD400F700E5250C /* Realm */; };
-		8B43CE4E2AD400F700E5250C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE4D2AD400F700E5250C /* RealmSwift */; };
 		8B43CE502AD5178400E5250C /* MainSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE4F2AD5178400E5250C /* MainSearchTableViewCell.swift */; };
 		8B43CE522AD517EB00E5250C /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE512AD517EB00E5250C /* BaseTableViewCell.swift */; };
 		8B43CE542AD5212900E5250C /* MainSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE532AD5212900E5250C /* MainSearchTableViewController.swift */; };
 		8B43CE562AD5217D00E5250C /* ReusableViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE552AD5217D00E5250C /* ReusableViewProtocol.swift */; };
 		8B43CE582AD5C3E900E5250C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE572AD5C3E900E5250C /* Observable.swift */; };
+		8B43CE6D2AD83ED800E5250C /* MainMapViewBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE6C2AD83ED800E5250C /* MainMapViewBottomSheetView.swift */; };
+		8B43CE712ADAAA6300E5250C /* HistoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE702ADAAA6300E5250C /* HistoryListViewController.swift */; };
+		8B43CE742ADAD92900E5250C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE732ADAD92900E5250C /* Alamofire */; };
+		8B43CE772ADAD95500E5250C /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE762ADAD95500E5250C /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		8B43CE792ADAD95500E5250C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE782ADAD95500E5250C /* FirebaseCrashlytics */; };
+		8B43CE7C2ADAD97400E5250C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE7B2ADAD97400E5250C /* SnapKit */; };
+		8B43CE7F2ADAD9D400E5250C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE7E2ADAD9D400E5250C /* Realm */; };
+		8B43CE812ADAD9D400E5250C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE802ADAD9D400E5250C /* RealmSwift */; };
+		8B43CE832ADBDF6900E5250C /* RestaurantTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE822ADBDF6900E5250C /* RestaurantTable.swift */; };
+		8B43CE852ADBE57A00E5250C /* HistoryTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE842ADBE57A00E5250C /* HistoryTable.swift */; };
+		8B43CE872ADBF95B00E5250C /* HistoryRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE862ADBF95B00E5250C /* HistoryRegisterViewController.swift */; };
+		8B43CE8A2ADC605800E5250C /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE892ADC605800E5250C /* Cosmos */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +66,11 @@
 		8B43CE532AD5212900E5250C /* MainSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchTableViewController.swift; sourceTree = "<group>"; };
 		8B43CE552AD5217D00E5250C /* ReusableViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableViewProtocol.swift; sourceTree = "<group>"; };
 		8B43CE572AD5C3E900E5250C /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		8B43CE6C2AD83ED800E5250C /* MainMapViewBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewBottomSheetView.swift; sourceTree = "<group>"; };
+		8B43CE702ADAAA6300E5250C /* HistoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListViewController.swift; sourceTree = "<group>"; };
+		8B43CE822ADBDF6900E5250C /* RestaurantTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTable.swift; sourceTree = "<group>"; };
+		8B43CE842ADBE57A00E5250C /* HistoryTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTable.swift; sourceTree = "<group>"; };
+		8B43CE862ADBF95B00E5250C /* HistoryRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,12 +78,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B43CE4E2AD400F700E5250C /* RealmSwift in Frameworks */,
-				8B43CE272AD1541B00E5250C /* FirebaseCrashlytics in Frameworks */,
-				8B43CE2A2AD1546800E5250C /* SnapKit in Frameworks */,
-				8B43CE222AD1531700E5250C /* Alamofire in Frameworks */,
-				8B43CE252AD1541B00E5250C /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				8B43CE4C2AD400F700E5250C /* Realm in Frameworks */,
+				8B43CE812ADAD9D400E5250C /* RealmSwift in Frameworks */,
+				8B43CE772ADAD95500E5250C /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				8B43CE8A2ADC605800E5250C /* Cosmos in Frameworks */,
+				8B43CE792ADAD95500E5250C /* FirebaseCrashlytics in Frameworks */,
+				8B43CE7C2ADAD97400E5250C /* SnapKit in Frameworks */,
+				8B43CE742ADAD92900E5250C /* Alamofire in Frameworks */,
+				8B43CE7F2ADAD9D400E5250C /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +116,7 @@
 				8B43CE122ACFFE5100E5250C /* Main.storyboard */,
 				8B43CE152ACFFE5200E5250C /* Assets.xcassets */,
 				8B43CE172ACFFE5200E5250C /* LaunchScreen.storyboard */,
+				8B43CE6E2ADA733E00E5250C /* Realm */,
 				8B43CE472AD3FD0400E5250C /* Base */,
 				8B43CE392AD2ACC600E5250C /* Network */,
 				8B43CE332AD1BC7500E5250C /* Scene */,
@@ -140,6 +153,7 @@
 				8B43CE572AD5C3E900E5250C /* Observable.swift */,
 				8B43CE442AD3FCCC00E5250C /* MainMapView */,
 				8B43CE302AD1B5C400E5250C /* MainSearchTableView */,
+				8B43CE6F2ADAA9FD00E5250C /* HistoryView */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -174,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				8B43CE452AD3FCE200E5250C /* MainMapViewController.swift */,
+				8B43CE6C2AD83ED800E5250C /* MainMapViewBottomSheetView.swift */,
 			);
 			path = MainMapView;
 			sourceTree = "<group>";
@@ -186,6 +201,24 @@
 				8B43CE552AD5217D00E5250C /* ReusableViewProtocol.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		8B43CE6E2ADA733E00E5250C /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE822ADBDF6900E5250C /* RestaurantTable.swift */,
+				8B43CE842ADBE57A00E5250C /* HistoryTable.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		8B43CE6F2ADAA9FD00E5250C /* HistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE702ADAAA6300E5250C /* HistoryListViewController.swift */,
+				8B43CE862ADBF95B00E5250C /* HistoryRegisterViewController.swift */,
+			);
+			path = HistoryView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,12 +239,13 @@
 			);
 			name = WhereIAte;
 			packageProductDependencies = (
-				8B43CE212AD1531700E5250C /* Alamofire */,
-				8B43CE242AD1541B00E5250C /* FirebaseAnalyticsWithoutAdIdSupport */,
-				8B43CE262AD1541B00E5250C /* FirebaseCrashlytics */,
-				8B43CE292AD1546800E5250C /* SnapKit */,
-				8B43CE4B2AD400F700E5250C /* Realm */,
-				8B43CE4D2AD400F700E5250C /* RealmSwift */,
+				8B43CE732ADAD92900E5250C /* Alamofire */,
+				8B43CE762ADAD95500E5250C /* FirebaseAnalyticsWithoutAdIdSupport */,
+				8B43CE782ADAD95500E5250C /* FirebaseCrashlytics */,
+				8B43CE7B2ADAD97400E5250C /* SnapKit */,
+				8B43CE7E2ADAD9D400E5250C /* Realm */,
+				8B43CE802ADAD9D400E5250C /* RealmSwift */,
+				8B43CE892ADC605800E5250C /* Cosmos */,
 			);
 			productName = WhereIAte;
 			productReference = 8B43CE092ACFFE5100E5250C /* WhereIAte.app */;
@@ -242,10 +276,11 @@
 			);
 			mainGroup = 8B43CE002ACFFE5100E5250C;
 			packageReferences = (
-				8B43CE202AD1531700E5250C /* XCRemoteSwiftPackageReference "Alamofire" */,
-				8B43CE232AD1541B00E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				8B43CE282AD1546800E5250C /* XCRemoteSwiftPackageReference "SnapKit" */,
-				8B43CE4A2AD400F700E5250C /* XCRemoteSwiftPackageReference "realm-swift" */,
+				8B43CE722ADAD92900E5250C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8B43CE752ADAD95500E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				8B43CE7A2ADAD97400E5250C /* XCRemoteSwiftPackageReference "SnapKit" */,
+				8B43CE7D2ADAD9D400E5250C /* XCRemoteSwiftPackageReference "realm-swift" */,
+				8B43CE882ADC605800E5250C /* XCRemoteSwiftPackageReference "Cosmos" */,
 			);
 			productRefGroup = 8B43CE0A2ACFFE5100E5250C /* Products */;
 			projectDirPath = "";
@@ -307,16 +342,21 @@
 				8B43CE492AD3FD1500E5250C /* BaseViewController.swift in Sources */,
 				8B43CE0F2ACFFE5100E5250C /* SceneDelegate.swift in Sources */,
 				8B43CE322AD1B62400E5250C /* MainSearchViewController.swift in Sources */,
+				8B43CE872ADBF95B00E5250C /* HistoryRegisterViewController.swift in Sources */,
 				8B43CE462AD3FCE200E5250C /* MainMapViewController.swift in Sources */,
+				8B43CE852ADBE57A00E5250C /* HistoryTable.swift in Sources */,
 				8B43CE502AD5178400E5250C /* MainSearchTableViewCell.swift in Sources */,
 				8B43CE412AD2F2E700E5250C /* Restaurant.swift in Sources */,
 				8B43CE3D2AD2E71D00E5250C /* KakaoLocalAPI.swift in Sources */,
 				8B43CE3F2AD2EF9D00E5250C /* Network.swift in Sources */,
 				8B43CE542AD5212900E5250C /* MainSearchTableViewController.swift in Sources */,
+				8B43CE832ADBDF6900E5250C /* RestaurantTable.swift in Sources */,
 				8B43CE562AD5217D00E5250C /* ReusableViewProtocol.swift in Sources */,
 				8B43CE382AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift in Sources */,
+				8B43CE6D2AD83ED800E5250C /* MainMapViewBottomSheetView.swift in Sources */,
 				8B43CE522AD517EB00E5250C /* BaseTableViewCell.swift in Sources */,
 				8B43CE432AD3169D00E5250C /* MainSearchViewModel.swift in Sources */,
+				8B43CE712ADAAA6300E5250C /* HistoryListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,7 +579,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8B43CE202AD1531700E5250C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		8B43CE722ADAD92900E5250C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
@@ -547,7 +587,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		8B43CE232AD1541B00E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		8B43CE752ADAD95500E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
@@ -555,7 +595,7 @@
 				minimumVersion = 10.0.0;
 			};
 		};
-		8B43CE282AD1546800E5250C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		8B43CE7A2ADAD97400E5250C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -563,7 +603,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		8B43CE4A2AD400F700E5250C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		8B43CE7D2ADAD9D400E5250C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -571,38 +611,51 @@
 				minimumVersion = 10.43.0;
 			};
 		};
+		8B43CE882ADC605800E5250C /* XCRemoteSwiftPackageReference "Cosmos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/Cosmos";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 23.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8B43CE212AD1531700E5250C /* Alamofire */ = {
+		8B43CE732ADAD92900E5250C /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B43CE202AD1531700E5250C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 8B43CE722ADAD92900E5250C /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		8B43CE242AD1541B00E5250C /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+		8B43CE762ADAD95500E5250C /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B43CE232AD1541B00E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 8B43CE752ADAD95500E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
 		};
-		8B43CE262AD1541B00E5250C /* FirebaseCrashlytics */ = {
+		8B43CE782ADAD95500E5250C /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B43CE232AD1541B00E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 8B43CE752ADAD95500E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
 		};
-		8B43CE292AD1546800E5250C /* SnapKit */ = {
+		8B43CE7B2ADAD97400E5250C /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B43CE282AD1546800E5250C /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 8B43CE7A2ADAD97400E5250C /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		8B43CE4B2AD400F700E5250C /* Realm */ = {
+		8B43CE7E2ADAD9D400E5250C /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B43CE4A2AD400F700E5250C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 8B43CE7D2ADAD9D400E5250C /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
-		8B43CE4D2AD400F700E5250C /* RealmSwift */ = {
+		8B43CE802ADAD9D400E5250C /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B43CE4A2AD400F700E5250C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 8B43CE7D2ADAD9D400E5250C /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		8B43CE892ADC605800E5250C /* Cosmos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B43CE882ADC605800E5250C /* XCRemoteSwiftPackageReference "Cosmos" */;
+			productName = Cosmos;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

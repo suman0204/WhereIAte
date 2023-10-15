@@ -16,12 +16,21 @@ struct Restaurant: Decodable {
 // MARK: - Document
 struct RestaurantDocument: Decodable {
     let addressName: String
-    let categoryGroupCode: CategoryGroupCode
-    let categoryGroupName: CategoryGroupName
     let categoryName, distance, id, phone: String
     let placeName: String
     let placeURL: String
     let roadAddressName, x, y: String
+    
+    var city: String {
+        let components = roadAddressName.components(separatedBy: " ")
+
+        if let firstWord = components.first {
+            return firstWord
+        } else {
+            print("nil")
+            return ""
+        }
+    }
     
     var lastCategory: String {
         let components = categoryName.components(separatedBy: " ")
@@ -33,11 +42,17 @@ struct RestaurantDocument: Decodable {
             return ""
         }
     }
+    
+    var latitude: Double {
+        return Double(y) ?? 0.0
+    }
+    
+    var longitude: Double {
+        return Double(x) ?? 0.0
+    }
 
     enum CodingKeys: String, CodingKey {
         case addressName = "address_name"
-        case categoryGroupCode = "category_group_code"
-        case categoryGroupName = "category_group_name"
         case categoryName = "category_name"
         case distance, id, phone
         case placeName = "place_name"
@@ -45,14 +60,6 @@ struct RestaurantDocument: Decodable {
         case roadAddressName = "road_address_name"
         case x, y
     }
-}
-
-enum CategoryGroupCode: String, Decodable {
-    case fd6 = "FD6"
-}
-
-enum CategoryGroupName: String, Decodable {
-    case 음식점 = "음식점"
 }
 
 // MARK: - Meta
