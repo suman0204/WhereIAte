@@ -11,14 +11,16 @@ import RealmSwift
 class HistoryTable: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var visitedDate: Date
+    @Persisted var historyTitle: String
     @Persisted var menu: String
     @Persisted var rate: Double
     @Persisted var comment: String
     @Persisted var images: List<String?>
     @Persisted var registeredDate: Date
     
-    convenience init(visitedDate: Date, menu: String, rate: Double, comment: String, image: [String]?, registeredDate: Date) {
+    convenience init(title: String, visitedDate: Date, menu: String, rate: Double, comment: String, image: [String]?, registeredDate: Date) {
         self.init()
+        self.historyTitle = title
         self.visitedDate = visitedDate
         self.menu = menu
         self.rate = rate
