@@ -186,10 +186,12 @@ class HistoryRegisterViewController: BaseViewController {
             return
         }
         
+        if !repository.restaurantFilter(restaurantID: restaurantDocument.id) {
         let restauarantTable = RestaurantTable(id: restaurantDocument.id, name: restaurantDocument.placeName, roadAddress: restaurantDocument.roadAddressName, phoneNumber: restaurantDocument.phone, placeURL: restaurantDocument.placeURL, city: restaurantDocument.city, latitude: restaurantDocument.latitude, longitude: restaurantDocument.longitude, registeredDate: Date())
         
         repository.createRestaurantTable(restauarantTable)
-//
+        }
+        
         var imageList: List<String> {
             let list: List<String> = List<String>()
             selectedAssetIdentifiers.forEach {

@@ -66,4 +66,16 @@ class RealmRepository {
         }
         
     }
+    
+    func restaurantFilter(restaurantID: String) -> Bool {
+        let result = realm.objects(RestaurantTable.self).where({
+            $0.restaurantID == restaurantID
+        })
+        
+        if !result.isEmpty {
+            return true
+        } else {
+            return false
+        }
+    }
 }
