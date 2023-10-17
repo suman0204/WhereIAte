@@ -120,6 +120,7 @@ class MainMapViewBottomSheetView: BaseViewController {
         print("tap")
         
         let historyListVC = HistoryListViewController()
+        historyListVC.restaurantDocument = restaurantDocument
         historyListVC.setData(data: restaurantDocument!)
         let navigationController = UINavigationController(rootViewController: historyListVC)
         navigationController.modalPresentationStyle = .fullScreen

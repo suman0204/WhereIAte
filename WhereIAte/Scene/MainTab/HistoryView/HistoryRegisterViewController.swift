@@ -7,9 +7,16 @@
 
 import UIKit
 import PhotosUI
+import RealmSwift
 import Cosmos
 
 class HistoryRegisterViewController: BaseViewController {
+    
+    let repository = RealmRepository()
+    
+//    var tasks: Results<RestaurantTable>
+    
+    var restaurantDocument: RestaurantDocument?
     
     // Identifier와 PHPickerResult로 만든 Dictionary (이미지 데이터를 저장하기 위해 만들어 줌)
     private var selections = [String : PHPickerResult]()
@@ -25,6 +32,12 @@ class HistoryRegisterViewController: BaseViewController {
 //        view.text = "복ㅁ낳이넨ㅁㄹㅇㄴㄹ"
 //        return view
 //    }()
+    
+    lazy var saveButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
+        
+        return button
+    }()
     
     let imagePickerView = {
         let view = UIView()
@@ -143,21 +156,52 @@ class HistoryRegisterViewController: BaseViewController {
         view.font = .systemFont(ofSize: 16)
         return view
     }()
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "기록 남기기"
         
+        navigationItem.rightBarButtonItem = saveButton
+
+        repository.fileURL()
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imagePickerViewTapped))
         imagePickerView.addGestureRecognizer(tapGesture)
+        
+        
         
     }
     
     @objc func imagePickerViewTapped() {
         presentPicker()
     }
+    
+    @objc func saveButtonClicked() {
+        print("saveButton")
+        
+        guard let restaurantDocument = restaurantDocument else {
+            print("RestaurantDocument Nil")
+            return
+        }
+        
+        let restauarantTable = RestaurantTable(id: restaurantDocument.id, name: restaurantDocument.placeName, roadAddress: restaurantDocument.roadAddressName, phoneNumber: restaurantDocument.phone, placeURL: restaurantDocument.placeURL, city: restaurantDocument.city, latitude: restaurantDocument.latitude, longitude: restaurantDocument.longitude, registeredDate: Date())
+        
+        repository.createRestaurantTable(restauarantTable)
+//
+        var imageList: List<String> {
+            let list: List<String> = List<String>()
+            selectedAssetIdentifiers.forEach {
+                list.append($0)
+            }
+            return list
+        }
+        
+        let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
+        repository.createHistoryTable(historyTable, restaurantID: restaurantDocument.id)
+    }
+    
     //image picker 호출
     private func presentPicker() {
         // 이미지의 Identifier를 사용하기 위해서는 초기화를 shared로 해줘야 합니다.
@@ -284,8 +328,12 @@ class HistoryRegisterViewController: BaseViewController {
         commentTextView.snp.makeConstraints { make in
             make.top.equalTo(ratingView.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(21)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.height.equalTo(200)
+//            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+//            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
+        
+
     }
 }
 
@@ -322,6 +370,7 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
             thirdImageView.image = nil
         } else {
             displayImage()
+            print(selectedAssetIdentifiers)
         }
     }
     
@@ -378,12 +427,15 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
             case 1:
                 guard let image = imagesDict[selectedAssetIdentifiers[0]] else { return }
                 firstImageView.image = image
+                secondImageView.image = nil
+                thirdImageView.image = nil
             
             case 2:
                 guard let image = imagesDict[selectedAssetIdentifiers[0]] else { return }
                 firstImageView.image = image
                 guard let image = imagesDict[selectedAssetIdentifiers[1]] else { return }
                 secondImageView.image = image
+                thirdImageView.image = nil
                 
             case 3:
                 guard let image = imagesDict[selectedAssetIdentifiers[0]] else { return }

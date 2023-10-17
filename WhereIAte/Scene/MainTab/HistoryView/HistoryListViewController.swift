@@ -93,6 +93,7 @@ class HistoryListViewController: BaseViewController {
     @objc func plusButtonClicked(_ sender: Any) {
         print("plusButtonClicked")
         let historyRegisterView = HistoryRegisterViewController()
+        historyRegisterView.restaurantDocument = restaurantDocument
         navigationController?.pushViewController(historyRegisterView, animated: true)
     }
     

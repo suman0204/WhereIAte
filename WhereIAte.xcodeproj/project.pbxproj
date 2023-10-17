@@ -40,6 +40,8 @@
 		8B43CE852ADBE57A00E5250C /* HistoryTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE842ADBE57A00E5250C /* HistoryTable.swift */; };
 		8B43CE872ADBF95B00E5250C /* HistoryRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE862ADBF95B00E5250C /* HistoryRegisterViewController.swift */; };
 		8B43CE8A2ADC605800E5250C /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE892ADC605800E5250C /* Cosmos */; };
+		8B43CE8C2ADE532200E5250C /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE8B2ADE532200E5250C /* RealmRepository.swift */; };
+		8B43CE8E2ADE856500E5250C /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		8B43CE822ADBDF6900E5250C /* RestaurantTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTable.swift; sourceTree = "<group>"; };
 		8B43CE842ADBE57A00E5250C /* HistoryTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTable.swift; sourceTree = "<group>"; };
 		8B43CE862ADBF95B00E5250C /* HistoryRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRegisterViewController.swift; sourceTree = "<group>"; };
+		8B43CE8B2ADE532200E5250C /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
+		8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,7 @@
 				8B43CE122ACFFE5100E5250C /* Main.storyboard */,
 				8B43CE152ACFFE5200E5250C /* Assets.xcassets */,
 				8B43CE172ACFFE5200E5250C /* LaunchScreen.storyboard */,
+				8B43CE8F2ADE85FA00E5250C /* Utility */,
 				8B43CE6E2ADA733E00E5250C /* Realm */,
 				8B43CE472AD3FD0400E5250C /* Base */,
 				8B43CE392AD2ACC600E5250C /* Network */,
@@ -208,6 +213,7 @@
 			children = (
 				8B43CE822ADBDF6900E5250C /* RestaurantTable.swift */,
 				8B43CE842ADBE57A00E5250C /* HistoryTable.swift */,
+				8B43CE8B2ADE532200E5250C /* RealmRepository.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -219,6 +225,14 @@
 				8B43CE862ADBF95B00E5250C /* HistoryRegisterViewController.swift */,
 			);
 			path = HistoryView;
+			sourceTree = "<group>";
+		};
+		8B43CE8F2ADE85FA00E5250C /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,7 +366,9 @@
 				8B43CE542AD5212900E5250C /* MainSearchTableViewController.swift in Sources */,
 				8B43CE832ADBDF6900E5250C /* RestaurantTable.swift in Sources */,
 				8B43CE562AD5217D00E5250C /* ReusableViewProtocol.swift in Sources */,
+				8B43CE8E2ADE856500E5250C /* FileManager+Extension.swift in Sources */,
 				8B43CE382AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift in Sources */,
+				8B43CE8C2ADE532200E5250C /* RealmRepository.swift in Sources */,
 				8B43CE6D2AD83ED800E5250C /* MainMapViewBottomSheetView.swift in Sources */,
 				8B43CE522AD517EB00E5250C /* BaseTableViewCell.swift in Sources */,
 				8B43CE432AD3169D00E5250C /* MainSearchViewModel.swift in Sources */,
