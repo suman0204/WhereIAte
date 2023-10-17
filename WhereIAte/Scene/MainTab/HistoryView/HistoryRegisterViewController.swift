@@ -187,9 +187,9 @@ class HistoryRegisterViewController: BaseViewController {
         }
         
         if !repository.restaurantFilter(restaurantID: restaurantDocument.id) {
-        let restauarantTable = RestaurantTable(id: restaurantDocument.id, name: restaurantDocument.placeName, roadAddress: restaurantDocument.roadAddressName, phoneNumber: restaurantDocument.phone, placeURL: restaurantDocument.placeURL, city: restaurantDocument.city, latitude: restaurantDocument.latitude, longitude: restaurantDocument.longitude, registeredDate: Date())
-        
-        repository.createRestaurantTable(restauarantTable)
+            let restauarantTable = RestaurantTable(id: restaurantDocument.id, name: restaurantDocument.placeName, roadAddress: restaurantDocument.roadAddressName, phoneNumber: restaurantDocument.phone, placeURL: restaurantDocument.placeURL, city: restaurantDocument.city, latitude: restaurantDocument.latitude, longitude: restaurantDocument.longitude, registeredDate: Date())
+            
+            repository.createRestaurantTable(restauarantTable)
         }
         
         var imageList: List<String> {
@@ -200,8 +200,19 @@ class HistoryRegisterViewController: BaseViewController {
             return list
         }
         
+        
         let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
+        
         repository.createHistoryTable(historyTable, restaurantID: restaurantDocument.id)
+        
+        [firstImageView, secondImageView, thirdImageView].forEach { imageView in
+            if imageView.image != nil {
+                imageList.forEach { imageIdentifier in
+                    
+                    saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
+                }
+            }
+        }
     }
     
     //image picker 호출
@@ -341,9 +352,6 @@ class HistoryRegisterViewController: BaseViewController {
 
 
 extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
-    
-    
-
     
     //image picker 종료시
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {

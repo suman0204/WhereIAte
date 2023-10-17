@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class HistoryListViewController: BaseViewController {
+    
+    let repository = RealmRepository()
+    
+    var tasks: Results<RestaurantTable>!
     
     let viewModel = MainSearchViewModel()
     
@@ -73,6 +78,16 @@ class HistoryListViewController: BaseViewController {
         return view
     }()
     
+    
+    lazy var historyTable = {
+        let view = UITableView()
+//        view.delegate = self
+//        view.dataSource = self
+        view.rowHeight = 80
+        view.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.reuseIdentifier)
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -81,6 +96,8 @@ class HistoryListViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
         
         title = "방문 기록"
+        
+        repository.fetch()
 
 //        viewModel.restaurantDocument.bind { data in
 //            print("history - data change")
@@ -168,3 +185,16 @@ class HistoryListViewController: BaseViewController {
         restaurantPhoneNumber.text = "📞" + data.phone
     }
 }
+
+
+//extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        
+//    }
+//    
+//    
+//}

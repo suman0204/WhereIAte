@@ -42,6 +42,7 @@
 		8B43CE8A2ADC605800E5250C /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 8B43CE892ADC605800E5250C /* Cosmos */; };
 		8B43CE8C2ADE532200E5250C /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE8B2ADE532200E5250C /* RealmRepository.swift */; };
 		8B43CE8E2ADE856500E5250C /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */; };
+		8B43CE922ADEC6BB00E5250C /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE912ADEC6BB00E5250C /* HistoryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		8B43CE862ADBF95B00E5250C /* HistoryRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRegisterViewController.swift; sourceTree = "<group>"; };
 		8B43CE8B2ADE532200E5250C /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		8B43CE912ADEC6BB00E5250C /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				8B43CE442AD3FCCC00E5250C /* MainMapView */,
 				8B43CE302AD1B5C400E5250C /* MainSearchTableView */,
 				8B43CE6F2ADAA9FD00E5250C /* HistoryView */,
+				8B43CE902ADEC67500E5250C /* HistoryListTableView */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -233,6 +236,14 @@
 				8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		8B43CE902ADEC67500E5250C /* HistoryListTableView */ = {
+			isa = PBXGroup;
+			children = (
+				8B43CE912ADEC6BB00E5250C /* HistoryTableViewCell.swift */,
+			);
+			path = HistoryListTableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +379,7 @@
 				8B43CE562AD5217D00E5250C /* ReusableViewProtocol.swift in Sources */,
 				8B43CE8E2ADE856500E5250C /* FileManager+Extension.swift in Sources */,
 				8B43CE382AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift in Sources */,
+				8B43CE922ADEC6BB00E5250C /* HistoryTableViewCell.swift in Sources */,
 				8B43CE8C2ADE532200E5250C /* RealmRepository.swift in Sources */,
 				8B43CE6D2AD83ED800E5250C /* MainMapViewBottomSheetView.swift in Sources */,
 				8B43CE522AD517EB00E5250C /* BaseTableViewCell.swift in Sources */,
