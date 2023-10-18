@@ -16,10 +16,19 @@ class RealmRepository {
         print(realm.configuration.fileURL)
     }
     
-    func fetch() -> Results<RestaurantTable> {
+    func fetchRestaurant() -> Results<RestaurantTable> {
         let data = realm.objects(RestaurantTable.self).sorted(byKeyPath: "registeredDate", ascending: false)
         return data
     }
+    
+//    func fetchHistory(restaurantID: String) -> Results<HistoryTable> {
+//        let data = realm.objects(HistoryTable.self).sorted(byKeyPath: "visitedDate", ascending:  false)
+//        data.map {
+//            
+//            $0.re
+//        }
+//        return data
+//    }
     
     func checkSchemaVersion() {
         do {
