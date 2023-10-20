@@ -16,7 +16,11 @@ class HistoryRegisterViewController: BaseViewController {
     
 //    var tasks: Results<RestaurantTable>
     
+    // Map to Here
     var restaurantDocument: RestaurantDocument?
+    
+    // List to Here
+    var restaurantID: String = ""
     
     // Identifier와 PHPickerResult로 만든 Dictionary (이미지 데이터를 저장하기 위해 만들어 줌)
     private var selections = [String : PHPickerResult]()
@@ -120,6 +124,20 @@ class HistoryRegisterViewController: BaseViewController {
         view.datePickerMode = .date
         view.preferredDatePickerStyle = .compact
         view.locale = Locale(identifier: "ko_KR")
+        let calendar = Calendar(identifier: .gregorian)
+        let currentDate = Date()
+        var components = DateComponents()
+        components.calendar = calendar
+
+        components.year = -1
+        components.month = 12
+        let maxDate = calendar.date(byAdding: components, to: currentDate)!
+
+        components.year = -31
+        let minDate = calendar.date(byAdding: components, to: currentDate)!
+
+        view.minimumDate = minDate
+        view.maximumDate = maxDate
         return view
     }()
     
@@ -181,38 +199,64 @@ class HistoryRegisterViewController: BaseViewController {
     @objc func saveButtonClicked() {
         print("saveButton")
         
-        guard let restaurantDocument = restaurantDocument else {
-            print("RestaurantDocument Nil")
-            return
-        }
+//        guard let restaurantDocument = restaurantDocument else {
+//            print("RestaurantDocument Nil")
+//            return
+//        }
         
-        if !repository.restaurantFilter(restaurantID: restaurantDocument.id) {
-            let restauarantTable = RestaurantTable(id: restaurantDocument.id, name: restaurantDocument.placeName, roadAddress: restaurantDocument.roadAddressName, phoneNumber: restaurantDocument.phone, placeURL: restaurantDocument.placeURL, city: restaurantDocument.city, latitude: restaurantDocument.latitude, longitude: restaurantDocument.longitude, registeredDate: Date())
-            
-            repository.createRestaurantTable(restauarantTable)
-        }
-        
-        var imageList: List<String> {
-            let list: List<String> = List<String>()
-            selectedAssetIdentifiers.forEach {
-                list.append($0)
+        if let restaurantDocument = restaurantDocument {
+            if !repository.restaurantFilter(restaurantID: restaurantDocument.id) {
+                let restauarantTable = RestaurantTable(id: restaurantDocument.id, name: restaurantDocument.placeName, category: restaurantDocument.lastCategory, roadAddress: restaurantDocument.roadAddressName, phoneNumber: restaurantDocument.phone, placeURL: restaurantDocument.placeURL, city: restaurantDocument.city, latitude: restaurantDocument.latitude, longitude: restaurantDocument.longitude, registeredDate: Date())
+                
+                repository.createRestaurantTable(restauarantTable)
             }
-            return list
-        }
-        
-        
-        let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
-        
-        repository.createHistoryTable(historyTable, restaurantID: restaurantDocument.id)
-        
-        [firstImageView, secondImageView, thirdImageView].forEach { imageView in
-            if imageView.image != nil {
-                imageList.forEach { imageIdentifier in
-                    
-                    saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
+            
+            var imageList: List<String> {
+                let list: List<String> = List<String>()
+                selectedAssetIdentifiers.forEach {
+                    list.append($0)
+                }
+                return list
+            }
+            
+            
+            let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
+            
+            repository.createHistoryTable(historyTable, restaurantID: restaurantDocument.id)
+            
+            [firstImageView, secondImageView, thirdImageView].forEach { imageView in
+                if imageView.image != nil {
+                    imageList.forEach { imageIdentifier in
+                        
+                        saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
+                    }
+                }
+            }
+        } else {
+            var imageList: List<String> {
+                let list: List<String> = List<String>()
+                selectedAssetIdentifiers.forEach {
+                    list.append($0)
+                }
+                return list
+            }
+            
+            
+            let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
+            
+            repository.createHistoryTable(historyTable, restaurantID: restaurantID)
+            
+            [firstImageView, secondImageView, thirdImageView].forEach { imageView in
+                if imageView.image != nil {
+                    imageList.forEach { imageIdentifier in
+                        
+                        saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
+                    }
                 }
             }
         }
+        
+        
     }
     
     //image picker 호출
@@ -366,6 +410,7 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
             // ⭐️ 여기는 WWDC에서 3분 부분을 참고하세요. (Picker의 사진의 저장 방식)
             newSelections[identifier] = selections[identifier] ?? result
         }
+        
         
         // selections에 새로 만들어진 newSelection을 넣어줍시다.
         selections = newSelections

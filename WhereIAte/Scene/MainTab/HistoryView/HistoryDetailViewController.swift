@@ -77,6 +77,9 @@ class HistoryDetailViewController: BaseViewController {
         view.font = .systemFont(ofSize: 16)
         view.text = "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라"
         view.numberOfLines = 0
+        view.textAlignment = .left
+        view.backgroundColor = .green
+        view.sizeToFit()
         return view
     }()
     
@@ -152,13 +155,14 @@ class HistoryDetailViewController: BaseViewController {
         menuLabel.snp.makeConstraints { make in
             make.top.equalTo(titleDateRateView.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(25)
-            make.height.equalTo(17)
+            make.height.equalTo(20)
         }
         
         commentLabel.snp.makeConstraints { make in
             make.top.equalTo(menuLabel.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(25)
-            make.height.equalToSuperview().multipliedBy(0.4)
+//            make.height.equalToSuperview().multipliedBy(0.4)
+            make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).offset(50)
         }
     }
     

@@ -10,6 +10,8 @@ import RealmSwift
 
 class HistoryListViewController: BaseViewController {
     
+    var tapType: TapType = .mapTap
+    
     let repository = RealmRepository()
     
     var tasks: Results<RestaurantTable>!
@@ -18,7 +20,11 @@ class HistoryListViewController: BaseViewController {
     
     let viewModel = MainSearchViewModel()
     
+    //Map to Here
     var restaurantDocument: RestaurantDocument?
+    
+    //List to Here
+    var restaurantID: String = ""
     
     lazy var plusButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(plusButtonClicked(_:)))
@@ -96,18 +102,25 @@ class HistoryListViewController: BaseViewController {
         view.backgroundColor = .white
         
         navigationItem.rightBarButtonItem = plusButton
-        navigationItem.leftBarButtonItem = backButton
+        
+        switch tapType {
+        case .mapTap:
+            navigationItem.leftBarButtonItem = backButton
+        case .listTap:
+            print("From listTap")
+        }
         
         title = "방문 기록"
         
         tasks = repository.fetchRestaurant()
 
-        guard let restaurantDocument = restaurantDocument else { return }
+//        guard let restaurantDocument = restaurantDocument else { return }
         
         historyList = tasks.where {
-            $0.restaurantID == restaurantDocument.id
+            $0.restaurantID == restaurantID
         }.first?.history
         
+        print("HistoryList----")
         print(historyList)
 //        viewModel.restaurantDocument.bind { data in
 //            print("history - data change")
@@ -117,10 +130,16 @@ class HistoryListViewController: BaseViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        historyTable.reloadData()
+    }
+    
     @objc func plusButtonClicked(_ sender: Any) {
         print("plusButtonClicked")
         let historyRegisterView = HistoryRegisterViewController()
         historyRegisterView.restaurantDocument = restaurantDocument
+        historyRegisterView.restaurantID = restaurantID
         navigationController?.pushViewController(historyRegisterView, animated: true)
     }
     
@@ -203,6 +222,13 @@ class HistoryListViewController: BaseViewController {
         restaurantRoadAddress.text = "📍" + data.roadAddressName
         restaurantPhoneNumber.text = "📞" + data.phone
     }
+    
+    func setDataFromTable(data: RestaurantTable) {
+        restaurantName.text = data.restaurantName
+        restaurantCategory.text = data.restaurantCategory
+        restaurantRoadAddress.text = "📍" + data.restaurantRoadAddress
+        restaurantPhoneNumber.text = "📞" + data.restaurantPhoneNumber
+    }
 }
 
 
@@ -217,6 +243,11 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
         guard let historyList = historyList else {return UITableViewCell()}
         let data = historyList[indexPath.row]
         cell.setData(data: data)
+        print(data.images.first)
+        print("nameList")
+        print(data.imageNameList)
+        guard let firstImage = data.images.first else { return UITableViewCell() }
+        cell.historyImageView.image = loadImageForDocument(fileName: "\(firstImage.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg")
         return cell
     }
     

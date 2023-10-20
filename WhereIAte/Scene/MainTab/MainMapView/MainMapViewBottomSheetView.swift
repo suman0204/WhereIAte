@@ -121,6 +121,8 @@ class MainMapViewBottomSheetView: BaseViewController {
         
         let historyListVC = HistoryListViewController()
         historyListVC.restaurantDocument = restaurantDocument
+        historyListVC.restaurantID = restaurantDocument?.id ?? ""
+        historyListVC.tapType = .mapTap
         historyListVC.setData(data: restaurantDocument!)
         let navigationController = UINavigationController(rootViewController: historyListVC)
         navigationController.modalPresentationStyle = .fullScreen
@@ -228,3 +230,7 @@ class MainMapViewBottomSheetView: BaseViewController {
         restaurantPhoneNumber.text = document.phone
     }
 }
+
+//extension MainMapViewBottomSheetView: UISheetPresentationControllerDelegate {
+//    
+//}

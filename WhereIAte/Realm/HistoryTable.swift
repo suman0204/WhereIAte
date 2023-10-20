@@ -18,6 +18,12 @@ class HistoryTable: Object {
     @Persisted var images: List<String>
     @Persisted var registeredDate: Date
     
+    var imageNameList: [String] {
+        return images.map {
+            $0.replacingOccurrences(of: "/L0/001", with: "")
+        }
+    }
+    
     convenience init(title: String, visitedDate: Date, menu: String, rate: Double, comment: String, images: List<String>, registeredDate: Date) {
         self.init()
         self.historyTitle = title

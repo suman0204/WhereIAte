@@ -80,7 +80,8 @@ class MainMapViewController: BaseViewController {
 //        searchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
         
-        navigationController?.navigationBar.backgroundColor = .clear
+//        navigationController?.navigationBar.backgroundColor = .clear
+        
         
     }
     
@@ -100,9 +101,9 @@ class MainMapViewController: BaseViewController {
     
     override func setConstraints() {
         mainMapView.snp.makeConstraints { make in
-//            make.edges.equalTo(view.safeAreaLayoutGuide)
-            make.top.equalToSuperview()
-            make.bottom.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+//            make.top.equalToSuperview()
+//            make.bottom.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
         }
         
         myLocationButton.snp.makeConstraints { make in
@@ -181,7 +182,16 @@ extension MainMapViewController: MKMapViewDelegate {
 //    }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//        presentSheet(data: restaurantDocument ?? RestaurantDocument(addressName: "", categoryName: "", distance: "", id: "", phone: "", placeName: "", placeURL: "", roadAddressName: "", x: "", y: ""))
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
+        guard !annotation.isKind(of: MKUserLocation.self) else { return  }
+        
         presentSheet(data: restaurantDocument ?? RestaurantDocument(addressName: "", categoryName: "", distance: "", id: "", phone: "", placeName: "", placeURL: "", roadAddressName: "", x: "", y: ""))
+        
+        //어노테이션 셀렉션 해제
+//        mapView.deselectAnnotation(annotation, animated: true)
     }
 }
 
@@ -303,6 +313,7 @@ extension MainMapViewController: UISearchControllerDelegate, UISearchBarDelegate
         viewModel.request(query: query)
 
         print("-------------")
+        print(viewModel.resultList.value)
         print(viewModel.rowCount)
     }
 }
@@ -337,6 +348,7 @@ extension MainMapViewController: HandleMapSearch {
         viewControllerToPresent.setData(document: data)
         viewControllerToPresent.restaurantDocument = data
         viewControllerToPresent.modalPresentationStyle = .pageSheet // 또는 .formSheet
+        viewControllerToPresent.sheetPresentationController?.delegate = self
 
         if let sheet = viewControllerToPresent.sheetPresentationController {
             // detent의 식별자, 식별자를 지정하지 않으면 시스템에서 랜덤한 식별자가 생성
@@ -374,4 +386,13 @@ extension MainMapViewController: HandleMapSearch {
     }
     
     
+}
+
+
+extension MainMapViewController: UISheetPresentationControllerDelegate {
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+        for annotation in mainMapView.annotations {
+            mainMapView.deselectAnnotation(annotation, animated: true)
+        }
+    }
 }

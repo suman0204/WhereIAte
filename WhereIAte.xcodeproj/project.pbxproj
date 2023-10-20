@@ -44,6 +44,8 @@
 		8B43CE8E2ADE856500E5250C /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */; };
 		8B43CE922ADEC6BB00E5250C /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE912ADEC6BB00E5250C /* HistoryTableViewCell.swift */; };
 		8BB2D7DD2ADFF5CC00510018 /* HistoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7DC2ADFF5CC00510018 /* HistoryDetailViewController.swift */; };
+		8BB2D7F42AE10C6800510018 /* RestaurantListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7F32AE10C6800510018 /* RestaurantListCell.swift */; };
+		8BB2D7F82AE28BF400510018 /* TapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7F72AE28BF400510018 /* TapType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +81,8 @@
 		8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		8B43CE912ADEC6BB00E5250C /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		8BB2D7DC2ADFF5CC00510018 /* HistoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailViewController.swift; sourceTree = "<group>"; };
+		8BB2D7F32AE10C6800510018 /* RestaurantListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListCell.swift; sourceTree = "<group>"; };
+		8BB2D7F72AE28BF400510018 /* TapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				8B43CE372AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift */,
+				8BB2D7F32AE10C6800510018 /* RestaurantListCell.swift */,
 			);
 			path = RegistedRestaurantListView;
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */,
+				8BB2D7F72AE28BF400510018 /* TapType.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -356,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BB2D7F82AE28BF400510018 /* TapType.swift in Sources */,
 				8B43CE582AD5C3E900E5250C /* Observable.swift in Sources */,
 				8B43CE112ACFFE5100E5250C /* ViewController.swift in Sources */,
 				8B43CE0D2ACFFE5100E5250C /* AppDelegate.swift in Sources */,
@@ -380,6 +387,7 @@
 				8B43CE6D2AD83ED800E5250C /* MainMapViewBottomSheetView.swift in Sources */,
 				8B43CE522AD517EB00E5250C /* BaseTableViewCell.swift in Sources */,
 				8B43CE432AD3169D00E5250C /* MainSearchViewModel.swift in Sources */,
+				8BB2D7F42AE10C6800510018 /* RestaurantListCell.swift in Sources */,
 				8B43CE712ADAAA6300E5250C /* HistoryListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

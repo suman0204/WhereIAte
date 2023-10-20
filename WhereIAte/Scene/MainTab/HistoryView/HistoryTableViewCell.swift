@@ -32,6 +32,7 @@ class HistoryTableViewCell: BaseTableViewCell {
         view.layer.cornerRadius = 20
         view.layer.cornerCurve = .circular
         view.backgroundColor = .blue
+        view.clipsToBounds = true
         return view
     }()
     
@@ -142,6 +143,5 @@ class HistoryTableViewCell: BaseTableViewCell {
         visitedDateLabel.text = "\(data.visitedDate)"
         rateLabel.text = "\(data.rate)"
         commentLabel.text = data.comment
-
     }
 }
