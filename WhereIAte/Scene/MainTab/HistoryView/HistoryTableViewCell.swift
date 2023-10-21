@@ -33,6 +33,8 @@ class HistoryTableViewCell: BaseTableViewCell {
         view.layer.cornerCurve = .circular
         view.backgroundColor = .blue
         view.clipsToBounds = true
+        view.contentMode = .scaleAspectFill
+        view.layer.masksToBounds = true
         return view
     }()
     

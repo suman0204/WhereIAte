@@ -36,6 +36,13 @@ class RegistedRestaurantListViewController: BaseViewController {
         view.backgroundColor = .white
         
         tasks = repository.fetchRestaurant()
+//        restaurantTable.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        restaurantTable.reloadData()
     }
     
     override func configureView() {
@@ -73,6 +80,10 @@ extension RegistedRestaurantListViewController: UITableViewDelegate, UITableView
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RestaurantListCell.reuseIdentifier) as? RestaurantListCell else { return UITableViewCell() }
         let data = tasks[indexPath.row]
         cell.setData(data: data)
+//        print(data.history.first?.imageNameList)
+        guard let firsthistory = data.history.first else { return UITableViewCell() }
+        guard let firstimage = firsthistory.imageNameList.first else {return UITableViewCell()}
+        cell.restaurantImage.image = loadImageForDocument(fileName: "\(firstimage)_image.jpg")
         return cell
     }
     

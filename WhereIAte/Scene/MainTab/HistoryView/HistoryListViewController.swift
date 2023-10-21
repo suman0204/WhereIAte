@@ -106,6 +106,8 @@ class HistoryListViewController: BaseViewController {
         switch tapType {
         case .mapTap:
             navigationItem.leftBarButtonItem = backButton
+            guard let restaurantDocument = restaurantDocument else {return}
+            restaurantID = restaurantDocument.id
         case .listTap:
             print("From listTap")
         }
@@ -128,6 +130,7 @@ class HistoryListViewController: BaseViewController {
 //            self.setData(data: self.restaurantDocument ?? RestaurantDocument(addressName: "", categoryName: "", distance: "", id: "", phone: "", placeName: "", placeURL: "", roadAddressName: "", x: "", y: ""))
 //        }
         
+        print(tapType)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,8 +141,16 @@ class HistoryListViewController: BaseViewController {
     @objc func plusButtonClicked(_ sender: Any) {
         print("plusButtonClicked")
         let historyRegisterView = HistoryRegisterViewController()
-        historyRegisterView.restaurantDocument = restaurantDocument
-        historyRegisterView.restaurantID = restaurantID
+        
+        switch tapType {
+        case .mapTap:
+            historyRegisterView.restaurantDocument = restaurantDocument
+        case .listTap:
+            historyRegisterView.restaurantID = restaurantID
+        }
+        
+        historyRegisterView.tapType = tapType
+        
         navigationController?.pushViewController(historyRegisterView, animated: true)
     }
     
@@ -246,8 +257,8 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
         print(data.images.first)
         print("nameList")
         print(data.imageNameList)
-        guard let firstImage = data.images.first else { return UITableViewCell() }
-        cell.historyImageView.image = loadImageForDocument(fileName: "\(firstImage.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg")
+        guard let firstImage = data.imageNameList.first else { return UITableViewCell() }
+        cell.historyImageView.image = loadImageForDocument(fileName: "\(firstImage)_image.jpg")
         return cell
     }
     
@@ -257,6 +268,7 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
         let data = historyList[indexPath.row]
         
         historyDetailVC.setData(data: data)
+//        historyDetailVC.setImageSlider(images: data.imageNameList)
         navigationController?.pushViewController(historyDetailVC, animated: true)
     }
     

@@ -121,7 +121,6 @@ class MainMapViewBottomSheetView: BaseViewController {
         
         let historyListVC = HistoryListViewController()
         historyListVC.restaurantDocument = restaurantDocument
-        historyListVC.restaurantID = restaurantDocument?.id ?? ""
         historyListVC.tapType = .mapTap
         historyListVC.setData(data: restaurantDocument!)
         let navigationController = UINavigationController(rootViewController: historyListVC)

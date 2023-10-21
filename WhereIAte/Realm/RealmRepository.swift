@@ -65,10 +65,10 @@ class RealmRepository {
     }
     
     
-    func updateHistory(/*restaurantID: String,*/ historyID: ObjectId, title: String, visitedDate: Date, menu: String, rate: Double, comment: String) {
+    func updateHistory(historyID: ObjectId, title: String, visitedDate: Date, menu: String, rate: Double, comment: String, images: List<String>) {
         do {
             try realm.write {
-                realm.create(HistoryTable.self, value: ["_id": historyID, "title": title, "visitedDate": visitedDate, "menu": menu, "rate": rate, "comment": comment], update: .modified)
+                realm.create(HistoryTable.self, value: ["_id": historyID, "title": title, "visitedDate": visitedDate, "menu": menu, "rate": rate, "comment": comment, "images": images], update: .modified)
             }
         } catch {
             print(error)

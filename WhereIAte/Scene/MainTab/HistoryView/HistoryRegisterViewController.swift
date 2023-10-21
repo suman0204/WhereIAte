@@ -12,6 +12,8 @@ import Cosmos
 
 class HistoryRegisterViewController: BaseViewController {
     
+    var tapType: TapType = .mapTap
+    
     let repository = RealmRepository()
     
 //    var tasks: Results<RestaurantTable>
@@ -27,15 +29,6 @@ class HistoryRegisterViewController: BaseViewController {
     // 선택한 사진의 순서에 맞게 Identifier들을 배열로 저장해줄 겁니다.
     // selections은 딕셔너리이기 때문에 순서가 없습니다. 그래서 따로 식별자를 담을 배열 생성
     private var selectedAssetIdentifiers = [String]()
-    
-//    let restaurantName = {
-//        let view = UILabel()
-//        view.font = .boldSystemFont(ofSize: 25)
-//        view.textAlignment = .left
-//        view.numberOfLines = 1
-//        view.text = "복ㅁ낳이넨ㅁㄹㅇㄴㄹ"
-//        return view
-//    }()
     
     lazy var saveButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
@@ -188,7 +181,7 @@ class HistoryRegisterViewController: BaseViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imagePickerViewTapped))
         imagePickerView.addGestureRecognizer(tapGesture)
         
-        
+        print(tapType)
         
     }
     
@@ -204,57 +197,95 @@ class HistoryRegisterViewController: BaseViewController {
 //            return
 //        }
         
-        if let restaurantDocument = restaurantDocument {
+        switch tapType {
+        case .mapTap:
+            guard let restaurantDocument = restaurantDocument else { return }
+            
             if !repository.restaurantFilter(restaurantID: restaurantDocument.id) {
                 let restauarantTable = RestaurantTable(id: restaurantDocument.id, name: restaurantDocument.placeName, category: restaurantDocument.lastCategory, roadAddress: restaurantDocument.roadAddressName, phoneNumber: restaurantDocument.phone, placeURL: restaurantDocument.placeURL, city: restaurantDocument.city, latitude: restaurantDocument.latitude, longitude: restaurantDocument.longitude, registeredDate: Date())
                 
                 repository.createRestaurantTable(restauarantTable)
             }
             
-            var imageList: List<String> {
-                let list: List<String> = List<String>()
-                selectedAssetIdentifiers.forEach {
-                    list.append($0)
-                }
-                return list
+            restaurantID = restaurantDocument.id
+            
+        case .listTap:
+            print("From List Tap")
+        }
+        
+        var imageList: List<String> {
+            let list: List<String> = List<String>()
+            selectedAssetIdentifiers.forEach {
+                list.append($0)
             }
-            
-            
-            let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
-            
-            repository.createHistoryTable(historyTable, restaurantID: restaurantDocument.id)
-            
-            [firstImageView, secondImageView, thirdImageView].forEach { imageView in
-                if imageView.image != nil {
-                    imageList.forEach { imageIdentifier in
-                        
-                        saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
-                    }
-                }
-            }
-        } else {
-            var imageList: List<String> {
-                let list: List<String> = List<String>()
-                selectedAssetIdentifiers.forEach {
-                    list.append($0)
-                }
-                return list
-            }
-            
-            
-            let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
-            
-            repository.createHistoryTable(historyTable, restaurantID: restaurantID)
-            
-            [firstImageView, secondImageView, thirdImageView].forEach { imageView in
-                if imageView.image != nil {
-                    imageList.forEach { imageIdentifier in
-                        
-                        saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
-                    }
+            return list
+        }
+        
+        
+        let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
+        
+        repository.createHistoryTable(historyTable, restaurantID: restaurantID)
+        
+        [firstImageView, secondImageView, thirdImageView].forEach { imageView in
+            if imageView.image != nil {
+                imageList.forEach { imageIdentifier in
+                    
+                    saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
                 }
             }
         }
+        
+//        if let restaurantDocument = restaurantDocument {
+//            if !repository.restaurantFilter(restaurantID: restaurantDocument.id) {
+//                let restauarantTable = RestaurantTable(id: restaurantDocument.id, name: restaurantDocument.placeName, category: restaurantDocument.lastCategory, roadAddress: restaurantDocument.roadAddressName, phoneNumber: restaurantDocument.phone, placeURL: restaurantDocument.placeURL, city: restaurantDocument.city, latitude: restaurantDocument.latitude, longitude: restaurantDocument.longitude, registeredDate: Date())
+//
+//                repository.createRestaurantTable(restauarantTable)
+//            }
+//
+//            var imageList: List<String> {
+//                let list: List<String> = List<String>()
+//                selectedAssetIdentifiers.forEach {
+//                    list.append($0)
+//                }
+//                return list
+//            }
+//
+//
+//            let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
+//
+//            repository.createHistoryTable(historyTable, restaurantID: restaurantDocument.id)
+//
+//            [firstImageView, secondImageView, thirdImageView].forEach { imageView in
+//                if imageView.image != nil {
+//                    imageList.forEach { imageIdentifier in
+//
+//                        saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
+//                    }
+//                }
+//            }
+//        } else {
+//            var imageList: List<String> {
+//                let list: List<String> = List<String>()
+//                selectedAssetIdentifiers.forEach {
+//                    list.append($0)
+//                }
+//                return list
+//            }
+//
+//
+//            let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
+//
+//            repository.createHistoryTable(historyTable, restaurantID: restaurantID)
+//
+//            [firstImageView, secondImageView, thirdImageView].forEach { imageView in
+//                if imageView.image != nil {
+//                    imageList.forEach { imageIdentifier in
+//
+//                        saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
+//                    }
+//                }
+//            }
+//        }
         
         
     }

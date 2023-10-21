@@ -21,6 +21,8 @@ class RestaurantListCell: BaseTableViewCell {
         view.layer.cornerRadius = 20
         view.layer.cornerCurve = .circular
         view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
+        view.contentMode = .scaleAspectFill
+        view.layer.masksToBounds = true
         return view
     }()
     
@@ -113,5 +115,6 @@ class RestaurantListCell: BaseTableViewCell {
         restaurantCategory.text = data.restaurantCategory
         restaurantRoadAddress.text = data.restaurantRoadAddress
         restaurantPhoneNumber.text = data.restaurantPhoneNumber
+//        restaurantImage.image = loadImageForDocument(fileName: "\(data.imageNameList.first)_image.jpg")
     }
 }
