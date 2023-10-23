@@ -69,3 +69,23 @@ extension UIViewController {
         }
     }
 }
+
+extension UICollectionViewCell {
+    //도큐먼트 폴더에서 이미지를 가져오는 메서드
+    func loadImageForDocument(fileName: String) -> UIImage {
+        //1. 도큐먼트 폴더 경로 찾기
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return UIImage(systemName: "star.fill")! }
+        
+        //2. 경로 설정(세부 경로, 이미지를 저장되어 있는 위치)
+        let fileURL = documentDirectory.appendingPathComponent(fileName)
+        
+        //3. 파일 유효성 검사 (존재 유무를 검사해줌, FileManager에서 메서드 제공)
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            return UIImage(contentsOfFile: fileURL.path)! //옵셔널 바인딩 대응 필요
+        } else {
+            return UIImage(systemName: "star.fill")!
+        }
+        
+    }
+}

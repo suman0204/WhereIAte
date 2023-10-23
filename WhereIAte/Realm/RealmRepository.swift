@@ -68,12 +68,26 @@ class RealmRepository {
     func updateHistory(historyID: ObjectId, title: String, visitedDate: Date, menu: String, rate: Double, comment: String, images: List<String>) {
         do {
             try realm.write {
-                realm.create(HistoryTable.self, value: ["_id": historyID, "title": title, "visitedDate": visitedDate, "menu": menu, "rate": rate, "comment": comment, "images": images], update: .modified)
+                realm.create(HistoryTable.self, value: ["_id": historyID, "historyTitle": title, "visitedDate": visitedDate, "menu": menu, "rate": rate, "comment": comment, "images": images], update: .modified)
             }
         } catch {
             print(error)
         }
         
+    }
+    
+    func deleteHistory(historyID: ObjectId) {
+        let deletItem = realm.objects(HistoryTable.self).where {
+            $0._id == historyID
+        }
+        
+        do {
+            try realm.write {
+                realm.delete(deletItem)
+            }
+        } catch {
+            print(error)
+        }
     }
     
     func restaurantFilter(restaurantID: String) -> Bool {
@@ -86,5 +100,21 @@ class RealmRepository {
         } else {
             return false
         }
+    }
+    
+    func restaurantSearchFilter(query: String) -> Results<RestaurantTable> {
+        let result = realm.objects(RestaurantTable.self).where {
+            $0.restaurantName.contains(query, options: .caseInsensitive) || $0.restaurantCategory.contains(query, options: .caseInsensitive)
+        }
+        
+        return result
+    }
+    
+    func restaurantSortByRating() {
+        
+    }
+    
+    func restaurantSortByCount() {
+        let result = realm.objects(RestaurantTable.self).sorted(by: <#T##KeyPath<RestaurantTable, _HasPersistedType>#>)
     }
 }

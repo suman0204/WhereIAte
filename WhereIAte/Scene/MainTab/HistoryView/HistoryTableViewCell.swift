@@ -59,7 +59,7 @@ class HistoryTableViewCell: BaseTableViewCell {
         let view = UIImageView()
         view.frame = .zero
         view.image = UIImage(systemName: "star.fill")
-        view.tintColor = .orange
+        view.tintColor = UIColor(named: "mainColor")
         return view
     }()
     

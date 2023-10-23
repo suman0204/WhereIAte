@@ -15,6 +15,11 @@ class ImageCollectionViewCell: BaseCollectionViewCell {
         return view
     }()
     
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        imageView.image = nil
+//    }
+    
     override func configureCell() {
         contentView.addSubview(imageView)
     }
@@ -23,5 +28,9 @@ class ImageCollectionViewCell: BaseCollectionViewCell {
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    func setData(imageName: String) {
+        imageView.image = loadImageForDocument(fileName: "\(imageName)_image.jpg")
     }
 }

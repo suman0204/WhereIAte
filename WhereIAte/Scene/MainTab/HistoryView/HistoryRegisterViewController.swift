@@ -14,9 +14,12 @@ class HistoryRegisterViewController: BaseViewController {
     
     var tapType: TapType = .mapTap
     
+    var registEditType: registEditType = .register
+    
     let repository = RealmRepository()
     
-//    var tasks: Results<RestaurantTable>
+    // Edit Mode
+    var historyID: ObjectId?
     
     // Map to Here
     var restaurantDocument: RestaurantDocument?
@@ -32,7 +35,7 @@ class HistoryRegisterViewController: BaseViewController {
     
     lazy var saveButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
-        
+            
         return button
     }()
     
@@ -172,7 +175,7 @@ class HistoryRegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "기록 남기기"
+        title = registEditType.titleName
         
         navigationItem.rightBarButtonItem = saveButton
 
@@ -182,6 +185,8 @@ class HistoryRegisterViewController: BaseViewController {
         imagePickerView.addGestureRecognizer(tapGesture)
         
         print(tapType)
+        print(selections)
+        print(selectedAssetIdentifiers)
         
     }
     
@@ -196,97 +201,67 @@ class HistoryRegisterViewController: BaseViewController {
 //            print("RestaurantDocument Nil")
 //            return
 //        }
-        
-        switch tapType {
-        case .mapTap:
-            guard let restaurantDocument = restaurantDocument else { return }
-            
-            if !repository.restaurantFilter(restaurantID: restaurantDocument.id) {
-                let restauarantTable = RestaurantTable(id: restaurantDocument.id, name: restaurantDocument.placeName, category: restaurantDocument.lastCategory, roadAddress: restaurantDocument.roadAddressName, phoneNumber: restaurantDocument.phone, placeURL: restaurantDocument.placeURL, city: restaurantDocument.city, latitude: restaurantDocument.latitude, longitude: restaurantDocument.longitude, registeredDate: Date())
+        switch registEditType {
+        case .register:
+            switch tapType {
+            case .mapTap:
+                guard let restaurantDocument = restaurantDocument else { return }
                 
-                repository.createRestaurantTable(restauarantTable)
-            }
-            
-            restaurantID = restaurantDocument.id
-            
-        case .listTap:
-            print("From List Tap")
-        }
-        
-        var imageList: List<String> {
-            let list: List<String> = List<String>()
-            selectedAssetIdentifiers.forEach {
-                list.append($0)
-            }
-            return list
-        }
-        
-        
-        let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
-        
-        repository.createHistoryTable(historyTable, restaurantID: restaurantID)
-        
-        [firstImageView, secondImageView, thirdImageView].forEach { imageView in
-            if imageView.image != nil {
-                imageList.forEach { imageIdentifier in
+                if !repository.restaurantFilter(restaurantID: restaurantDocument.id) {
+                    let restauarantTable = RestaurantTable(id: restaurantDocument.id, name: restaurantDocument.placeName, category: restaurantDocument.lastCategory, roadAddress: restaurantDocument.roadAddressName, phoneNumber: restaurantDocument.phone, placeURL: restaurantDocument.placeURL, city: restaurantDocument.city, latitude: restaurantDocument.latitude, longitude: restaurantDocument.longitude, registeredDate: Date())
                     
-                    saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
+                    repository.createRestaurantTable(restauarantTable)
+                }
+                
+                restaurantID = restaurantDocument.id
+                
+            case .listTap:
+                print("From List Tap")
+            }
+            
+            var imageList: List<String> {
+                let list: List<String> = List<String>()
+                selectedAssetIdentifiers.forEach {
+                    list.append($0)
+                }
+                return list
+            }
+            
+            
+            let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
+            
+            repository.createHistoryTable(historyTable, restaurantID: restaurantID)
+            
+            
+            for (index, imageView) in [firstImageView, secondImageView, thirdImageView].enumerated() {
+                if let image = imageView.image {
+                    let imageID = selectedAssetIdentifiers[index]  // 사용 가능한 이미지 식별자 가져오기
+                    saveImageToDocument(fileName: "\(imageID.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: image)
+                }
+            }
+
+        case .edit:
+            var imageList: List<String> {
+                let list: List<String> = List<String>()
+                selectedAssetIdentifiers.forEach {
+                    list.append($0)
+                }
+                return list
+            }
+            
+            guard let historyID = historyID else { return print("NO HistoryID")}
+            repository.updateHistory(historyID: historyID, title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList)
+            
+            for (index, imageView) in [firstImageView, secondImageView, thirdImageView].enumerated() {
+                if let image = imageView.image {
+                    let imageID = selectedAssetIdentifiers[index]  // 사용 가능한 이미지 식별자 가져오기
+                    saveImageToDocument(fileName: "\(imageID.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: image)
                 }
             }
         }
         
-//        if let restaurantDocument = restaurantDocument {
-//            if !repository.restaurantFilter(restaurantID: restaurantDocument.id) {
-//                let restauarantTable = RestaurantTable(id: restaurantDocument.id, name: restaurantDocument.placeName, category: restaurantDocument.lastCategory, roadAddress: restaurantDocument.roadAddressName, phoneNumber: restaurantDocument.phone, placeURL: restaurantDocument.placeURL, city: restaurantDocument.city, latitude: restaurantDocument.latitude, longitude: restaurantDocument.longitude, registeredDate: Date())
-//
-//                repository.createRestaurantTable(restauarantTable)
-//            }
-//
-//            var imageList: List<String> {
-//                let list: List<String> = List<String>()
-//                selectedAssetIdentifiers.forEach {
-//                    list.append($0)
-//                }
-//                return list
-//            }
-//
-//
-//            let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
-//
-//            repository.createHistoryTable(historyTable, restaurantID: restaurantDocument.id)
-//
-//            [firstImageView, secondImageView, thirdImageView].forEach { imageView in
-//                if imageView.image != nil {
-//                    imageList.forEach { imageIdentifier in
-//
-//                        saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
-//                    }
-//                }
-//            }
-//        } else {
-//            var imageList: List<String> {
-//                let list: List<String> = List<String>()
-//                selectedAssetIdentifiers.forEach {
-//                    list.append($0)
-//                }
-//                return list
-//            }
-//
-//
-//            let historyTable = HistoryTable(title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList, registeredDate: Date())
-//
-//            repository.createHistoryTable(historyTable, restaurantID: restaurantID)
-//
-//            [firstImageView, secondImageView, thirdImageView].forEach { imageView in
-//                if imageView.image != nil {
-//                    imageList.forEach { imageIdentifier in
-//
-//                        saveImageToDocument(fileName: "\(imageIdentifier.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: imageView.image!)
-//                    }
-//                }
-//            }
-//        }
-        
+
+        navigationController?.popViewController(animated: true)
         
     }
     
@@ -420,8 +395,20 @@ class HistoryRegisterViewController: BaseViewController {
 //            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
 //            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
+    }
+    
+    func setEditMode(historyTable: HistoryTable) {
+        titleTextField.text = historyTable.historyTitle
+        insertMenuTextField.text = historyTable.menu
+        ratingView.rating = historyTable.rate
+        commentTextView.text = historyTable.comment
+//        selectedAssetIdentifiers = historyTable.images.map{ $0 }
         
-
+        let imageView = [firstImageView, secondImageView, thirdImageView]
+        
+        for (index, imageName) in historyTable.imageNameList.enumerated() {
+            imageView[index].image = loadImageForDocument(fileName: "\(imageName)_image.jpg")
+        }
     }
 }
 
@@ -451,10 +438,18 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
         
         if selections.isEmpty {
 //            imageStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-            firstImageView.image = nil
-            secondImageView.image = nil
-            thirdImageView.image = nil
+            let imageView = [firstImageView, secondImageView, thirdImageView]
+
+            imageView.forEach {
+                $0.image = nil
+            }
         } else {
+//            self.selectedAssetIdentifiers.removeAll()
+//            let imageView = [firstImageView, secondImageView, thirdImageView]
+//            imageView.forEach {
+//                $0.image = nil
+//            }
+
             displayImage()
             print(selectedAssetIdentifiers)
         }
@@ -482,7 +477,17 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
         let dispatchGroup = DispatchGroup()
         // identifier와 이미지로 dictionary를 만듬 (selectedAssetIdentifiers의 순서에 따라 이미지를 받을 예정입니다.)
         var imagesDict = [String: UIImage]()
-
+        print("displayImage")
+        print(selections)
+        
+//        // 1. 기존 이미지를 가져와 딕셔너리에 추가
+//        for identifier in selectedAssetIdentifiers {
+//            let image = loadImageForDocument(fileName: "\(identifier)_image.jpg")
+////            if let image = loadImageForDocument(fileName: "\(identifier)_image.jpg") {
+//                imagesDict[identifier] = image
+////            }
+//        }
+        
         for (identifier, result) in selections {
             
             dispatchGroup.enter()
@@ -500,38 +505,50 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
                 }
             }
         }
-        
         dispatchGroup.notify(queue: DispatchQueue.main) { [weak self] in
             
             guard let self = self else { return }
+            
+
+            let imageView = [firstImageView, secondImageView, thirdImageView]
+//            imageView.forEach {
+//                $0.image = nil
+//            }
             
             // 먼저 스택뷰의 서브뷰들을 모두 제거함
 //            self.imageStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
             
-            switch self.selectedAssetIdentifiers.count {
-            case 1:
-                guard let image = imagesDict[selectedAssetIdentifiers[0]] else { return }
-                firstImageView.image = image
-                secondImageView.image = nil
-                thirdImageView.image = nil
+//            switch self.selectedAssetIdentifiers.count {
+//            case 1:
+//                guard let image = imagesDict[selectedAssetIdentifiers[0]] else { return }
+//                firstImageView.image = image
+//                secondImageView.image = nil
+//                thirdImageView.image = nil
+//
+//            case 2:
+//                guard let image = imagesDict[selectedAssetIdentifiers[0]] else { return }
+//                firstImageView.image = image
+//                guard let image = imagesDict[selectedAssetIdentifiers[1]] else { return }
+//                secondImageView.image = image
+//                thirdImageView.image = nil
+//
+//            case 3:
+//                guard let image = imagesDict[selectedAssetIdentifiers[0]] else { return }
+//                firstImageView.image = image
+//                guard let image = imagesDict[selectedAssetIdentifiers[1]] else { return }
+//                secondImageView.image = image
+//                guard let image = imagesDict[selectedAssetIdentifiers[2]] else { return }
+//                thirdImageView.image = image
+//            default:
+//                print("default")
+//            }
             
-            case 2:
-                guard let image = imagesDict[selectedAssetIdentifiers[0]] else { return }
-                firstImageView.image = image
-                guard let image = imagesDict[selectedAssetIdentifiers[1]] else { return }
-                secondImageView.image = image
-                thirdImageView.image = nil
-                
-            case 3:
-                guard let image = imagesDict[selectedAssetIdentifiers[0]] else { return }
-                firstImageView.image = image
-                guard let image = imagesDict[selectedAssetIdentifiers[1]] else { return }
-                secondImageView.image = image
-                guard let image = imagesDict[selectedAssetIdentifiers[2]] else { return }
-                thirdImageView.image = image
-            default:
-                print("default")
+            print("displayImage")
+            print(selectedAssetIdentifiers)
+            for (index, identifier) in self.selectedAssetIdentifiers.enumerated() {
+                guard let image = imagesDict[identifier] else { return }
+                imageView[index].image = image
             }
             
             // 선택한 이미지의 순서대로 정렬하여 스택뷰에 올리기

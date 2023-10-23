@@ -9,9 +9,37 @@ import UIKit
 
 class HistoryDetailViewController: BaseViewController {
     
+    let repository = RealmRepository()
+    
     var historyID: String = ""
     
-    var imageNames: [String] = ["ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED"]
+    var historyTable: HistoryTable?
+    
+    var imageNames: [String] = []
+    
+    lazy var menu: UIMenu = {
+        let menu = UIMenu(children: [
+            UIAction(title: "수정", image: UIImage(systemName: "square.and.pencil"), handler: { action in
+                print("edit")
+                let registerVC = HistoryRegisterViewController()
+                registerVC.registEditType = .edit
+                guard let historyTable = self.historyTable else { return print("No HistoryTable") }
+                registerVC.setEditMode(historyTable: historyTable)
+                registerVC.historyID = historyTable._id
+                self.navigationController?.pushViewController(registerVC, animated: true)
+            }),
+            UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { action in
+                print("delete")
+                self.deleteAlert()
+            })
+        ])
+        return menu
+    }()
+    
+    lazy var editDeleteButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), menu: menu)
+        return button
+    }()
     
     let pageControl = {
         let view = UIPageControl()
@@ -112,8 +140,16 @@ class HistoryDetailViewController: BaseViewController {
 //                addContentScrollView()
 //                setPageControl()
 //        setImageSlider(images: imageNames)
+        
+        navigationItem.rightBarButtonItem = editDeleteButton
 
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        imageCollectionView.reloadData()
+//    }
     
     
     override func configureView() {
@@ -202,7 +238,7 @@ class HistoryDetailViewController: BaseViewController {
         rateLabel.text = "\(data.rate)"
         
         historyID = "\(data._id)"
-        imageNames = data.imageNameList
+//        imageNames = data.imageNameList
         
 //        setImageSlider(images: imageNames)
     }
@@ -211,66 +247,66 @@ class HistoryDetailViewController: BaseViewController {
 
 extension HistoryDetailViewController: UIScrollViewDelegate {
     
-    private func addContentScrollView() {
-        print("addContentScrollView")
-        print(imageNames)
-        for i in 0..<imageNames.count {
-            let imageView = UIImageView()
-            let xPos = imagePageScrollView.frame.width * CGFloat(i)
-            imageView.frame = CGRect(x: xPos, y: 0, width: imagePageScrollView.bounds.width, height: imagePageScrollView.bounds.height)
-            imageView.image = loadImageForDocument(fileName: "\(imageNames[i])_image.jpg")
-            imagePageScrollView.addSubview(imageView)
-            imagePageScrollView.contentSize.width = imageView.frame.width * CGFloat(i + 1)
-        }
-    }
-    
-    func setImageSlider(images: [String]) { // scrolliVew에 imageView 추가하는 함수
-        for index in 0..<images.count {
-
-            let imageView = UIImageView()
-            //          imageView.image = UIImage(named: images[index])
-            imageView.image = loadImageForDocument(fileName: "\(images[index])_image.jpg")
-//            imageView.contentMode = .scaleAspectFill
-            //          imageView.layer.cornerRadius = 5
-            imageView.clipsToBounds = true
-
-            let xPosition = self.view.frame.width * CGFloat(index)
-
-            imageView.frame = CGRect(x: xPosition,
-                                     y: 0,
-                                     width: imagePageScrollView.frame.width,
-                                     height: imagePageScrollView.frame.width)
-
-//            imagePageScrollView.contentSize.width = imageView.frame.width * CGFloat(index+1)
-            imagePageScrollView.addSubview(imageView)
-            imageView.snp.makeConstraints { make in
-                make.top.left.right.equalToSuperview()
-                make.centerX.equalToSuperview()
-            }
-        }
-        imagePageScrollView.contentSize = CGSize(width: self.view.frame.width * CGFloat(images.count), height: imagePageScrollView.frame.height)
-        imagePageScrollView.snp.remakeConstraints { make in
-            make.top.leading.equalTo(view.safeAreaLayoutGuide)
-            make.width.equalTo(view.frame.width * CGFloat(imageNames.count))
-            make.height.equalToSuperview().multipliedBy(0.3)
-        }
-    }
-    
-    private func setPageControl() {
-        pageControl.numberOfPages = imageNames.count
-    }
-    
-    private func setPageControlSelectedPage(currentPage:Int) {
-        pageControl.currentPage = currentPage
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        //        let value = scrollView.contentOffset.x/scrollView.frame.size.width
-        //        setPageControlSelectedPage(currentPage: Int(round(value)))
-        
-        self.pageControl.currentPage = Int(round(imagePageScrollView.contentOffset.x / UIScreen.main.bounds.width))
-        //        self.imageNumberLabel.text = "\(imagePageControl.currentPage)/\(imagePageControl.numberOfPages)"
-    }
+//    private func addContentScrollView() {
+//        print("addContentScrollView")
+//        print(imageNames)
+//        for i in 0..<imageNames.count {
+//            let imageView = UIImageView()
+//            let xPos = imagePageScrollView.frame.width * CGFloat(i)
+//            imageView.frame = CGRect(x: xPos, y: 0, width: imagePageScrollView.bounds.width, height: imagePageScrollView.bounds.height)
+//            imageView.image = loadImageForDocument(fileName: "\(imageNames[i])_image.jpg")
+//            imagePageScrollView.addSubview(imageView)
+//            imagePageScrollView.contentSize.width = imageView.frame.width * CGFloat(i + 1)
+//        }
+//    }
+//
+//    func setImageSlider(images: [String]) { // scrolliVew에 imageView 추가하는 함수
+//        for index in 0..<images.count {
+//
+//            let imageView = UIImageView()
+//            //          imageView.image = UIImage(named: images[index])
+//            imageView.image = loadImageForDocument(fileName: "\(images[index])_image.jpg")
+////            imageView.contentMode = .scaleAspectFill
+//            //          imageView.layer.cornerRadius = 5
+//            imageView.clipsToBounds = true
+//
+//            let xPosition = self.view.frame.width * CGFloat(index)
+//
+//            imageView.frame = CGRect(x: xPosition,
+//                                     y: 0,
+//                                     width: imagePageScrollView.frame.width,
+//                                     height: imagePageScrollView.frame.width)
+//
+////            imagePageScrollView.contentSize.width = imageView.frame.width * CGFloat(index+1)
+//            imagePageScrollView.addSubview(imageView)
+//            imageView.snp.makeConstraints { make in
+//                make.top.left.right.equalToSuperview()
+//                make.centerX.equalToSuperview()
+//            }
+//        }
+//        imagePageScrollView.contentSize = CGSize(width: self.view.frame.width * CGFloat(images.count), height: imagePageScrollView.frame.height)
+//        imagePageScrollView.snp.remakeConstraints { make in
+//            make.top.leading.equalTo(view.safeAreaLayoutGuide)
+//            make.width.equalTo(view.frame.width * CGFloat(imageNames.count))
+//            make.height.equalToSuperview().multipliedBy(0.3)
+//        }
+//    }
+//
+//    private func setPageControl() {
+//        pageControl.numberOfPages = imageNames.count
+//    }
+//
+//    private func setPageControlSelectedPage(currentPage:Int) {
+//        pageControl.currentPage = currentPage
+//    }
+//
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        //        let value = scrollView.contentOffset.x/scrollView.frame.size.width
+//        //        setPageControlSelectedPage(currentPage: Int(round(value)))
+//
+//        self.pageControl.currentPage = Int(round(imagePageScrollView.contentOffset.x / UIScreen.main.bounds.width))
+//        //        self.imageNumberLabel.text = "\(imagePageControl.currentPage)/\(imagePageControl.numberOfPages)"
+//    }
     
     
 }
@@ -296,9 +332,32 @@ extension HistoryDetailViewController: UICollectionViewDelegate, UICollectionVie
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.reuseIdentifier, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
         
         cell.imageView.image = loadImageForDocument(fileName: "\(imageNames[indexPath.item])_image.jpg")
-        
+        print(imageNames[indexPath.item])
+//        cell.setData(imageName: imageNames[indexPath.item])
+//        collectionView.reloadData()
         return cell
     }
     
     
+}
+
+
+extension HistoryDetailViewController {
+    func deleteAlert() {
+        let alert = UIAlertController(title: "정말 삭제하시겠습니까?", message: "삭제하시면 작성하신 내용과 사진이 삭제됩니다.", preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "취소", style: .default)
+        
+        let delete = UIAlertAction(title: "삭제", style: .destructive) {_ in
+            guard let historyTable = self.historyTable else {return}
+            self.repository.deleteHistory(historyID: historyTable._id)
+            
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true)
+    }
 }

@@ -49,6 +49,7 @@
 		8BB2D7FA2AE41B9B00510018 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7F92AE41B9B00510018 /* PageControl.swift */; };
 		8BB2D7FC2AE422DC00510018 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7FB2AE422DC00510018 /* ImageCollectionViewCell.swift */; };
 		8BB2D7FE2AE422FA00510018 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7FD2AE422FA00510018 /* BaseCollectionViewCell.swift */; };
+		8BB2D8052AE670BD00510018 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D8042AE670BD00510018 /* GradientView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		8BB2D7F92AE41B9B00510018 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		8BB2D7FB2AE422DC00510018 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		8BB2D7FD2AE422FA00510018 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		8BB2D8042AE670BD00510018 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 			children = (
 				8B43CE372AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift */,
 				8BB2D7F32AE10C6800510018 /* RestaurantListCell.swift */,
+				8BB2D8042AE670BD00510018 /* GradientView.swift */,
 			);
 			path = RegistedRestaurantListView;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				8B43CE832ADBDF6900E5250C /* RestaurantTable.swift in Sources */,
 				8BB2D7DD2ADFF5CC00510018 /* HistoryDetailViewController.swift in Sources */,
 				8B43CE562AD5217D00E5250C /* ReusableViewProtocol.swift in Sources */,
+				8BB2D8052AE670BD00510018 /* GradientView.swift in Sources */,
 				8B43CE8E2ADE856500E5250C /* FileManager+Extension.swift in Sources */,
 				8B43CE382AD1BCEA00E5250C /* RegistedRestaurantListViewController.swift in Sources */,
 				8B43CE922ADEC6BB00E5250C /* HistoryTableViewCell.swift in Sources */,

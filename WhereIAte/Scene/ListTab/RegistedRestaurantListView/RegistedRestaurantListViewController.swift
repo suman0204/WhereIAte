@@ -13,11 +13,47 @@ class RegistedRestaurantListViewController: BaseViewController {
     let repository = RealmRepository()
     
     var tasks: Results<RestaurantTable>!
+//
+//    lazy var searchBar = {
+//        let view = UISearchBar()
+//        view.placeholder = "방문한 식당을 찾아보세요"
+//        view.delegate = self
+//        return view
+//    }()
     
-    lazy var searchBar = {
-        let view = UISearchBar()
-        view.placeholder = "방문한 식당을 찾아보세요"
-        view.delegate = self
+    lazy var searchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.delegate = self
+        
+        return searchController
+    }()
+    
+    lazy var sortButton = {
+        let view = UIButton()
+        view.setTitle("최신순", for: .normal)
+        view.setTitleColor(UIColor(named: "mainColor"), for: .normal)
+        view.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        view.tintColor = UIColor(named: "mainColor")
+        view.titleLabel?.font = .systemFont(ofSize: 15)
+//        view.configuration?.imagePadding = 20
+        view.showsMenuAsPrimaryAction = true
+        view.changesSelectionAsPrimaryAction = true
+        view.menu = UIMenu(children: [
+                   UIAction(title: "최신순", state: .on, handler: { action in
+                       self.tasks = self.repository.fetchRestaurant()
+                       self.restaurantTable.reloadData()
+                   }),
+                   UIAction(title: "별점순", handler: { action in
+                       print("中信兄弟隊")
+                   }),
+                   UIAction(title: "방문횟수순", handler: { action in
+                       print("樂天桃猿隊")
+                   }),
+                   
+               ])
         return view
     }()
     
@@ -25,8 +61,10 @@ class RegistedRestaurantListViewController: BaseViewController {
         let view = UITableView()
         view.dataSource = self
         view.delegate = self
-        view.rowHeight = 250
-        view.separatorStyle = .none
+        view.rowHeight = 280
+        view.separatorStyle = .singleLine
+        view.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+//        view.separatorInsetReference = .fromAutomaticInsets
         view.register(RestaurantListCell.self, forCellReuseIdentifier: RestaurantListCell.reuseIdentifier)
         return view
     }()
@@ -37,6 +75,10 @@ class RegistedRestaurantListViewController: BaseViewController {
         
         tasks = repository.fetchRestaurant()
 //        restaurantTable.reloadData()
+        
+        //SearchController
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,18 +89,27 @@ class RegistedRestaurantListViewController: BaseViewController {
     
     override func configureView() {
         title = "방문한 식당"
-        [searchBar, restaurantTable].forEach {
+        [/*searchBar,*/sortButton, restaurantTable].forEach {
             view.addSubview($0)
         }
     }
     
     override func setConstraints() {
-        searchBar.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+//        searchBar.snp.makeConstraints { make in
+//            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+//
+//        }
         
+        sortButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-15)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+//            make.width.equalTo(100)
+//            make.height.equalTo(5)
+            
         }
+        
         restaurantTable.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom)
+            make.top.equalTo(sortButton.snp.bottom).offset(10)
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
@@ -66,10 +117,6 @@ class RegistedRestaurantListViewController: BaseViewController {
     
 }
 
-
-extension RegistedRestaurantListViewController: UISearchBarDelegate {
-    
-}
 
 extension RegistedRestaurantListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,6 +145,40 @@ extension RegistedRestaurantListViewController: UITableViewDelegate, UITableView
         
         
         navigationController?.pushViewController(historyListVC, animated: true)
+    }
+    
+}
+
+
+extension RegistedRestaurantListViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+//        guard let query = searchController.searchBar.text else {
+//            return
+//        }
+//
+//        tasks = repository.restaurantSearchFilter(query: query)
+//        restaurantTable.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text else { return }
+        
+        tasks = repository.restaurantSearchFilter(query: query)
+        restaurantTable.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("cancel")
+        
+        tasks = repository.fetchRestaurant()
+        restaurantTable.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let query = searchBar.text else {return}
+        
+        tasks = repository.restaurantSearchFilter(query: query)
+        restaurantTable.reloadData()
     }
     
 }

@@ -19,9 +19,19 @@ class RestaurantTable: Object {
     @Persisted var latitue: Double
     @Persisted var longitude: Double
     @Persisted var registeredDate: Date
-
+//    @Persisted var avgRate: Double
+    
     @Persisted var history: List<HistoryTable>
-
+    @Persisted var historyCount: Int
+    
+    var avgRate: Double {
+        var total: Double = 0
+        history.forEach {
+            total += $0.rate
+        }
+        return total / Double(history.count)
+    }
+    
     convenience init(id: String, name: String, category: String, roadAddress: String, phoneNumber: String, placeURL: String, city: String, latitude: Double, longitude: Double, registeredDate: Date) {
         self.init()
         
@@ -35,6 +45,7 @@ class RestaurantTable: Object {
         self.latitue = latitude
         self.longitude = longitude
         self.registeredDate = registeredDate
+//        self.avgRate = history.map { $0.rate }.reduce(0, +) / Double(history.count)
     }
     
 

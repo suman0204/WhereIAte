@@ -16,7 +16,7 @@ class HistoryListViewController: BaseViewController {
     
     var tasks: Results<RestaurantTable>!
     
-    var historyList: List<HistoryTable>?
+    var historyList: Results<HistoryTable>?
     
     let viewModel = MainSearchViewModel()
     
@@ -120,7 +120,9 @@ class HistoryListViewController: BaseViewController {
         
         historyList = tasks.where {
             $0.restaurantID == restaurantID
-        }.first?.history
+        }.first?.history.sorted(byKeyPath: "visitedDate", ascending: false)
+        
+        
         
         print("HistoryList----")
         print(historyList)
@@ -135,6 +137,7 @@ class HistoryListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        tasks = repository.fetchRestaurant()
         historyTable.reloadData()
     }
     
@@ -268,7 +271,8 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
         let data = historyList[indexPath.row]
         
         historyDetailVC.setData(data: data)
-//        historyDetailVC.setImageSlider(images: data.imageNameList)
+        historyDetailVC.imageNames = data.imageNameList
+        historyDetailVC.historyTable = data
         navigationController?.pushViewController(historyDetailVC, animated: true)
     }
     
