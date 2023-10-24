@@ -22,14 +22,19 @@ class RestaurantTable: Object {
 //    @Persisted var avgRate: Double
     
     @Persisted var history: List<HistoryTable>
-    @Persisted var historyCount: Int
+//    @Persisted var historyCount: Int
     
-    var avgRate: Double {
+    var avgRate: String {
         var total: Double = 0
         history.forEach {
             total += $0.rate
         }
-        return total / Double(history.count)
+        var avg = total / Double(history.count)
+        return String(format: "%.1f", avg)
+    }
+    
+    var historyCount: Int {
+        return history.count
     }
     
     convenience init(id: String, name: String, category: String, roadAddress: String, phoneNumber: String, placeURL: String, city: String, latitude: Double, longitude: Double, registeredDate: Date) {

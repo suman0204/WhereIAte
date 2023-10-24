@@ -35,14 +35,35 @@ class MainMapViewController: BaseViewController {
     
     let mainSearchTableViewController = MainSearchTableViewController()
 
-    var searchController = UISearchController(searchResultsController: nil)
+//    var searchController = UISearchController(searchResultsController: nil)
+    lazy var searchController = {
+        let searchController = UISearchController(searchResultsController: self.mainSearchTableViewController)
+        searchController.delegate = self
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self.mainSearchTableViewController
+        
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        searchController.searchBar.placeholder = "방문하신 식당을 검색해보세요"
+        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
+        searchController.searchBar.tintColor = UIColor(named: "mainColor")
+//        searchController.searchBar.setShowsCancelButton(true, animated: true)
+       
+//        searchController.searchBar.searchTextField.backgroundColor = .white
+        searchController.searchBar.searchTextField.leftView?.tintColor = UIColor(named: "mainColor")
+        
+        return searchController
+    }()
 
     let myLocationButton = {
         let view = UIButton()
         view.setImage(UIImage(systemName: "location"), for: .normal)
-        view.tintColor = .black
+        view.tintColor = UIColor(named: "mainColor")
         view.backgroundColor = .white
         view.layer.cornerRadius = 25
+        view.layer.borderWidth = 0.5
+        view.layer.borderColor = UIColor.lightGray.cgColor
         view.addTarget(self, action: #selector(myLoactionButtonClicked), for: .touchUpInside)
         return view
     }()
@@ -60,13 +81,13 @@ class MainMapViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController = UISearchController(searchResultsController: mainSearchTableViewController)
+//        searchController = UISearchController(searchResultsController: mainSearchTableViewController)
         viewModel.resultList.bind { resultList in
             self.mainSearchTableViewController.restaurantResultList = resultList
             self.mainSearchTableViewController.tableView.reloadData()
 
         }
-        
+        navigationItem.titleView = searchController.searchBar
 //        title = "Where I Ate"
         mainSearchTableViewController.handleMapSearchDelegate = self
         
@@ -75,7 +96,7 @@ class MainMapViewController: BaseViewController {
         
         checkDeviceLocationAuthorization()
         
-        searchController.hidesNavigationBarDuringPresentation = true
+//        searchController.hidesNavigationBarDuringPresentation = true
 //        searchController.obscuresBackgroundDuringPresentation = true
 //        searchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
@@ -84,6 +105,12 @@ class MainMapViewController: BaseViewController {
         
         
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        searchController.isActive = true
+//    }
     
     @objc private func myLoactionButtonClicked() {
         mainMapView.showsUserLocation = true
@@ -96,7 +123,7 @@ class MainMapViewController: BaseViewController {
         [mainMapView, myLocationButton].forEach {
             view.addSubview($0)
         }
-        configureSearchController()
+//        configureSearchController()
     }
     
     override func setConstraints() {
@@ -111,6 +138,8 @@ class MainMapViewController: BaseViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.trailing.equalTo(mainMapView.snp.trailing).inset(20)
         }
+        
+
 
     }
 }
@@ -300,10 +329,15 @@ extension MainMapViewController: UISearchControllerDelegate, UISearchBarDelegate
         searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
 //        searchController.searchBar.setShowsCancelButton(true, animated: true)
        
-        searchController.searchBar.searchTextField.backgroundColor = .white
+//        searchController.searchBar.searchTextField.backgroundColor = .white
+        searchController.searchBar.searchTextField.leftView?.tintColor = UIColor(named: "mainColor")
+        
+//        searchController.searchBar.sizeToFit()
         
         // UISearchController를 내비게이션 바의 타이틀 뷰로 설정합니다.
-        navigationItem.searchController = searchController
+//        navigationItem.searchController = searchController
+//        navigationItem.titleView = searchController.searchBar
+    
         definesPresentationContext = true
     }
     

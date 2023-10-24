@@ -50,6 +50,18 @@ class HistoryDetailViewController: BaseViewController {
         return view
     }()
     
+    lazy var imageCountLabel = {
+        let view = UILabel()
+        view.backgroundColor = UIColor(named: "mainColorAlpha")
+        view.textColor = .white
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 10
+        view.font = .systemFont(ofSize: 13)
+        view.textAlignment = .center
+        view.text = "1 / \(imageNames.count)"
+        return view
+    }()
+    
     lazy var imageCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.reuseIdentifier)
@@ -136,7 +148,8 @@ class HistoryDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "mainColor")
+
 //                addContentScrollView()
 //                setPageControl()
 //        setImageSlider(images: imageNames)
@@ -163,7 +176,7 @@ class HistoryDetailViewController: BaseViewController {
             contentsView.addSubview($0)
         }
         
-        [imageCollectionView, contentsView].forEach {
+        [imageCollectionView, imageCountLabel, contentsView].forEach {
             view.addSubview($0)
         }
         
@@ -175,6 +188,14 @@ class HistoryDetailViewController: BaseViewController {
     }
     
     override func setConstraints() {
+        
+        imageCountLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageCollectionView.snp.top).offset(10)
+            make.trailing.equalTo(imageCollectionView.snp.trailing).offset(-10)
+            make.width.equalTo(imageCollectionView.snp.width).multipliedBy(0.1)
+            make.height.equalTo(imageCollectionView.snp.height).multipliedBy(0.1)
+        }
+        
         imageCollectionView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalToSuperview().multipliedBy(0.3)
@@ -338,7 +359,13 @@ extension HistoryDetailViewController: UICollectionViewDelegate, UICollectionVie
         return cell
     }
     
-    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let x = targetContentOffset.pointee.x
+        let item = Int(x / view.frame.width)
+        print("현재 페이지: \(item)")
+        imageCountLabel.text = "\(item + 1) / \(imageNames.count)"
+    }
+
 }
 
 

@@ -35,7 +35,7 @@ class RestaurantListCell: BaseTableViewCell {
         view.font = .boldSystemFont(ofSize: 18.5)
         view.numberOfLines = 1
         view.text = "오레노라멘"
-        view.textColor = UIColor(named: "mainColor")
+//        view.textColor = UIColor(named: "mainColor")
         return view
     }()
     
@@ -65,12 +65,28 @@ class RestaurantListCell: BaseTableViewCell {
 //        return view
 //    }()
     
+    let starImage = {
+        let view = UIImageView()
+        view.frame = .zero
+        view.image = UIImage(systemName: "star.fill")
+        view.tintColor = UIColor(named: "mainColor")
+        return view
+    }()
+    
+    let rateLabel = {
+        let view = UILabel()
+        view.numberOfLines = 1
+        view.font = .systemFont(ofSize: 16)
+        view.text = "4.5"
+        return view
+    }()
+    
     override func prepareForReuse() {
         restaurantImage.image = nil
     }
     
     override func configureCell() {
-        [restaurantImage, restaurantTitle, restaurantCategory, restaurantRoadAddress, /*gradient, restaurantPhoneNumber*/].forEach {
+        [restaurantImage, restaurantTitle, restaurantCategory, restaurantRoadAddress, rateLabel, starImage/*gradient, restaurantPhoneNumber*/].forEach {
             mainView.addSubview($0)
         }
         
@@ -91,15 +107,18 @@ class RestaurantListCell: BaseTableViewCell {
             make.height.equalToSuperview().multipliedBy(0.75)
         }
         
+        restaurantTitle.setContentCompressionResistancePriority(.init(rawValue: 750), for: .horizontal)
         restaurantTitle.snp.makeConstraints { make in
             make.top.equalTo(restaurantImage.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(5)
 //            make.height.equalTo(20)
         }
         
+        restaurantCategory.setContentCompressionResistancePriority(.init(rawValue: 751), for: .horizontal)
         restaurantCategory.snp.makeConstraints { make in
             make.centerY.equalTo(restaurantTitle)
             make.leading.equalTo(restaurantTitle.snp.trailing).offset(5)
+            make.trailing.lessThanOrEqualTo(starImage.snp.leading).offset(-10)
         }
         
         restaurantRoadAddress.snp.makeConstraints { make in
@@ -107,6 +126,21 @@ class RestaurantListCell: BaseTableViewCell {
             make.leading.equalToSuperview().offset(5)
 //            make.height.equalTo(20)
         }
+        
+        rateLabel.setContentCompressionResistancePriority(.init(rawValue: 751), for: .horizontal)
+        rateLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-10)
+            make.centerY.equalTo(restaurantTitle)
+        }
+        
+        starImage.setContentCompressionResistancePriority(.init(rawValue: 751), for: .horizontal)
+        starImage.snp.makeConstraints { make in
+            make.trailing.equalTo(rateLabel.snp.leading).offset(-5)
+            make.centerY.equalTo(restaurantTitle)
+            make.size.equalTo(20)
+        }
+        
+        
 //
 //        gradient.snp.makeConstraints { make in
 //            make.bottom.horizontalEdges.equalToSuperview()
@@ -124,6 +158,7 @@ class RestaurantListCell: BaseTableViewCell {
         restaurantTitle.text = data.restaurantName
         restaurantCategory.text = data.restaurantCategory
         restaurantRoadAddress.text = data.restaurantRoadAddress
+        rateLabel.text = data.avgRate
 //        restaurantPhoneNumber.text = data.restaurantPhoneNumber
 //        restaurantImage.image = loadImageForDocument(fileName: "\(data.imageNameList.first)_image.jpg")
     }

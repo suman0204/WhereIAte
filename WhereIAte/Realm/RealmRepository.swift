@@ -110,11 +110,11 @@ class RealmRepository {
         return result
     }
     
-    func restaurantSortByRating() {
-        
-    }
+//    func restaurantSortByRating() {
+//        
+//    }
     
-    func restaurantSortByCount() {
-        let result = realm.objects(RestaurantTable.self).sorted(by: <#T##KeyPath<RestaurantTable, _HasPersistedType>#>)
-    }
+//    func restaurantSortByCount() {
+//        let result = realm.objects(RestaurantTable.self).sorted(by: <#T##KeyPath<RestaurantTable, _HasPersistedType>#>)
+//    }
 }

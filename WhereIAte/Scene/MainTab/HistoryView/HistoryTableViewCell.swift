@@ -13,24 +13,24 @@ class HistoryTableViewCell: BaseTableViewCell {
         
     let mainView = {
         let view = UIView()
-        view.layer.cornerRadius = 20
-        view.layer.cornerCurve = .circular
-        view.backgroundColor = .white
+//        view.layer.cornerRadius = 20
+//        view.layer.cornerCurve = .circular
+//        view.backgroundColor = .white
 //        view.layer.borderColor = UIColor.black.cgColor
 //        view.layer.borderWidth = 1
-        view.layer.masksToBounds = false
-        view.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: 1)
-        view.layer.shadowRadius = 2
-        view.layer.shadowOpacity = 0.7
+//        view.layer.masksToBounds = false
+//        view.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
+//        view.layer.shadowOffset = CGSize(width: 0, height: 1)
+//        view.layer.shadowRadius = 2
+//        view.layer.shadowOpacity = 0.7
         return view
     }()
     
     let historyImageView = {
         let view = UIImageView()
         view.frame = .zero
-        view.layer.cornerRadius = 20
-        view.layer.cornerCurve = .circular
+        view.layer.cornerRadius = 10
+        view.layer.cornerCurve = .continuous
         view.backgroundColor = .blue
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
@@ -103,7 +103,7 @@ class HistoryTableViewCell: BaseTableViewCell {
         }
         
         historyImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
+            make.leading.equalToSuperview()
             make.verticalEdges.equalToSuperview().inset(10)
             make.centerY.equalToSuperview()
             make.width.equalTo(historyImageView.snp.height)

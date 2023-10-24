@@ -64,7 +64,7 @@ class MainMapViewBottomSheetView: BaseViewController {
     
     let plusImageView = {
         let view = UIImageView()
-        view.image = UIImage(systemName: "plus.circle")
+        view.image = UIImage(systemName: "plus.circle")?.withTintColor(UIColor(named: "mainColor")!, renderingMode: .alwaysOriginal)
         view.frame = .zero
         view.tintColor = .black
         return view
@@ -74,7 +74,7 @@ class MainMapViewBottomSheetView: BaseViewController {
         let view = UILabel()
         view.text = "방문기록 등록하기"
         view.font = .boldSystemFont(ofSize: 13)
-        view.textColor = .black
+        view.textColor =  UIColor(named: "mainColor")
         view.textAlignment = .center
         view.numberOfLines = 0
         return view
@@ -186,7 +186,8 @@ class MainMapViewBottomSheetView: BaseViewController {
         
         restaurantName.setContentHuggingPriority(.init(751), for: .horizontal)
         restaurantName.snp.makeConstraints { make in
-            make.leading.verticalEdges.equalToSuperview()
+            make.verticalEdges.equalToSuperview()
+            make.leading.equalToSuperview().offset(7)
         }
         restaurantCategory.setContentHuggingPriority(.init(750), for: .horizontal)
         restaurantCategory.snp.makeConstraints { make in
@@ -225,8 +226,12 @@ class MainMapViewBottomSheetView: BaseViewController {
     func setData(document: RestaurantDocument) {
         restaurantName.text = document.placeName
         restaurantCategory.text = document.lastCategory
-        restaurantRoadAddress.text = document.roadAddressName
-        restaurantPhoneNumber.text = document.phone
+        restaurantRoadAddress.text = "📍" + document.roadAddressName
+        if document.phone.isEmpty {
+            restaurantPhoneNumber.text = "📞  - "
+        } else {
+            restaurantPhoneNumber.text = "📞" + document.phone
+        }
     }
 }
 

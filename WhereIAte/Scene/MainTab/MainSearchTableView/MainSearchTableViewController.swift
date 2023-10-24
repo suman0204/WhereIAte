@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import SnapKit
 
 class MainSearchTableViewController: UITableViewController {
     
@@ -21,6 +22,7 @@ class MainSearchTableViewController: UITableViewController {
         
         tableView.register(MainSearchTableViewCell.self, forCellReuseIdentifier: MainSearchTableViewCell.reuseIdentifier)
         
+        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
 //        viewModel.resultList.bind { resultList in
 ////            self.mainSearchTableViewController.restaurantResultList = resultList\
 //            print("chage list")
@@ -30,6 +32,10 @@ class MainSearchTableViewController: UITableViewController {
 //                self.tableView.reloadData()
 //            }
 //        }
+//        tableView.snp.makeConstraints { make in
+//            make.edges.equalTo(view.safeAreaLayoutGuide)
+//        }
+        
         
     }
     

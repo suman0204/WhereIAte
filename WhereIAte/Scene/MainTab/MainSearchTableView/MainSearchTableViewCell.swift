@@ -95,7 +95,7 @@ class MainSearchTableViewCell: BaseTableViewCell {
         
 //        contentView.addSubview(imageLableStackView)
         
-        [bookmarkImage, restaurantName, restaurantCategory, restaurantRoadAddress].forEach {
+        [/*bookmarkImage,*/ restaurantName, restaurantCategory, restaurantRoadAddress].forEach {
             contentView.addSubview($0)
         }
     }
@@ -105,16 +105,16 @@ class MainSearchTableViewCell: BaseTableViewCell {
 //            make.edges.equalToSuperview()
 //        }
         
-        bookmarkImage.snp.makeConstraints { make in
-            make.size.equalTo(25)
-            make.leading.equalTo(10)
-            make.centerY.equalToSuperview()
-        }
-        
+//        bookmarkImage.snp.makeConstraints { make in
+//            make.size.equalTo(25)
+//            make.leading.equalTo(10)
+//            make.centerY.equalToSuperview()
+//        }
+//
         
         restaurantName.snp.makeConstraints { make in
-            make.leading.equalTo(bookmarkImage.snp.trailing).offset(10)
-            make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(15)
 //            make.leading.equalToSuperview()
         }
         
@@ -125,7 +125,7 @@ class MainSearchTableViewCell: BaseTableViewCell {
         }
         
         restaurantRoadAddress.snp.makeConstraints { make in
-            make.leading.equalTo(bookmarkImage.snp.trailing).offset(10)
+            make.leading.equalToSuperview().offset(20)
             make.top.equalTo(restaurantName.snp.bottom).offset(10)
             make.trailing.equalToSuperview().inset(10)
         }

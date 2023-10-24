@@ -27,7 +27,11 @@ class RegistedRestaurantListViewController: BaseViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.delegate = self
-        
+        searchController.searchBar.placeholder = "식당 이름 및 카테고리로 검색해보세요"
+        searchController.searchBar.tintColor = UIColor(named: "mainColor")
+        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
+        searchController.searchBar.searchTextField.leftView?.tintColor = UIColor(named: "mainColor")
+
         return searchController
     }()
     
@@ -47,10 +51,16 @@ class RegistedRestaurantListViewController: BaseViewController {
                        self.restaurantTable.reloadData()
                    }),
                    UIAction(title: "별점순", handler: { action in
-                       print("中信兄弟隊")
+                       print("별점순")
+                       let sortedRestaurantTables = self.tasks.sorted(by: { $0.avgRate > $1.avgRate })
+                       print(sortedRestaurantTables)
                    }),
                    UIAction(title: "방문횟수순", handler: { action in
-                       print("樂天桃猿隊")
+                       print("방문횟수순")
+                       let sortedRestaurants = self.tasks.sorted(by: { restaurant1, restaurant2 in
+                           return restaurant1.history.count > restaurant2.history.count
+                       })
+                       print(sortedRestaurants)
                    }),
                    
                ])
@@ -77,7 +87,10 @@ class RegistedRestaurantListViewController: BaseViewController {
 //        restaurantTable.reloadData()
         
         //SearchController
-        navigationItem.searchController = searchController
+//        navigationItem.searchController = searchController
+        searchController.searchBar.sizeToFit()
+        
+        navigationItem.titleView = searchController.searchBar
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     
@@ -131,6 +144,7 @@ extension RegistedRestaurantListViewController: UITableViewDelegate, UITableView
         guard let firsthistory = data.history.first else { return UITableViewCell() }
         guard let firstimage = firsthistory.imageNameList.first else {return UITableViewCell()}
         cell.restaurantImage.image = loadImageForDocument(fileName: "\(firstimage)_image.jpg")
+        print(data.avgRate)
         return cell
     }
     

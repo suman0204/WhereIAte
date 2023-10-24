@@ -93,12 +93,15 @@ class HistoryListViewController: BaseViewController {
         view.dataSource = self
         view.rowHeight = 150
         view.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.reuseIdentifier)
-        view.separatorStyle = .none
+        view.separatorStyle = .singleLine
+        view.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
         return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.tintColor = UIColor(named: "mainColor")
+        
         view.backgroundColor = .white
         
         navigationItem.rightBarButtonItem = plusButton
@@ -184,7 +187,7 @@ class HistoryListViewController: BaseViewController {
         restaurantInfoView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.height.equalTo(100)
+            make.height.lessThanOrEqualTo(120)
 //            make.height.equalToSuperview().multipliedBy(0.16)
         }
         
@@ -198,15 +201,15 @@ class HistoryListViewController: BaseViewController {
 //            make.height.equalToSuperview().multipliedBy(0.2)
         }
         
-        restaurantName.setContentHuggingPriority(.init(751), for: .horizontal)
+        restaurantName.setContentCompressionResistancePriority(.init(750), for: .horizontal)
         restaurantName.snp.makeConstraints { make in
             make.leading.verticalEdges.equalToSuperview()
         }
 
-        restaurantCategory.setContentHuggingPriority(.init(750), for: .horizontal)
+        restaurantCategory.setContentCompressionResistancePriority(.init(751), for: .horizontal)
         restaurantCategory.snp.makeConstraints { make in
             make.leading.equalTo(restaurantName.snp.trailing).offset(5)
-            make.trailing.equalToSuperview()
+            make.trailing.lessThanOrEqualToSuperview()
             make.centerY.equalTo(restaurantName)
         }
         
@@ -241,7 +244,11 @@ class HistoryListViewController: BaseViewController {
         restaurantName.text = data.restaurantName
         restaurantCategory.text = data.restaurantCategory
         restaurantRoadAddress.text = "📍" + data.restaurantRoadAddress
-        restaurantPhoneNumber.text = "📞" + data.restaurantPhoneNumber
+        if data.restaurantPhoneNumber.isEmpty {
+            restaurantPhoneNumber.text = "📞  - "
+        } else {
+            restaurantPhoneNumber.text = "📞" + data.restaurantPhoneNumber
+        }
     }
 }
 

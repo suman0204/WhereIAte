@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([MainMapVC, ListVC], animated: true)
+        tabBarController.tabBar.tintColor = UIColor(named: "mainColor")
 //        tabBarController.tabBar.tintColor = .white
         
         if let items = tabBarController.tabBar.items {

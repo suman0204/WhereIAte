@@ -39,6 +39,29 @@ class HistoryRegisterViewController: BaseViewController {
         return button
     }()
     
+//    let imageLoadingActivityIndicator: UIActivityIndicatorView = {
+//        let activityIndicator = UIActivityIndicatorView(style: .medium)
+//        // 다음으로 적절한 프레임과 스타일을 설정합니다.
+//        return activityIndicator
+//    }()
+    
+    lazy var imageLoadingActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        
+        activityIndicator.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: 150)
+       
+        activityIndicator.color = UIColor(named: "mainColor")
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .medium
+        
+        activityIndicator.stopAnimating()
+        
+        return activityIndicator
+        
+    }()
+    
     let imagePickerView = {
         let view = UIView()
         view.layer.borderColor = UIColor.black.cgColor
@@ -162,6 +185,13 @@ class HistoryRegisterViewController: BaseViewController {
         return view
     }()
     
+    let commentLabel = {
+        let view = UILabel()
+        view.text = "기록"
+        view.font = .boldSystemFont(ofSize: 17)
+        return view
+    }()
+    
     let commentTextView = {
         let view = UITextView()
         view.layer.borderColor = UIColor.black.cgColor
@@ -175,10 +205,14 @@ class HistoryRegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.tintColor = UIColor(named: "mainColor")
+
         title = registEditType.titleName
+        view.backgroundColor = .white
         
         navigationItem.rightBarButtonItem = saveButton
-
+//        navigationController?.navigationBar.backgroundColor = .white
+        
         repository.fileURL()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imagePickerViewTapped))
@@ -197,10 +231,31 @@ class HistoryRegisterViewController: BaseViewController {
     @objc func saveButtonClicked() {
         print("saveButton")
         
-//        guard let restaurantDocument = restaurantDocument else {
-//            print("RestaurantDocument Nil")
-//            return
-//        }
+        if selectedAssetIdentifiers.isEmpty {
+            showAlert(title: "사진 선택", message: "사진을 선택하세요.")
+            return
+        }
+        
+        guard let title = titleTextField.text, !title.isEmpty else {
+            showAlert(title: "제목 입력", message: "제목을 입력하세요.")
+            return
+        }
+        
+        guard let menu = insertMenuTextField.text, !menu.isEmpty else {
+            showAlert(title: "메뉴 입력", message: "메뉴를 입력하세요.")
+            return
+        }
+        
+        if ratingView.rating == 0.0 {
+            showAlert(title: "별점 입력", message: "별점을 입력하세요.")
+            return
+        }
+        
+        guard let comment = commentTextView.text, !comment.isEmpty else {
+            showAlert(title: "기록 입력", message: "기록을 입력하세요.")
+            return
+        }
+        
         switch registEditType {
         case .register:
             switch tapType {
@@ -299,7 +354,7 @@ class HistoryRegisterViewController: BaseViewController {
 //            imageStackView.backgroundColor = .black
         }
         
-        [/*restaurantName,*/ imagePickerView, imageStackView, historyTitleLabel, titleTextField,visitedDateLabel, visitedDatePicker, menuLabel, insertMenuTextField, ratingView, commentTextView].forEach {
+        [/*restaurantName,*/ imagePickerView, imageStackView, historyTitleLabel, titleTextField,visitedDateLabel, visitedDatePicker, menuLabel, insertMenuTextField, ratingView, commentLabel, commentTextView, imageLoadingActivityIndicator].forEach {
             view.addSubview($0)
         }
     }
@@ -388,10 +443,15 @@ class HistoryRegisterViewController: BaseViewController {
             make.centerX.equalToSuperview()
         }
         
-        commentTextView.snp.makeConstraints { make in
+        commentLabel.snp.makeConstraints { make in
             make.top.equalTo(ratingView.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(21)
-            make.height.equalTo(200)
+        }
+        
+        commentTextView.snp.makeConstraints { make in
+            make.top.equalTo(commentLabel.snp.bottom).offset(10)
+            make.horizontalEdges.equalToSuperview().inset(21)
+            make.bottom.greaterThanOrEqualTo(view.safeAreaLayoutGuide).offset(-30)
 //            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
 //            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
@@ -419,6 +479,8 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         // picker가 선택이 완료되면 화면 내리기
         picker.dismiss(animated: true)
+        
+        imageLoadingActivityIndicator.startAnimating()
         
         // Picker의 작업이 끝난 후, 새로 만들어질 selections을 담을 변수를 생성
         var newSelections = [String: PHPickerResult]()
@@ -452,6 +514,7 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
 
             displayImage()
             print(selectedAssetIdentifiers)
+//            imageLoadingActivityIndicator.stopAnimating()
         }
     }
     
@@ -566,7 +629,19 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
 //                guard let image = imagesDict[identifier] else { return }
 //                self.addImage(image)
 //            }
+            imageLoadingActivityIndicator.stopAnimating()
+            
         }
     }
     
+}
+
+
+extension HistoryRegisterViewController {
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
 }
