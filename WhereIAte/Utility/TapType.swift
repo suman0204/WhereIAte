@@ -12,6 +12,11 @@ enum TapType {
     case listTap
 }
 
+enum dataFrom {
+    case table
+    case api
+}
+
 enum registEditType {
     case register
     case edit
@@ -25,4 +30,10 @@ enum registEditType {
         }
     }
     
+}
+
+enum sortedType {
+    case lastest
+    case rates
+    case times
 }

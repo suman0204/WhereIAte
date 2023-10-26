@@ -26,11 +26,16 @@ class RestaurantTable: Object {
     
     var avgRate: String {
         var total: Double = 0
-        history.forEach {
-            total += $0.rate
+        if history.isEmpty {
+            return "0.0"
+        } else {
+            history.forEach {
+                total += $0.rate
+            }
+            var avg = total / Double(history.count)
+            
+            return String(format: "%.1f", avg)
         }
-        var avg = total / Double(history.count)
-        return String(format: "%.1f", avg)
     }
     
     var historyCount: Int {

@@ -176,6 +176,7 @@ class HistoryRegisterViewController: BaseViewController {
     let ratingView = {
         let view = CosmosView()
         view.rating = 0
+        view.settings.minTouchRating = 0.5
         view.settings.fillMode = .half
         view.settings.starSize = 40
         view.settings.starMargin = 15
@@ -205,7 +206,7 @@ class HistoryRegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.tintColor = UIColor(named: "mainColor")
+        navigationController?.navigationBar.tintColor = .black
 
         title = registEditType.titleName
         view.backgroundColor = .white
@@ -231,9 +232,11 @@ class HistoryRegisterViewController: BaseViewController {
     @objc func saveButtonClicked() {
         print("saveButton")
         
-        if selectedAssetIdentifiers.isEmpty {
-            showAlert(title: "사진 선택", message: "사진을 선택하세요.")
-            return
+        if registEditType == .register {
+            if selectedAssetIdentifiers.isEmpty {
+                showAlert(title: "사진 선택", message: "사진을 선택하세요.")
+                return
+            }
         }
         
         guard let title = titleTextField.text, !title.isEmpty else {
@@ -296,23 +299,23 @@ class HistoryRegisterViewController: BaseViewController {
             }
 
         case .edit:
-            var imageList: List<String> {
-                let list: List<String> = List<String>()
-                selectedAssetIdentifiers.forEach {
-                    list.append($0)
-                }
-                return list
-            }
+//            var imageList: List<String> {
+//                let list: List<String> = List<String>()
+//                selectedAssetIdentifiers.forEach {
+//                    list.append($0)
+//                }
+//                return list
+//            }
             
             guard let historyID = historyID else { return print("NO HistoryID")}
-            repository.updateHistory(historyID: historyID, title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "", images: imageList)
+            repository.updateHistory(historyID: historyID, title: titleTextField.text ?? "", visitedDate: visitedDatePicker.date, menu: insertMenuTextField.text ?? "", rate: ratingView.rating, comment: commentTextView.text ?? "")
             
-            for (index, imageView) in [firstImageView, secondImageView, thirdImageView].enumerated() {
-                if let image = imageView.image {
-                    let imageID = selectedAssetIdentifiers[index]  // 사용 가능한 이미지 식별자 가져오기
-                    saveImageToDocument(fileName: "\(imageID.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: image)
-                }
-            }
+//            for (index, imageView) in [firstImageView, secondImageView, thirdImageView].enumerated() {
+//                if let image = imageView.image {
+//                    let imageID = selectedAssetIdentifiers[index]  // 사용 가능한 이미지 식별자 가져오기
+//                    saveImageToDocument(fileName: "\(imageID.replacingOccurrences(of: "/L0/001", with: ""))_image.jpg", image: image)
+//                }
+//            }
         }
         
 
@@ -354,106 +357,164 @@ class HistoryRegisterViewController: BaseViewController {
 //            imageStackView.backgroundColor = .black
         }
         
-        [/*restaurantName,*/ imagePickerView, imageStackView, historyTitleLabel, titleTextField,visitedDateLabel, visitedDatePicker, menuLabel, insertMenuTextField, ratingView, commentLabel, commentTextView, imageLoadingActivityIndicator].forEach {
-            view.addSubview($0)
+        switch registEditType {
+        case .register:
+            [/*restaurantName,*/ imagePickerView, imageStackView, historyTitleLabel, titleTextField,visitedDateLabel, visitedDatePicker, menuLabel, insertMenuTextField, ratingView, commentLabel, commentTextView, imageLoadingActivityIndicator].forEach {
+                view.addSubview($0)
+            }
+        case .edit:
+            [historyTitleLabel, titleTextField,visitedDateLabel, visitedDatePicker, menuLabel, insertMenuTextField, ratingView, commentLabel, commentTextView, imageLoadingActivityIndicator].forEach {
+                view.addSubview($0)
+            }
         }
     }
     
     override func setConstraints() {
-//        restaurantName.snp.makeConstraints { make in
-//            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(15)
-//        }
         
-        cameraImage.snp.makeConstraints { make in
-//            make.size.equalTo(30)
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(20)
-        }
-        
-        imageCountLabel.snp.makeConstraints { make in
-            make.top.equalTo(cameraImage.snp.bottom).offset(5)
-            make.centerX.equalToSuperview()
-        }
-        
-        imagePickerView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(15)
-            make.size.equalTo(80)
-        }
-        
-        imageStackView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.leading.equalTo(imagePickerView.snp.trailing).offset(5)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-15)
-            make.height.equalTo(80)
-        }
-        
-        firstImageView.snp.makeConstraints { make in
-            make.size.equalTo(80)
-            make.leading.equalToSuperview().offset(10)
-            make.centerY.equalToSuperview()
-        }
-        
-        secondImageView.snp.makeConstraints { make in
-            make.size.equalTo(80)
-            make.leading.equalTo(firstImageView.snp.trailing).offset(10)
-            make.centerY.equalToSuperview()
-        }
-        
-        thirdImageView.snp.makeConstraints { make in
-            make.size.equalTo(80)
-            make.leading.equalTo(secondImageView.snp.trailing).offset(10)
-            make.centerY.equalToSuperview()
-        }
-        
-        historyTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(imagePickerView.snp.bottom).offset(20)
-            make.horizontalEdges.equalToSuperview().inset(21)
-        }
-        
-        titleTextField.snp.makeConstraints { make in
-            make.top.equalTo(historyTitleLabel.snp.bottom).offset(10)
-            make.horizontalEdges.equalToSuperview().inset(21)
-        }
-        
-        menuLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleTextField.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(21)
-        }
-        
-        insertMenuTextField.snp.makeConstraints { make in
-            make.top.equalTo(menuLabel.snp.bottom).offset(10)
-            make.horizontalEdges.equalToSuperview().inset(21)
-        }
-        
-        visitedDateLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(visitedDatePicker)
-            make.leading.equalToSuperview().offset(21)
-        }
-        
-        visitedDatePicker.snp.makeConstraints { make in
-            make.top.equalTo(insertMenuTextField.snp.bottom).offset(20)
-            make.trailing.equalToSuperview().offset(-21)
+        switch registEditType {
+        case .register:
+            cameraImage.snp.makeConstraints { make in
+                //            make.size.equalTo(30)
+                make.centerX.equalToSuperview()
+                make.top.equalToSuperview().offset(20)
+            }
             
-        }
-        
-        
-        ratingView.snp.makeConstraints { make in
-            make.top.equalTo(visitedDatePicker.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-        }
-        
-        commentLabel.snp.makeConstraints { make in
-            make.top.equalTo(ratingView.snp.bottom).offset(20)
-            make.horizontalEdges.equalToSuperview().inset(21)
-        }
-        
-        commentTextView.snp.makeConstraints { make in
-            make.top.equalTo(commentLabel.snp.bottom).offset(10)
-            make.horizontalEdges.equalToSuperview().inset(21)
-            make.bottom.greaterThanOrEqualTo(view.safeAreaLayoutGuide).offset(-30)
-//            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
-//            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+            imageCountLabel.snp.makeConstraints { make in
+                make.top.equalTo(cameraImage.snp.bottom).offset(5)
+                make.centerX.equalToSuperview()
+            }
+            
+            imagePickerView.snp.makeConstraints { make in
+                make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+                make.leading.equalTo(view.safeAreaLayoutGuide).offset(15)
+                make.size.equalTo(80)
+            }
+            
+            imageStackView.snp.makeConstraints { make in
+                make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+                make.leading.equalTo(imagePickerView.snp.trailing).offset(5)
+                make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-15)
+                make.height.equalTo(80)
+            }
+            
+            firstImageView.snp.makeConstraints { make in
+                make.size.equalTo(80)
+                make.leading.equalToSuperview().offset(10)
+                make.centerY.equalToSuperview()
+            }
+            
+            secondImageView.snp.makeConstraints { make in
+                make.size.equalTo(80)
+                make.leading.equalTo(firstImageView.snp.trailing).offset(10)
+                make.centerY.equalToSuperview()
+            }
+            
+            thirdImageView.snp.makeConstraints { make in
+                make.size.equalTo(80)
+                make.leading.equalTo(secondImageView.snp.trailing).offset(10)
+                make.centerY.equalToSuperview()
+            }
+            
+            historyTitleLabel.snp.makeConstraints { make in
+                make.top.equalTo(imagePickerView.snp.bottom).offset(20)
+                make.horizontalEdges.equalToSuperview().inset(21)
+            }
+            
+            titleTextField.snp.makeConstraints { make in
+                make.top.equalTo(historyTitleLabel.snp.bottom).offset(10)
+                make.horizontalEdges.equalToSuperview().inset(21)
+            }
+            
+            menuLabel.snp.makeConstraints { make in
+                make.top.equalTo(titleTextField.snp.bottom).offset(20)
+                make.leading.equalToSuperview().offset(21)
+            }
+            
+            insertMenuTextField.snp.makeConstraints { make in
+                make.top.equalTo(menuLabel.snp.bottom).offset(10)
+                make.horizontalEdges.equalToSuperview().inset(21)
+            }
+            
+            visitedDateLabel.snp.makeConstraints { make in
+                make.centerY.equalTo(visitedDatePicker)
+                make.leading.equalToSuperview().offset(21)
+            }
+            
+            visitedDatePicker.snp.makeConstraints { make in
+                make.top.equalTo(insertMenuTextField.snp.bottom).offset(20)
+                make.trailing.equalToSuperview().offset(-21)
+                
+            }
+            
+            
+            ratingView.snp.makeConstraints { make in
+                make.top.equalTo(visitedDatePicker.snp.bottom).offset(20)
+                make.centerX.equalToSuperview()
+            }
+            
+            commentLabel.snp.makeConstraints { make in
+                make.top.equalTo(ratingView.snp.bottom).offset(20)
+                make.horizontalEdges.equalToSuperview().inset(21)
+            }
+            
+            commentTextView.snp.makeConstraints { make in
+                make.top.equalTo(commentLabel.snp.bottom).offset(10)
+                make.horizontalEdges.equalToSuperview().inset(21)
+                make.bottom.greaterThanOrEqualTo(view.safeAreaLayoutGuide).offset(-30)
+                //            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+                //            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+            }
+            
+        case .edit:
+            historyTitleLabel.snp.makeConstraints { make in
+                make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+                make.horizontalEdges.equalToSuperview().inset(21)
+            }
+            
+            titleTextField.snp.makeConstraints { make in
+                make.top.equalTo(historyTitleLabel.snp.bottom).offset(10)
+                make.horizontalEdges.equalToSuperview().inset(21)
+            }
+            
+            menuLabel.snp.makeConstraints { make in
+                make.top.equalTo(titleTextField.snp.bottom).offset(20)
+                make.leading.equalToSuperview().offset(21)
+            }
+            
+            insertMenuTextField.snp.makeConstraints { make in
+                make.top.equalTo(menuLabel.snp.bottom).offset(10)
+                make.horizontalEdges.equalToSuperview().inset(21)
+            }
+            
+            visitedDateLabel.snp.makeConstraints { make in
+                make.centerY.equalTo(visitedDatePicker)
+                make.leading.equalToSuperview().offset(21)
+            }
+            
+            visitedDatePicker.snp.makeConstraints { make in
+                make.top.equalTo(insertMenuTextField.snp.bottom).offset(20)
+                make.trailing.equalToSuperview().offset(-21)
+                
+            }
+            
+            
+            ratingView.snp.makeConstraints { make in
+                make.top.equalTo(visitedDatePicker.snp.bottom).offset(20)
+                make.centerX.equalToSuperview()
+            }
+            
+            commentLabel.snp.makeConstraints { make in
+                make.top.equalTo(ratingView.snp.bottom).offset(20)
+                make.horizontalEdges.equalToSuperview().inset(21)
+            }
+            
+            commentTextView.snp.makeConstraints { make in
+                make.top.equalTo(commentLabel.snp.bottom).offset(10)
+                make.horizontalEdges.equalToSuperview().inset(21)
+                make.bottom.greaterThanOrEqualTo(view.safeAreaLayoutGuide).offset(-130)
+                //            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+                //            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+            }
         }
     }
     
@@ -463,12 +524,12 @@ class HistoryRegisterViewController: BaseViewController {
         ratingView.rating = historyTable.rate
         commentTextView.text = historyTable.comment
 //        selectedAssetIdentifiers = historyTable.images.map{ $0 }
-        
-        let imageView = [firstImageView, secondImageView, thirdImageView]
-        
-        for (index, imageName) in historyTable.imageNameList.enumerated() {
-            imageView[index].image = loadImageForDocument(fileName: "\(imageName)_image.jpg")
-        }
+//
+//        let imageView = [firstImageView, secondImageView, thirdImageView]
+//
+//        for (index, imageName) in historyTable.imageNameList.enumerated() {
+//            imageView[index].image = loadImageForDocument(fileName: "\(imageName)_image.jpg")
+//        }
     }
 }
 
@@ -514,6 +575,7 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
 
             displayImage()
             print(selectedAssetIdentifiers)
+            
 //            imageLoadingActivityIndicator.stopAnimating()
         }
     }
@@ -574,9 +636,9 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
             
 
             let imageView = [firstImageView, secondImageView, thirdImageView]
-//            imageView.forEach {
-//                $0.image = nil
-//            }
+            imageView.forEach {
+                $0.image = nil
+            }
             
             // 먼저 스택뷰의 서브뷰들을 모두 제거함
 //            self.imageStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -630,7 +692,7 @@ extension HistoryRegisterViewController: PHPickerViewControllerDelegate {
 //                self.addImage(image)
 //            }
             imageLoadingActivityIndicator.stopAnimating()
-            
+            self.imageCountLabel.text = "\(selectedAssetIdentifiers.count)/3"
         }
     }
     

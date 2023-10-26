@@ -9,6 +9,9 @@ import UIKit
 
 class MainMapViewBottomSheetView: BaseViewController {
     
+    var datafrom: dataFrom = .api
+    var restaurantTable: RestaurantTable?
+    
     var restaurantDocument: RestaurantDocument?
     
     let viewModel = MainSearchViewModel()
@@ -120,9 +123,20 @@ class MainMapViewBottomSheetView: BaseViewController {
         print("tap")
         
         let historyListVC = HistoryListViewController()
-        historyListVC.restaurantDocument = restaurantDocument
-        historyListVC.tapType = .mapTap
-        historyListVC.setData(data: restaurantDocument!)
+        switch datafrom {
+        case .table:
+            guard let restaurantTable = restaurantTable else { return print("No restaurantTable") }
+            historyListVC.restaurantID = restaurantTable.restaurantID
+            historyListVC.tapType = .listTap
+            historyListVC.dataFrom = .table
+            historyListVC.setDataFromTable(data: restaurantTable)
+        case .api:
+//            guard let restaurantDocument
+            historyListVC.restaurantDocument = restaurantDocument
+            historyListVC.tapType = .mapTap
+            historyListVC.setData(data: restaurantDocument!)
+        }
+       
         let navigationController = UINavigationController(rootViewController: historyListVC)
         navigationController.modalPresentationStyle = .fullScreen
         
@@ -187,7 +201,7 @@ class MainMapViewBottomSheetView: BaseViewController {
         restaurantName.setContentHuggingPriority(.init(751), for: .horizontal)
         restaurantName.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview()
-            make.leading.equalToSuperview().offset(7)
+            make.leading.equalToSuperview().offset(6)
         }
         restaurantCategory.setContentHuggingPriority(.init(750), for: .horizontal)
         restaurantCategory.snp.makeConstraints { make in
@@ -231,6 +245,17 @@ class MainMapViewBottomSheetView: BaseViewController {
             restaurantPhoneNumber.text = "📞  - "
         } else {
             restaurantPhoneNumber.text = "📞" + document.phone
+        }
+    }
+    
+    func setDataFromRealm(data: RestaurantTable) {
+        restaurantName.text = data.restaurantName
+        restaurantCategory.text = data.restaurantCategory
+        restaurantRoadAddress.text = "📍" + data.restaurantRoadAddress
+        if data.restaurantPhoneNumber.isEmpty {
+            restaurantPhoneNumber.text = "📞  - "
+        } else {
+            restaurantPhoneNumber.text = "📞" + data.restaurantPhoneNumber
         }
     }
 }

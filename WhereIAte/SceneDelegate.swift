@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([MainMapVC, ListVC], animated: true)
-        tabBarController.tabBar.tintColor = UIColor(named: "mainColor")
+        tabBarController.tabBar.tintColor = .black
 //        tabBarController.tabBar.tintColor = .white
         
         if let items = tabBarController.tabBar.items {
@@ -34,7 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             items[1].selectedImage = UIImage(systemName: "list.bullet")
             items[1].image = UIImage(systemName: "list.bullet")
-            items[1].title = "리스트"
+            items[1].title = "방문한 식당"
             
         }
         

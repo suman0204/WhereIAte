@@ -11,6 +11,7 @@ import RealmSwift
 class HistoryListViewController: BaseViewController {
     
     var tapType: TapType = .mapTap
+    var dataFrom: dataFrom = .api
     
     let repository = RealmRepository()
     
@@ -28,6 +29,7 @@ class HistoryListViewController: BaseViewController {
     
     lazy var plusButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(plusButtonClicked(_:)))
+        button.tintColor = UIColor(named: "mainColor")
         return button
     }()
     
@@ -98,9 +100,17 @@ class HistoryListViewController: BaseViewController {
         return view
     }()
     
+    let emptyHistoryLabel = {
+        let view = UILabel()
+        view.text = "방문 기록을 남겨보세요"
+        view.font = .systemFont(ofSize: 20)
+        view.textColor = .systemGray
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.tintColor = UIColor(named: "mainColor")
+        navigationController?.navigationBar.tintColor = .black
         
         view.backgroundColor = .white
         
@@ -112,10 +122,18 @@ class HistoryListViewController: BaseViewController {
             guard let restaurantDocument = restaurantDocument else {return}
             restaurantID = restaurantDocument.id
         case .listTap:
-            print("From listTap")
+            switch dataFrom {
+            case .table:
+                navigationItem.leftBarButtonItem = backButton
+            case .api:
+                print("From listTap")
+            }
+            
         }
         
-        title = "방문 기록"
+//        title = "방문 기록"
+        
+        self.navigationController?.navigationBar.topItem?.title = "방문 기록"
         
         tasks = repository.fetchRestaurant()
 
@@ -140,8 +158,18 @@ class HistoryListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        tasks = repository.fetchRestaurant()
+    
+        tasks = repository.fetchRestaurant()
+        historyList = tasks.where {
+            $0.restaurantID == restaurantID
+        }.first?.history.sorted(byKeyPath: "visitedDate", ascending: false)
         historyTable.reloadData()
+        
+        if ((historyList?.isEmpty) != nil) {
+            emptyHistoryLabel.isHidden = true
+        } else {
+            emptyHistoryLabel.isHidden = false
+        }
     }
     
     @objc func plusButtonClicked(_ sender: Any) {
@@ -178,21 +206,28 @@ class HistoryListViewController: BaseViewController {
             restaurantInfoView.addSubview($0)
         }
         
-        [restaurantInfoView, historyTable].forEach {
+        [restaurantInfoView, historyTable, emptyHistoryLabel].forEach {
             view.addSubview($0)
         }
+//        restaurantInfoView.backgroundColor = .blue
+//        verticalView.backgroundColor = .brown
+//        historyTable.backgroundColor = .red
     }
     
     override func setConstraints() {
         restaurantInfoView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.height.greaterThanOrEqualTo(80)
             make.height.lessThanOrEqualTo(120)
 //            make.height.equalToSuperview().multipliedBy(0.16)
         }
         
         verticalView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().offset(10)
+            make.horizontalEdges.equalToSuperview().inset(8)
+//            make.verticalEdges.equalToSuperview()
+            make.height.greaterThanOrEqualTo(80)
+            make.height.lessThanOrEqualTo(120)
         }
         
         nameCategoryView.snp.makeConstraints { make in
@@ -228,8 +263,12 @@ class HistoryListViewController: BaseViewController {
         
         historyTable.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
-            make.top.equalTo(restaurantInfoView.snp.bottom).offset(15)
+            make.top.equalTo(restaurantInfoView.snp.bottom)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        emptyHistoryLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
     

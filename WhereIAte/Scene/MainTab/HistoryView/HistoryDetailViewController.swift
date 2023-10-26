@@ -78,8 +78,6 @@ class HistoryDetailViewController: BaseViewController {
         view.isPagingEnabled = true
 //        view.showsHorizontalScrollIndicator = false
         view.contentSize = CGSize(width: view.frame.size.width * CGFloat(imageNames.count), height: view.frame.size.height)
-//        view.contentSize = CGSize(width: 0, height: 0)
-        view.backgroundColor = .red
         return view
     }()
     
@@ -123,7 +121,7 @@ class HistoryDetailViewController: BaseViewController {
     let rateLabel = {
         let view = UILabel()
         view.numberOfLines = 1
-        view.font = .systemFont(ofSize: 23)
+        view.font = .systemFont(ofSize: 22)
         view.text = "4.5"
         return view
     }()
@@ -131,24 +129,23 @@ class HistoryDetailViewController: BaseViewController {
     let menuLabel = {
         let view = UILabel()
         view.text = "짜장면/탕수육/군만두/라조기/짬뽕"
-        view.font = .systemFont(ofSize: 17)
+        view.font = .systemFont(ofSize: 18)
         return view
     }()
     
     let commentLabel = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 16)
+        view.font = .systemFont(ofSize: 19)
         view.text = "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라"
         view.numberOfLines = 0
         view.textAlignment = .left
-        view.backgroundColor = .green
         view.sizeToFit()
         return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "mainColor")
+        self.navigationController?.navigationBar.tintColor = .black
 
 //                addContentScrollView()
 //                setPageControl()
@@ -219,8 +216,9 @@ class HistoryDetailViewController: BaseViewController {
         }
         
         starImageView.snp.makeConstraints { make in
-            make.size.equalTo(30)
+            make.size.equalTo(25)
             make.top.equalToSuperview()
+//            make.centerY.equalTo(titleLabel)
             //            make.leading.equalTo(titleLabel.snp.trailing).offset(30)
             make.trailing.equalTo(rateLabel.snp.leading).offset(-5)
             //            make.centerY.equalToSuperview()
@@ -253,7 +251,7 @@ class HistoryDetailViewController: BaseViewController {
     
     func setData(data: HistoryTable) {
         titleLabel.text = data.historyTitle
-        visitedLabel.text = "\(data.visitedDate)"
+        visitedLabel.text = "\(data.stringDate)"
         menuLabel.text = data.menu
         commentLabel.text = data.comment
         rateLabel.text = "\(data.rate)"

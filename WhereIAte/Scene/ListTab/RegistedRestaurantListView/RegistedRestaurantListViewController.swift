@@ -10,16 +10,13 @@ import RealmSwift
 
 class RegistedRestaurantListViewController: BaseViewController {
     
+    var sortedType: sortedType = .lastest
+    
     let repository = RealmRepository()
     
     var tasks: Results<RestaurantTable>!
 //
-//    lazy var searchBar = {
-//        let view = UISearchBar()
-//        view.placeholder = "방문한 식당을 찾아보세요"
-//        view.delegate = self
-//        return view
-//    }()
+    var sortedRestaurantTable: [RestaurantTable]?
     
     lazy var searchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -30,7 +27,7 @@ class RegistedRestaurantListViewController: BaseViewController {
         searchController.searchBar.placeholder = "식당 이름 및 카테고리로 검색해보세요"
         searchController.searchBar.tintColor = UIColor(named: "mainColor")
         searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
-        searchController.searchBar.searchTextField.leftView?.tintColor = UIColor(named: "mainColor")
+        searchController.searchBar.searchTextField.leftView?.tintColor = .black
 
         return searchController
     }()
@@ -42,25 +39,34 @@ class RegistedRestaurantListViewController: BaseViewController {
         view.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         view.tintColor = UIColor(named: "mainColor")
         view.titleLabel?.font = .systemFont(ofSize: 15)
-//        view.configuration?.imagePadding = 20
+        view.semanticContentAttribute = .forceRightToLeft
         view.showsMenuAsPrimaryAction = true
         view.changesSelectionAsPrimaryAction = true
         view.menu = UIMenu(children: [
                    UIAction(title: "최신순", state: .on, handler: { action in
                        self.tasks = self.repository.fetchRestaurant()
                        self.restaurantTable.reloadData()
+                       self.sortedType = .lastest
                    }),
                    UIAction(title: "별점순", handler: { action in
                        print("별점순")
-                       let sortedRestaurantTables = self.tasks.sorted(by: { $0.avgRate > $1.avgRate })
-                       print(sortedRestaurantTables)
+                       self.tasks = self.repository.fetchRestaurant()
+                       self.sortedRestaurantTable = self.tasks.sorted(by: { $0.avgRate > $1.avgRate })
+                       self.sortedType = .rates
+                       self.restaurantTable.reloadData()
+
+                       print(self.sortedRestaurantTable)
                    }),
                    UIAction(title: "방문횟수순", handler: { action in
                        print("방문횟수순")
-                       let sortedRestaurants = self.tasks.sorted(by: { restaurant1, restaurant2 in
+                       self.tasks = self.repository.fetchRestaurant()
+                       self.sortedRestaurantTable = self.tasks.sorted(by: { restaurant1, restaurant2 in
                            return restaurant1.history.count > restaurant2.history.count
                        })
-                       print(sortedRestaurants)
+                       self.sortedType = .times
+                       self.restaurantTable.reloadData()
+
+                       print(self.sortedRestaurantTable)
                    }),
                    
                ])
@@ -82,6 +88,7 @@ class RegistedRestaurantListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationItem.backButtonTitle = ""
         
         tasks = repository.fetchRestaurant()
 //        restaurantTable.reloadData()
@@ -96,7 +103,19 @@ class RegistedRestaurantListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tasks = repository.fetchRestaurant()
 
+        switch sortedType {
+        case .lastest:
+//            tasks = repository.fetchRestaurant()
+            print("lateset")
+        case .rates:
+            self.sortedRestaurantTable = self.tasks.sorted(by: { $0.avgRate > $1.avgRate })
+        case .times:
+            self.sortedRestaurantTable = self.tasks.sorted(by: { restaurant1, restaurant2 in
+                return restaurant1.history.count > restaurant2.history.count
+            })
+        }
         restaurantTable.reloadData()
     }
     
@@ -114,8 +133,8 @@ class RegistedRestaurantListViewController: BaseViewController {
 //        }
         
         sortButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-15)
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(5)
 //            make.width.equalTo(100)
 //            make.height.equalTo(5)
             
@@ -138,19 +157,46 @@ extension RegistedRestaurantListViewController: UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RestaurantListCell.reuseIdentifier) as? RestaurantListCell else { return UITableViewCell() }
-        let data = tasks[indexPath.row]
+        
+        let data: RestaurantTable?
+        
+        switch sortedType {
+        case .lastest:
+            data = tasks[indexPath.row]
+        case .rates, .times:
+            guard let sortedRestaurantTable = sortedRestaurantTable else {return UITableViewCell()}
+            data = sortedRestaurantTable[indexPath.row]
+        }
+        guard let data = data else {return UITableViewCell()}
         cell.setData(data: data)
-//        print(data.history.first?.imageNameList)
-        guard let firsthistory = data.history.first else { return UITableViewCell() }
-        guard let firstimage = firsthistory.imageNameList.first else {return UITableViewCell()}
-        cell.restaurantImage.image = loadImageForDocument(fileName: "\(firstimage)_image.jpg")
-        print(data.avgRate)
-        return cell
+        
+        if let firstHistory = data.history.first {
+            guard let firstImage = firstHistory.imageNameList.first else { return UITableViewCell() }
+            cell.restaurantImage.contentMode = .scaleAspectFill
+            cell.restaurantImage.image = loadImageForDocument(fileName: "\(firstImage)_image.jpg")
+            return cell
+        } else {
+            cell.restaurantImage.contentMode = .scaleAspectFit
+            cell.restaurantImage.image = UIImage(systemName: "photo")?.withTintColor(UIColor(named: "mainColor")!, renderingMode: .alwaysOriginal)
+                
+            return cell
+        }
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let data = tasks[indexPath.row]
+        let data: RestaurantTable?
+        
+        switch sortedType {
+        case .lastest:
+            data = tasks[indexPath.row]
+        case .rates, .times:
+            guard let sortedRestaurantTable = sortedRestaurantTable else {return}
+            data = sortedRestaurantTable[indexPath.row]
+        }
+        guard let data = data else {return}
+        
         
         let historyListVC = HistoryListViewController()
         historyListVC.restaurantID = data.restaurantID
@@ -159,6 +205,31 @@ extension RegistedRestaurantListViewController: UITableViewDelegate, UITableView
         
         
         navigationController?.pushViewController(historyListVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let data: RestaurantTable?
+        
+        switch sortedType {
+        case .lastest:
+            data = tasks[indexPath.row]
+        case .rates, .times:
+            guard let sortedRestaurantTable = sortedRestaurantTable else {return UISwipeActionsConfiguration()}
+            data = sortedRestaurantTable[indexPath.row]
+        }
+        guard let data = data else {return UISwipeActionsConfiguration()}
+        
+        let delete = UIContextualAction(style: .normal, title: "삭제하기") { previewAction, view, completionHandler in
+            print("delete")
+            self.deleteAlert(restaurantTable: data)
+//            self.tasks = self.repository.fetchRestaurant()
+
+        }
+        
+        delete.backgroundColor = .red
+        delete.image = UIImage(systemName: "trash")
+        
+        return UISwipeActionsConfiguration(actions: [delete])
     }
     
 }
@@ -195,4 +266,41 @@ extension RegistedRestaurantListViewController: UISearchResultsUpdating, UISearc
         restaurantTable.reloadData()
     }
     
+}
+
+extension RegistedRestaurantListViewController {
+    func deleteAlert(restaurantTable: RestaurantTable) {
+        let alert = UIAlertController(title: "정말 삭제하시겠습니까?", message: "등록된 식당 정보와 방문 기록이 삭제됩니다.", preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "취소", style: .default)
+        
+        let delete = UIAlertAction(title: "삭제", style: .destructive) {_ in
+            restaurantTable.history.forEach {
+                self.repository.deleteHistory(historyID: $0._id)
+            }
+            
+            self.repository.deleteRestaurant(restaurantID: restaurantTable.restaurantID)
+            
+            DispatchQueue.main.async {
+                switch self.sortedType {
+                case .lastest:
+                    self.restaurantTable.reloadData()
+                case .rates:
+                    self.sortedRestaurantTable = self.tasks.sorted(by: { $0.avgRate > $1.avgRate })
+                    self.restaurantTable.reloadData()
+                case .times:
+                    self.sortedRestaurantTable = self.tasks.sorted(by: { restaurant1, restaurant2 in
+                        return restaurant1.history.count > restaurant2.history.count
+                    })
+                    self.restaurantTable.reloadData()
+                }
+            }
+            
+        }
+        
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true)
+    }
 }

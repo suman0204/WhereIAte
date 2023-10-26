@@ -49,7 +49,7 @@ class HistoryTableViewCell: BaseTableViewCell {
     let visitedDateLabel = {
         let view = UILabel()
         view.numberOfLines = 1
-        view.font = .systemFont(ofSize: 15)
+        view.font = .systemFont(ofSize: 16)
         view.text = "2023.10.22"
         view.textColor = .darkGray
         return view
@@ -66,7 +66,7 @@ class HistoryTableViewCell: BaseTableViewCell {
     let rateLabel = {
         let view = UILabel()
         view.numberOfLines = 1
-        view.font = .systemFont(ofSize: 15)
+        view.font = .systemFont(ofSize: 17)
         view.text = "4.5"
         return view
     }()
@@ -142,7 +142,7 @@ class HistoryTableViewCell: BaseTableViewCell {
     
     func setData(data: HistoryTable) {
         titleLabel.text = data.historyTitle
-        visitedDateLabel.text = "\(data.visitedDate)"
+        visitedDateLabel.text = "\(data.stringDate)"
         rateLabel.text = "\(data.rate)"
         commentLabel.text = data.comment
     }

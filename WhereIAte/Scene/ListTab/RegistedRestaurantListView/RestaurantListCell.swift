@@ -20,11 +20,24 @@ class RestaurantListCell: BaseTableViewCell {
         return view
     }()
     
+    let visitedTimesLabel = {
+        let view = UILabel()
+        view.backgroundColor = UIColor(named: "mainColorAlpha")
+        view.layer.cornerRadius = 8
+        view.layer.cornerCurve = .continuous
+        view.layer.masksToBounds = true
+        view.textColor = .white
+        view.textAlignment = .center
+        view.font = .boldSystemFont(ofSize: 12)
+        view.text = "방문 4회"
+        return view
+    }()
+    
     let restaurantImage = {
         let view = UIImageView(frame: .zero)
         view.layer.cornerRadius = 10
         view.layer.cornerCurve = .continuous
-//        view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
+        view.image = UIImage(systemName: "photo")?.withTintColor(UIColor(named: "mainColor")!, renderingMode: .alwaysOriginal)
         view.contentMode = .scaleAspectFill
         view.layer.masksToBounds = true
         return view
@@ -86,20 +99,27 @@ class RestaurantListCell: BaseTableViewCell {
     }
     
     override func configureCell() {
-        [restaurantImage, restaurantTitle, restaurantCategory, restaurantRoadAddress, rateLabel, starImage/*gradient, restaurantPhoneNumber*/].forEach {
+        [restaurantImage, restaurantTitle, restaurantCategory, restaurantRoadAddress, rateLabel, starImage, visitedTimesLabel/*gradient, restaurantPhoneNumber*/].forEach {
             mainView.addSubview($0)
         }
         
         contentView.addSubview(mainView)
         
 //        mainView.backgroundColor = UIColor(named: "mainColor")
-        restaurantImage.backgroundColor = .blue
+//        restaurantImage.backgroundColor = .blue
     }
     
     override func setConstraints() {
         mainView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(17)
             make.verticalEdges.equalToSuperview().inset(10)
+        }
+        
+        visitedTimesLabel.snp.makeConstraints { make in
+            make.top.equalTo(restaurantImage.snp.top).offset(10)
+            make.trailing.equalTo(restaurantImage.snp.trailing).offset(-10)
+            make.width.equalTo(restaurantImage.snp.width).multipliedBy(0.17)
+            make.height.equalTo(restaurantImage.snp.height).multipliedBy(0.13)
         }
         
         restaurantImage.snp.makeConstraints { make in
@@ -159,6 +179,7 @@ class RestaurantListCell: BaseTableViewCell {
         restaurantCategory.text = data.restaurantCategory
         restaurantRoadAddress.text = data.restaurantRoadAddress
         rateLabel.text = data.avgRate
+        visitedTimesLabel.text = "방문 \(data.historyCount)회"
 //        restaurantPhoneNumber.text = data.restaurantPhoneNumber
 //        restaurantImage.image = loadImageForDocument(fileName: "\(data.imageNameList.first)_image.jpg")
     }

@@ -24,6 +24,17 @@ class HistoryTable: Object {
         }
     }
     
+    var stringDate: String {
+        let formatter = DateFormatter()
+        
+        formatter.locale = Locale(identifier: "ko_kr")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        return formatter.string(from: visitedDate)
+    }
+    
     convenience init(title: String, visitedDate: Date, menu: String, rate: Double, comment: String, images: List<String>, registeredDate: Date) {
         self.init()
         self.historyTitle = title

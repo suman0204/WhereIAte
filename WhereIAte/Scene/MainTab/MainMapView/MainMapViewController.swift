@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import MapKit
+import RealmSwift
 
 protocol HandleMapSearch {
     func dropPinZoomIn(center: CLLocationCoordinate2D, restaurantName: String, retaurantRoadAddress: String)
@@ -19,7 +20,11 @@ protocol HandleMapSearch {
 
 class MainMapViewController: BaseViewController {
     
-//    var restaurantReultList: [RestaurantDocument] = []
+    var taskToken: NotificationToken? // Realm 알림 토큰 추가
+
+    let repository = RealmRepository()
+    
+    var tasks: Results<RestaurantTable>!
     
     let viewModel = MainSearchViewModel()
     
@@ -28,14 +33,9 @@ class MainMapViewController: BaseViewController {
     let mainMapView = MKMapView()
     
     var restaurantDocument: RestaurantDocument?
-  
-//    let mainSearchTableViewController = MainSearchTableViewController()
-//    let searchController = UISearchController(searchResultsController: MainSearchTableViewController())
-//    var searchController = UISearchController(searchResultsController: nil)
     
     let mainSearchTableViewController = MainSearchTableViewController()
 
-//    var searchController = UISearchController(searchResultsController: nil)
     lazy var searchController = {
         let searchController = UISearchController(searchResultsController: self.mainSearchTableViewController)
         searchController.delegate = self
@@ -51,7 +51,7 @@ class MainMapViewController: BaseViewController {
 //        searchController.searchBar.setShowsCancelButton(true, animated: true)
        
 //        searchController.searchBar.searchTextField.backgroundColor = .white
-        searchController.searchBar.searchTextField.leftView?.tintColor = UIColor(named: "mainColor")
+        searchController.searchBar.searchTextField.leftView?.tintColor = .black
         
         return searchController
     }()
@@ -62,59 +62,84 @@ class MainMapViewController: BaseViewController {
         view.tintColor = UIColor(named: "mainColor")
         view.backgroundColor = .white
         view.layer.cornerRadius = 25
-        view.layer.borderWidth = 0.5
-        view.layer.borderColor = UIColor.lightGray.cgColor
+//        view.layer.borderWidth = 0.5
+//        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.masksToBounds = false
+        view.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 1)
+        view.layer.shadowRadius = 2
+        view.layer.shadowOpacity = 0.7
         view.addTarget(self, action: #selector(myLoactionButtonClicked), for: .touchUpInside)
         return view
     }()
 
-//    let restaurantSearchBar = {
-//        let view = UISearchBar()
-//        view.placeholder = "식당을 검색해보세요"
-//        view.setValue("취소", forKey: "cancelButtonText")
-//        view.setShowsCancelButton(true, animated: true)
-//
-////        view.clipsToBounds = true
-////        view.layer.cornerRadius = 10
-//        return view
-//    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        searchController = UISearchController(searchResultsController: mainSearchTableViewController)
+
         viewModel.resultList.bind { resultList in
             self.mainSearchTableViewController.restaurantResultList = resultList
             self.mainSearchTableViewController.tableView.reloadData()
 
         }
         navigationItem.titleView = searchController.searchBar
-//        title = "Where I Ate"
+
         mainSearchTableViewController.handleMapSearchDelegate = self
-        
         locationManager.delegate = self
         mainMapView.delegate = self
         
         checkDeviceLocationAuthorization()
-        
-//        searchController.hidesNavigationBarDuringPresentation = true
-//        searchController.obscuresBackgroundDuringPresentation = true
-//        searchController.dimsBackgroundDuringPresentation = true
+
         definesPresentationContext = true
         
-//        navigationController?.navigationBar.backgroundColor = .clear
+        tasks = repository.fetchRestaurant()
         
+        taskToken = tasks.observe { [weak self] changes in
+            switch changes {
+            case .initial:
+                self?.updateMapView(with: self?.tasks)
+            case .update(_, _, _, _):
+                self?.updateMapView(with: self?.tasks)
+            case .error(let error):
+                print("Error: \(error)")
+            }
+        }
+//        updateMapView(with: tasks)
         
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        searchController.isActive = true
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewvwill")
+//        DispatchQueue.main.async {
+//            self.tasks = self.repository.fetchRestaurant()
+//            self.updateMapView(with: self.tasks)
+//        }
+    }
+
     
     @objc private func myLoactionButtonClicked() {
-        mainMapView.showsUserLocation = true
-        mainMapView.setUserTrackingMode(.follow, animated: true)
+        let manager = CLLocationManager()
+        
+        switch manager.authorizationStatus {
+        case .notDetermined:
+            print("notDetermined")
+        case .restricted:
+            print("restricted")
+        case .denied:
+            showRequestLocationSettingAlert()
+        case .authorizedAlways:
+            mainMapView.showsUserLocation = true
+            mainMapView.setUserTrackingMode(.follow, animated: true)
+        case .authorizedWhenInUse:
+            mainMapView.showsUserLocation = true
+            mainMapView.setUserTrackingMode(.follow, animated: true)
+        @unknown default:
+            print("default")
+        }
+           
+        
     }
     
     override func configureView() {
@@ -135,7 +160,7 @@ class MainMapViewController: BaseViewController {
         
         myLocationButton.snp.makeConstraints { make in
             make.size.equalTo(50)
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.trailing.equalTo(mainMapView.snp.trailing).inset(20)
         }
         
@@ -216,9 +241,15 @@ extension MainMapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
         guard !annotation.isKind(of: MKUserLocation.self) else { return  }
+        print("annotation")
         
-        presentSheet(data: restaurantDocument ?? RestaurantDocument(addressName: "", categoryName: "", distance: "", id: "", phone: "", placeName: "", placeURL: "", roadAddressName: "", x: "", y: ""))
         
+        if let selectedTask = tasks.first(where: { $0.latitue == annotation.coordinate.latitude && $0.longitude == annotation.coordinate.longitude }) {
+            presentSheetFromRealm(data: selectedTask)
+            
+        } else {
+            presentSheet(data: restaurantDocument ?? RestaurantDocument(addressName: "", categoryName: "", distance: "", id: "", phone: "", placeName: "", placeURL: "", roadAddressName: "", x: "", y: ""))
+        }
         //어노테이션 셀렉션 해제
 //        mapView.deselectAnnotation(annotation, animated: true)
     }
@@ -313,39 +344,85 @@ extension MainMapViewController {
         
         present(alert, animated: true)
     }
+    
+    func updateMapView(with tasks: Results<RestaurantTable>?) {
+          guard let tasks = tasks else { return }
+
+          // 기존 Annotation 제거
+          mainMapView.removeAnnotations(mainMapView.annotations)
+
+          // tasks에 저장된 RestaurantTable 정보를 사용하여 Annotation을 추가
+          for task in tasks {
+//              if let latitude = task.latitue, let longitude = task.longitude {
+                  let coordinate = CLLocationCoordinate2D(latitude: task.latitue, longitude: task.longitude)
+                  let annotation = MKPointAnnotation()
+                  annotation.coordinate = coordinate
+                  annotation.title = task.restaurantName // 여기에 어떤 정보를 표시할지 선택
+                  mainMapView.addAnnotation(annotation)
+//              }
+          }
+      }
+    
+    func presentSheetFromRealm(data: RestaurantTable) {
+        let viewControllerToPresent = MainMapViewBottomSheetView()
+        
+        viewControllerToPresent.setDataFromRealm(data: data)
+        viewControllerToPresent.restaurantTable = data
+        viewControllerToPresent.datafrom = .table
+        viewControllerToPresent.modalPresentationStyle = .pageSheet // 또는 .formSheet
+        viewControllerToPresent.sheetPresentationController?.delegate = self
+
+        if let sheet = viewControllerToPresent.sheetPresentationController {
+
+            if #available(iOS 16.0, *) {
+                sheet.detents = [.custom(resolver: { context in
+                    return 120
+                })]
+            } else {
+                // Fallback on earlier versions
+            }
+            
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false  // true 기본값
+            sheet.prefersEdgeAttachedInCompactHeight = true // false 기본값
+            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true // false 기본값
+        }
+
+        // ✅ sheet present.
+        present(viewControllerToPresent, animated: true, completion: nil)
+    }
 }
 
 extension MainMapViewController: UISearchControllerDelegate, UISearchBarDelegate {
     
-    func configureSearchController() {
-        searchController = UISearchController(searchResultsController: mainSearchTableViewController)
-
-        searchController.delegate = self
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = mainSearchTableViewController
-        
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "식당을 검색해보세요"
-        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
-//        searchController.searchBar.setShowsCancelButton(true, animated: true)
-       
-//        searchController.searchBar.searchTextField.backgroundColor = .white
-        searchController.searchBar.searchTextField.leftView?.tintColor = UIColor(named: "mainColor")
-        
-//        searchController.searchBar.sizeToFit()
-        
-        // UISearchController를 내비게이션 바의 타이틀 뷰로 설정합니다.
-//        navigationItem.searchController = searchController
-//        navigationItem.titleView = searchController.searchBar
-    
-        definesPresentationContext = true
-    }
+//    func configureSearchController() {
+//        searchController = UISearchController(searchResultsController: mainSearchTableViewController)
+//
+//        searchController.delegate = self
+//        searchController.searchBar.delegate = self
+//        searchController.searchResultsUpdater = mainSearchTableViewController
+//
+//        searchController.obscuresBackgroundDuringPresentation = false
+//        searchController.searchBar.placeholder = "식당을 검색해보세요"
+//        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
+////        searchController.searchBar.setShowsCancelButton(true, animated: true)
+//
+////        searchController.searchBar.searchTextField.backgroundColor = .white
+//        searchController.searchBar.searchTextField.leftView?.tintColor = UIColor(named: "mainColor")
+//
+////        searchController.searchBar.sizeToFit()
+//
+//        // UISearchController를 내비게이션 바의 타이틀 뷰로 설정합니다.
+////        navigationItem.searchController = searchController
+////        navigationItem.titleView = searchController.searchBar
+//
+//        definesPresentationContext = true
+//    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else { return }
-
+        
         viewModel.request(query: query)
-
+        
         print("-------------")
         print(viewModel.resultList.value)
         print(viewModel.rowCount)
@@ -381,23 +458,16 @@ extension MainMapViewController: HandleMapSearch {
         
         viewControllerToPresent.setData(document: data)
         viewControllerToPresent.restaurantDocument = data
+        viewControllerToPresent.datafrom = .api
         viewControllerToPresent.modalPresentationStyle = .pageSheet // 또는 .formSheet
         viewControllerToPresent.sheetPresentationController?.delegate = self
 
         if let sheet = viewControllerToPresent.sheetPresentationController {
             // detent의 식별자, 식별자를 지정하지 않으면 시스템에서 랜덤한 식별자가 생성
-            let detentIdentifier = UISheetPresentationController.Detent.Identifier("customDetent")
+//            let detentIdentifier = UISheetPresentationController.Detent.Identifier("customDetent")
             
-//            if #available(iOS 16.0, *) {
-//                let minCustomDetent = UISheetPresentationController.Detent.custom(identifier: detentIdentifier) { _ in
-//                    return 200
-//                }
-//            } else {
-//                // Fallback on earlier versions
-//            }
             
-        // ✅ 다음 프로퍼티들은 찬찬히 알아가봅시다.
-//            sheet.detents = [.medium(), .large()]
+
             if #available(iOS 16.0, *) {
                 sheet.detents = [.custom(resolver: { context in
                     return 120
@@ -405,11 +475,7 @@ extension MainMapViewController: HandleMapSearch {
             } else {
                 // Fallback on earlier versions
             }
-            if #available(iOS 16.0, *) {
-//                sheet.largestUndimmedDetentIdentifier = sheet.detents[0].identifier
-            } else {
-                // Fallback on earlier versions
-            }  // nil 기본값
+            
             sheet.prefersScrollingExpandsWhenScrolledToEdge = false  // true 기본값
             sheet.prefersEdgeAttachedInCompactHeight = true // false 기본값
             sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true // false 기본값
@@ -428,5 +494,31 @@ extension MainMapViewController: UISheetPresentationControllerDelegate {
         for annotation in mainMapView.annotations {
             mainMapView.deselectAnnotation(annotation, animated: true)
         }
+        
+        updateMapView(with: tasks)
     }
 }
+
+//extension MainMapViewController {
+//    
+//    func requestInsertWord() {
+//        let alert = UIAlertController(title: "검색어를 입력하세요", message: "검색어 입력 후 검색해주세요!", preferredStyle: .alert)
+//        
+//        let ok = UIAlertAction(title: "확인", style: .default)
+//        
+//        alert.addAction(ok)
+//        
+//        present(alert, animated: true)
+//
+//    }
+//    
+//    func noResultAlert() {
+//        let alert = UIAlertController(title: "검색 결과가 없습니다", message: "다른 검색어를 입력해주세요", preferredStyle: .alert)
+//        
+//        let ok = UIAlertAction(title: "확인", style: .default)
+//        
+//        alert.addAction(ok)
+//        
+//        present(alert, animated: true)
+//    }
+//}
