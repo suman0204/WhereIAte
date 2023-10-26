@@ -35,7 +35,7 @@ class HistoryRegisterViewController: BaseViewController {
     
     lazy var saveButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
-            
+        button.tintColor = UIColor(named: "mainColor")
         return button
     }()
     

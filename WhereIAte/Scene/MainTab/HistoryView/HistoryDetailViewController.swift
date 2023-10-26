@@ -38,6 +38,7 @@ class HistoryDetailViewController: BaseViewController {
     
     lazy var editDeleteButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), menu: menu)
+        button.tintColor = UIColor(named: "mainColor")
         return button
     }()
     
