@@ -153,11 +153,12 @@ class HistoryDetailViewController: BaseViewController {
 
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
 //        imageCollectionView.reloadData()
-//    }
+        setData(data: historyTable!)
+    }
     
     
     override func configureView() {

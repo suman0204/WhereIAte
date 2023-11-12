@@ -321,7 +321,7 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
         guard let historyList = historyList else {return}
         let data = historyList[indexPath.row]
         
-        historyDetailVC.setData(data: data)
+//        historyDetailVC.setData(data: data)
         historyDetailVC.imageNames = data.imageNameList
         historyDetailVC.historyTable = data
         navigationController?.pushViewController(historyDetailVC, animated: true)
