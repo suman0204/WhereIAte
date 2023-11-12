@@ -523,6 +523,7 @@ class HistoryRegisterViewController: BaseViewController {
         insertMenuTextField.text = historyTable.menu
         ratingView.rating = historyTable.rate
         commentTextView.text = historyTable.comment
+        visitedDatePicker.date = historyTable.visitedDate
 //        selectedAssetIdentifiers = historyTable.images.map{ $0 }
 //
 //        let imageView = [firstImageView, secondImageView, thirdImageView]

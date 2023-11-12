@@ -43,6 +43,9 @@
 		8B43CE8C2ADE532200E5250C /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE8B2ADE532200E5250C /* RealmRepository.swift */; };
 		8B43CE8E2ADE856500E5250C /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */; };
 		8B43CE922ADEC6BB00E5250C /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43CE912ADEC6BB00E5250C /* HistoryTableViewCell.swift */; };
+		8B51FF7F2B00DCD6009F1E50 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8B51FF7E2B00DCD6009F1E50 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		8B51FF812B00DCD6009F1E50 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8B51FF802B00DCD6009F1E50 /* FirebaseCrashlytics */; };
+		8B51FF832B00DCD6009F1E50 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8B51FF822B00DCD6009F1E50 /* FirebaseMessaging */; };
 		8BB2D7DD2ADFF5CC00510018 /* HistoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7DC2ADFF5CC00510018 /* HistoryDetailViewController.swift */; };
 		8BB2D7F42AE10C6800510018 /* RestaurantListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7F32AE10C6800510018 /* RestaurantListCell.swift */; };
 		8BB2D7F82AE28BF400510018 /* TapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7F72AE28BF400510018 /* TapType.swift */; };
@@ -85,6 +88,7 @@
 		8B43CE8B2ADE532200E5250C /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		8B43CE912ADEC6BB00E5250C /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		8B51FF842B00DE87009F1E50 /* WhereIAte.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhereIAte.entitlements; sourceTree = "<group>"; };
 		8BB2D7DC2ADFF5CC00510018 /* HistoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailViewController.swift; sourceTree = "<group>"; };
 		8BB2D7F32AE10C6800510018 /* RestaurantListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListCell.swift; sourceTree = "<group>"; };
 		8BB2D7F72AE28BF400510018 /* TapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapType.swift; sourceTree = "<group>"; };
@@ -106,6 +110,9 @@
 				8B43CE792ADAD95500E5250C /* FirebaseCrashlytics in Frameworks */,
 				8B43CE7C2ADAD97400E5250C /* SnapKit in Frameworks */,
 				8B43CE742ADAD92900E5250C /* Alamofire in Frameworks */,
+				8B51FF812B00DCD6009F1E50 /* FirebaseCrashlytics in Frameworks */,
+				8B51FF7F2B00DCD6009F1E50 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				8B51FF832B00DCD6009F1E50 /* FirebaseMessaging in Frameworks */,
 				8B43CE7F2ADAD9D400E5250C /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,6 +139,7 @@
 		8B43CE0B2ACFFE5100E5250C /* WhereIAte */ = {
 			isa = PBXGroup;
 			children = (
+				8B51FF842B00DE87009F1E50 /* WhereIAte.entitlements */,
 				8B43CE0C2ACFFE5100E5250C /* AppDelegate.swift */,
 				8B43CE0E2ACFFE5100E5250C /* SceneDelegate.swift */,
 				8B43CE102ACFFE5100E5250C /* ViewController.swift */,
@@ -287,6 +295,9 @@
 				8B43CE802ADAD9D400E5250C /* RealmSwift */,
 				8B43CE892ADC605800E5250C /* Cosmos */,
 				8BB2D8072AE7DB5100510018 /* IQKeyboardManagerSwift */,
+				8B51FF7E2B00DCD6009F1E50 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				8B51FF802B00DCD6009F1E50 /* FirebaseCrashlytics */,
+				8B51FF822B00DCD6009F1E50 /* FirebaseMessaging */,
 			);
 			productName = WhereIAte;
 			productReference = 8B43CE092ACFFE5100E5250C /* WhereIAte.app */;
@@ -553,23 +564,27 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WhereIAte/WhereIAte.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZB66AY8DJC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhereIAte/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Where I Ate";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 현재 위치와 검색한 식당의 위치를 함께 확인 하기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SoomanHong.WhereIAte;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -586,22 +601,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WhereIAte/WhereIAte.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = ZB66AY8DJC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhereIAte/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Where I Ate";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 현재 위치와 검색한 식당의 위치를 함께 확인 하기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SoomanHong.WhereIAte;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -722,6 +741,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B43CE882ADC605800E5250C /* XCRemoteSwiftPackageReference "Cosmos" */;
 			productName = Cosmos;
+		};
+		8B51FF7E2B00DCD6009F1E50 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B43CE752ADAD95500E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		8B51FF802B00DCD6009F1E50 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B43CE752ADAD95500E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		8B51FF822B00DCD6009F1E50 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B43CE752ADAD95500E5250C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		8BB2D8072AE7DB5100510018 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;

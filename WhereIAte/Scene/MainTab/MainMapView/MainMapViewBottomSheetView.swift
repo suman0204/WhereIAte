@@ -242,7 +242,7 @@ class MainMapViewBottomSheetView: BaseViewController {
         restaurantCategory.text = document.lastCategory
         restaurantRoadAddress.text = "📍" + document.roadAddressName
         if document.phone.isEmpty {
-            restaurantPhoneNumber.text = "📞  - "
+            restaurantPhoneNumber.text = ""
         } else {
             restaurantPhoneNumber.text = "📞" + document.phone
         }
@@ -253,7 +253,7 @@ class MainMapViewBottomSheetView: BaseViewController {
         restaurantCategory.text = data.restaurantCategory
         restaurantRoadAddress.text = "📍" + data.restaurantRoadAddress
         if data.restaurantPhoneNumber.isEmpty {
-            restaurantPhoneNumber.text = "📞  - "
+            restaurantPhoneNumber.text = ""
         } else {
             restaurantPhoneNumber.text = "📞" + data.restaurantPhoneNumber
         }

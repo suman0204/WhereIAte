@@ -78,6 +78,8 @@ class MainMapViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        repository.checkSchemaVersion()
+        
         viewModel.resultList.bind { resultList in
             self.mainSearchTableViewController.restaurantResultList = resultList
             self.mainSearchTableViewController.tableView.reloadData()

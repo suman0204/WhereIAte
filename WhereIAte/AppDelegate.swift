@@ -7,7 +7,9 @@
 
 import UIKit
 import FirebaseCore
+import FirebaseMessaging
 import IQKeyboardManagerSwift
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let config = Realm.Configuration(schemaVersion: 0)
+        Realm.Configuration.defaultConfiguration = config
         
         FirebaseApp.configure()
         IQKeyboardManager.shared.enable = true
@@ -45,6 +49,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UITabBar.appearance().scrollEdgeAppearance = appearance
         }
         
+//        //FCM
+//        //원격 알림 등록
+//        UNUserNotificationCenter.current().delegate = self
+//
+//        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+//        UNUserNotificationCenter.current().requestAuthorization(
+//          options: authOptions,
+//          completionHandler: { _, _ in }
+//        )
+//
+//        application.registerForRemoteNotifications()
+//
+//        //FirebaseMessaging
+//        Messaging.messaging().delegate = self
+        
         return true
     }
 
@@ -65,3 +84,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+//extension AppDelegate: UNUserNotificationCenterDelegate {
+//    //APNs에게서 디바이스 토큰을 받아오는 메서드
+//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        
+//        let token = deviceToken.map { String(format: "%02.2hhx", $0)}.joined()
+//        print("apple",token)
+//    }
+//}
+//
+//extension AppDelegate: MessagingDelegate {
+//    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+//      print("Firebase registration token: \(String(describing: fcmToken))")
+//
+//      let dataDict: [String: String] = ["token": fcmToken ?? ""]
+//      NotificationCenter.default.post(
+//        name: Notification.Name("FCMToken"),
+//        object: nil,
+//        userInfo: dataDict
+//      )
+//      // TODO: If necessary send token to application server.
+//      // Note: This callback is fired at each app startup and whenever a new token is generated.
+//    }
+//
+//}

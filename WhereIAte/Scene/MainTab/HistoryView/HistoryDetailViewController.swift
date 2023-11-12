@@ -147,10 +147,7 @@ class HistoryDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = .black
-
-//                addContentScrollView()
-//                setPageControl()
-//        setImageSlider(images: imageNames)
+        navigationItem.backButtonTitle = ""
         
         navigationItem.rightBarButtonItem = editDeleteButton
 

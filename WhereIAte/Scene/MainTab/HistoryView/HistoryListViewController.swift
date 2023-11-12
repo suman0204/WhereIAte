@@ -111,7 +111,8 @@ class HistoryListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = .black
-        
+        navigationItem.backButtonTitle = ""
+
         view.backgroundColor = .white
         
         navigationItem.rightBarButtonItem = plusButton
@@ -276,7 +277,11 @@ class HistoryListViewController: BaseViewController {
         restaurantName.text = data.placeName
         restaurantCategory.text = data.lastCategory
         restaurantRoadAddress.text = "📍" + data.roadAddressName
-        restaurantPhoneNumber.text = "📞" + data.phone
+        if data.phone.isEmpty {
+            restaurantPhoneNumber.text = ""
+        } else {
+            restaurantPhoneNumber.text = "📞" + data.phone
+        }
     }
     
     func setDataFromTable(data: RestaurantTable) {
@@ -284,7 +289,7 @@ class HistoryListViewController: BaseViewController {
         restaurantCategory.text = data.restaurantCategory
         restaurantRoadAddress.text = "📍" + data.restaurantRoadAddress
         if data.restaurantPhoneNumber.isEmpty {
-            restaurantPhoneNumber.text = "📞  - "
+            restaurantPhoneNumber.text = ""
         } else {
             restaurantPhoneNumber.text = "📞" + data.restaurantPhoneNumber
         }
