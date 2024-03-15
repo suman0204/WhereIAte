@@ -10,11 +10,11 @@
 <br/>
 
 <p align="center">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/c8363fbc-ea1c-44c0-966e-a5914b433b33" width="19%" height="30%">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/4c105f19-19f1-4c01-965b-111d53296ece" width="19%" height="30%">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/25221450-dbe2-46c4-afb8-8575ff515bc9" width="19%" height="30%">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/4804f457-8269-4bd1-970d-fe07af0cf6a3" width="19%" height="30%">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/f27946fd-f299-4704-9bee-e74271d2801d" width="19%" height="30%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/c8363fbc-ea1c-44c0-966e-a5914b433b33" width="19%" height="20%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/4c105f19-19f1-4c01-965b-111d53296ece" width="19%" height="20%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/25221450-dbe2-46c4-afb8-8575ff515bc9" width="19%" height="20%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/4804f457-8269-4bd1-970d-fe07af0cf6a3" width="19%" height="20%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/f27946fd-f299-4704-9bee-e74271d2801d" width="19%" height="20%">
 </p>
 
 <br/>
@@ -65,9 +65,9 @@
 
 **iOS 15** 업데이트 이후부터  **scrollEdgeAppearance**가 기본적으로 투명한 배경으로 생성됨
 
-<p align="left">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/8aa9e852-a450-4d70-aa6a-8a292c8554d9" width="20%" height="30%">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/b24fed92-5a47-4024-9919-d39f68b1cccc" width="20%" height="30%">
+<p align="center">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/8aa9e852-a450-4d70-aa6a-8a292c8554d9" width="20%" height="20%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/b24fed92-5a47-4024-9919-d39f68b1cccc" width="20%" height="20%">
 </p>
 
 **해결법**
@@ -105,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     ...
 ```
-<p align="left">
+<p align="center">
 <img src="https://github.com/suman0204/MyPick/assets/18048754/18364c0e-981e-4c19-94df-70ba9bd5556e" width="20%" height="20%">
 </p>
 
