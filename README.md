@@ -1,4 +1,6 @@
-![WhereIAte.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/b73ed056-6f9b-4905-a0c4-645243806149/WhereIAte.png)
+<p align="left">
+  <img width="100" alt="image" src="https://github.com/suman0204/MyPick/assets/18048754/131c1aef-6dc3-4178-bd73-a7f24e748b59">
+</p>
 
 # Where I Ate
 
