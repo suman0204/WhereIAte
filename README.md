@@ -89,15 +89,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 아래 회색 라인 없애기
         appearance.shadowColor = .clear
             
-        'UINavigationBar.appearance().standardAppearance = appearance'
-        **UINavigationBar.appearance().scrollEdgeAppearance = appearance**
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
         
         //탭바 설정
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = .white
         
-        **UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance**
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
         
         ...
     }
@@ -128,7 +128,7 @@ UISearchController도 ViewController이기 때문에 부모 뷰 컨트롤러의 
 override func viewDidLoad() {
         super.viewDidLoad()
         
-        **self.definesPresentationContext = true**
+        self.definesPresentationContext = true
         
         ...
 }
@@ -149,7 +149,7 @@ override func viewDidLoad() {
 ```swift
 class MainMapViewController: BaseViewController {
     
-    **var taskToken: NotificationToken? // Realm 알림 토큰 추가**
+    var taskToken: NotificationToken? // Realm 알림 토큰 추가
 
     let repository = RealmRepository()
     
@@ -162,7 +162,7 @@ class MainMapViewController: BaseViewController {
         
         tasks = repository.fetchRestaurant()
         
-        **taskToken = tasks.observe { [weak self] changes in
+        taskToken = tasks.observe { [weak self] changes in
             switch changes {
             case .initial:
                 self?.updateMapView(with: self?.tasks)
@@ -171,7 +171,7 @@ class MainMapViewController: BaseViewController {
             case .error(let error):
                 print("Error: \(error)")
             }
-        }**
+        }
         
     }
 ```
