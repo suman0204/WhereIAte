@@ -58,6 +58,8 @@
 
 ---
 
+<br/>
+
 ## 트러블 슈팅
 
 
@@ -112,6 +114,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 <img src="https://github.com/suman0204/MyPick/assets/18048754/18364c0e-981e-4c19-94df-70ba9bd5556e" width="20%" height="20%">
 </p>
 
+<br/>
+
 ---
 
 ### 2. SearchController 활성화된 상태로 탭 이동 시 화면 보이지 않는 문제
@@ -141,6 +145,9 @@ override func viewDidLoad() {
         ...
 }
 ```
+<br/>
+
+---
 
 ### 3. Realm 데이터베이스 관리
 
