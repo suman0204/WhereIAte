@@ -8,11 +8,11 @@
 **방문한 음식점을 검색하고 방문에 대한 기록을 남기고 관리할 수 있는 앱**
 
 <p align="center">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/c8363fbc-ea1c-44c0-966e-a5914b433b33" width="15%" height="30%">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/4c105f19-19f1-4c01-965b-111d53296ece" width="15%" height="30%">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/25221450-dbe2-46c4-afb8-8575ff515bc9" width="15%" height="30%">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/4804f457-8269-4bd1-970d-fe07af0cf6a3" width="15%" height="30%">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/f27946fd-f299-4704-9bee-e74271d2801d" width="15%" height="30%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/c8363fbc-ea1c-44c0-966e-a5914b433b33" width="18%" height="30%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/4c105f19-19f1-4c01-965b-111d53296ece" width="18%" height="30%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/25221450-dbe2-46c4-afb8-8575ff515bc9" width="18%" height="30%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/4804f457-8269-4bd1-970d-fe07af0cf6a3" width="18%" height="30%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/f27946fd-f299-4704-9bee-e74271d2801d" width="18%" height="30%">
 </p>
 
 ## 프로젝트 소개
