@@ -117,7 +117,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 UISearchController가 활성화된 상태에서 다른 탭으로 이동 후 해당 탭으로 돌아오는 경우 화면이 보이지 않는 현상
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/cf2c20ac-086a-45a0-aba8-0d3e0a873a27/Untitled.png)
+<p align="center">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/e9bd2eb5-331d-4e4e-9bdc-c5ed237f4276" width="20%" height="20%">
+</p>
 
 **해결법**
 
