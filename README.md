@@ -7,6 +7,8 @@
 
 **방문한 음식점을 검색하고 방문에 대한 기록을 남기고 관리할 수 있는 앱**
 
+<br/>
+
 <p align="center">
 <img src="https://github.com/suman0204/MyPick/assets/18048754/c8363fbc-ea1c-44c0-966e-a5914b433b33" width="19%" height="30%">
 <img src="https://github.com/suman0204/MyPick/assets/18048754/4c105f19-19f1-4c01-965b-111d53296ece" width="19%" height="30%">
@@ -14,6 +16,8 @@
 <img src="https://github.com/suman0204/MyPick/assets/18048754/4804f457-8269-4bd1-970d-fe07af0cf6a3" width="19%" height="30%">
 <img src="https://github.com/suman0204/MyPick/assets/18048754/f27946fd-f299-4704-9bee-e74271d2801d" width="19%" height="30%">
 </p>
+
+<br/>
 
 ## 프로젝트 소개
 
@@ -63,7 +67,6 @@
 
 <p align="left">
 <img src="https://github.com/suman0204/MyPick/assets/18048754/8aa9e852-a450-4d70-aa6a-8a292c8554d9" width="20%" height="30%">
-  
 <img src="https://github.com/suman0204/MyPick/assets/18048754/b24fed92-5a47-4024-9919-d39f68b1cccc" width="20%" height="30%">
 </p>
 
@@ -102,8 +105,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     ...
 ```
-
-![Simulator Screenshot - iPhone 15 Pro - 2024-03-13 at 16.31.34.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/7c966aec-d44e-4bf7-9c3c-f6f4b4c82ae0/Simulator_Screenshot_-_iPhone_15_Pro_-_2024-03-13_at_16.31.34.png)
+<p align="left">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/18364c0e-981e-4c19-94df-70ba9bd5556e
+" width="20%" height="20%">
+</p>
 
 ---
 
