@@ -89,8 +89,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 아래 회색 라인 없애기
         appearance.shadowColor = .clear
             
-        **UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance**
+        **UINavigationBar.appearance().standardAppearance = appearance**
+        **UINavigationBar.appearance().scrollEdgeAppearance = appearance**
         
         //탭바 설정
         let appearance = UITabBarAppearance()
