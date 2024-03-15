@@ -4,23 +4,19 @@
 
 # Where I Ate
 
----
 
 **방문한 음식점을 검색하고 방문에 대한 기록을 남기고 관리할 수 있는 앱**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/8f31e24b-c12c-47f3-9024-ea977840d4dd/Untitled.png)
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/e337fa11-dc36-40e3-805e-91dda7e5a4e4/Untitled.png)
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/586bc3c5-c6dc-4a55-b0de-7f0c02465414/Untitled.png)
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/473fd924-9a59-4e3b-94b6-21dcdf532841/Untitled.png)
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/9afd99b6-fc9d-450a-83ef-53633d57544c/Untitled.png)
+<p align="center">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/c8363fbc-ea1c-44c0-966e-a5914b433b33" width="20%" height="30%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/4c105f19-19f1-4c01-965b-111d53296ece" width="20%" height="30%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/25221450-dbe2-46c4-afb8-8575ff515bc9" width="20%" height="30%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/4804f457-8269-4bd1-970d-fe07af0cf6a3" width="20%" height="30%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/f27946fd-f299-4704-9bee-e74271d2801d" width="20%" height="30%">
+</p>
 
 ## 프로젝트 소개
 
----
 
 > 앱 소개
 > 
@@ -58,11 +54,10 @@
 
 ## 트러블 슈팅
 
----
 
 ### 1. iOS 15 이상 부터 네비게이션바와 탭바가 투명해지는 현상
 
-**문제**
+**문제점**
 
 **iOS 15** 업데이트 이후부터  **scrollEdgeAppearance**가 기본적으로 투명한 배경으로 생성됨
 
@@ -70,7 +65,7 @@
 
 ![Simulator Screenshot - iPhone 14 Pro - 2023-10-25 at 00.53.40.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/7b2b38a4-51ef-48c0-a3d5-3aa144f7e1d6/Simulator_Screenshot_-_iPhone_14_Pro_-_2023-10-25_at_00.53.40.png)
 
-**해결**
+**해결법**
 
 **AppDelegate**에서 네비게이션 바와 탭 바의 원하는 설정 추가를 통해 모든 화면에서의 **Appearance 문제를 해결**
 
@@ -112,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 ### 2. SearchController 활성화된 상태로 탭 이동 시 화면 보이지 않는 문제
 
-**문제**
+**문제점**
 
 UISearchController가 활성화된 상태에서 다른 탭으로 이동 후 해당 탭으로 돌아오는 경우 화면이 보이지 않는 현상
 
@@ -138,7 +133,7 @@ override func viewDidLoad() {
 
 ### 3. Realm 데이터베이스 관리
 
-**문제**
+**문제점**
 
 방문한 식당에 관한 데이터가 사용되는 뷰에서 **데이터가 동기화**될 수 있도록 매번 **Realm 데이터를 불러**오고 **tableView**  또는 **MapAnnotation** **갱신** 진행
 
