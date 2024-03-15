@@ -1,7 +1,7 @@
 <p align="left">
   <img width="100" alt="image" src="https://github.com/suman0204/MyPick/assets/18048754/131c1aef-6dc3-4178-bd73-a7f24e748b59">
 	&nbsp&nbsp&nbsp&nbsp 
-  <a href="https://apps.apple.com/kr/app/where-i-ate-%EB%82%B4%EA%B0%80-%EA%B0%84-%EB%A7%9B%EC%A7%91-%EA%B8%B0%EB%A1%9D/id6470489682" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1697673600" alt="Download on the App Store" style="border-radius: 13px; width: 200px; height: 63px;"></a>
+  <a href="https://apps.apple.com/kr/app/where-i-ate-%EB%82%B4%EA%B0%80-%EA%B0%84-%EB%A7%9B%EC%A7%91-%EA%B8%B0%EB%A1%9D/id6470489682" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1697673600" alt="Download on the App Store" style="border-radius: 13px; width: 150px; height: 47.25px;"></a>
 </p>
 
 # Where I Ate
@@ -69,6 +69,7 @@
 
 <p align="center">
 <img src="https://github.com/suman0204/MyPick/assets/18048754/8aa9e852-a450-4d70-aa6a-8a292c8554d9" width="20%" height="20%">
+&nbsp&nbsp&nbsp 
 <img src="https://github.com/suman0204/MyPick/assets/18048754/b24fed92-5a47-4024-9919-d39f68b1cccc" width="20%" height="20%">
 </p>
 
