@@ -106,8 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ...
 ```
 <p align="left">
-<img src="https://github.com/suman0204/MyPick/assets/18048754/18364c0e-981e-4c19-94df-70ba9bd5556e
-" width="20%" height="20%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/18364c0e-981e-4c19-94df-70ba9bd5556e" width="20%" height="20%">
 </p>
 
 ---
