@@ -61,9 +61,10 @@
 
 **iOS 15** 업데이트 이후부터  **scrollEdgeAppearance**가 기본적으로 투명한 배경으로 생성됨
 
-![Simulator Screenshot - iPhone 14 Pro - 2023-10-25 at 00.53.30.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/6569ac29-c696-4e62-884f-2e918c2d4b12/Simulator_Screenshot_-_iPhone_14_Pro_-_2023-10-25_at_00.53.30.png)
-
-![Simulator Screenshot - iPhone 14 Pro - 2023-10-25 at 00.53.40.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/7b2b38a4-51ef-48c0-a3d5-3aa144f7e1d6/Simulator_Screenshot_-_iPhone_14_Pro_-_2023-10-25_at_00.53.40.png)
+<p align="left">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/8aa9e852-a450-4d70-aa6a-8a292c8554d9" width="20%" height="30%">
+<img src="https://github.com/suman0204/MyPick/assets/18048754/b24fed92-5a47-4024-9919-d39f68b1cccc" width="20%" height="30%">
+</p>
 
 **해결법**
 
