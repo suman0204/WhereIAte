@@ -75,6 +75,8 @@
 <img src="https://github.com/suman0204/MyPick/assets/18048754/b24fed92-5a47-4024-9919-d39f68b1cccc" width="20%" height="20%">
 </p>
 
+<br/>
+
 **해결법**
 
 **AppDelegate**에서 네비게이션 바와 탭 바의 원하는 설정 추가를 통해 모든 화면에서의 **Appearance 문제를 해결**
@@ -127,6 +129,8 @@ UISearchController가 활성화된 상태에서 다른 탭으로 이동 후 해�
 <p align="center">
 <img src="https://github.com/suman0204/MyPick/assets/18048754/e9bd2eb5-331d-4e4e-9bdc-c5ed237f4276" width="20%" height="20%">
 </p>
+
+<br/>
 
 **해결법**
 
