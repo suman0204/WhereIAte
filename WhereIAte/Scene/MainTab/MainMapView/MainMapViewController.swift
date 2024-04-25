@@ -77,6 +77,8 @@ class MainMapViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(documentDirectoryPath())
 
         repository.checkSchemaVersion()
         

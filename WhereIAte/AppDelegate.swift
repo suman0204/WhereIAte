@@ -29,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 네비게이션바 설정
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
-            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+//            appearance.configureWithTransparentBackground()
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
             
             // 네비게이션바 배경색
             appearance.backgroundColor = .white
@@ -43,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if #available(iOS 15, *) {
             let appearance = UITabBarAppearance()
-            appearance.configureWithOpaqueBackground()
+//            appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = .white
             UITabBar.appearance().standardAppearance = appearance
             UITabBar.appearance().scrollEdgeAppearance = appearance

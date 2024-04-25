@@ -28,7 +28,6 @@ class RegistedRestaurantListViewController: BaseViewController {
         searchController.searchBar.tintColor = UIColor(named: "mainColor")
         searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
         searchController.searchBar.searchTextField.leftView?.tintColor = .black
-
         return searchController
     }()
     
@@ -87,6 +86,15 @@ class RegistedRestaurantListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.definesPresentationContext = true
+//        if let tabBarController = tabBarController {
+//            tabBarController.delegate = self
+//            print("tabBarController is")
+//        } else {
+//            print("tabBarController is nil")
+//        }
+        tabBarController?.delegate = self
+        
         view.backgroundColor = .white
         navigationItem.backButtonTitle = ""
         
@@ -103,6 +111,10 @@ class RegistedRestaurantListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        print("ViewWillAppear Tasks", tasks)
+//        searchController.canc
+        
         tasks = repository.fetchRestaurant()
 
         switch sortedType {
@@ -117,6 +129,32 @@ class RegistedRestaurantListViewController: BaseViewController {
             })
         }
         restaurantTable.reloadData()
+        
+//        searchController.isActive = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("viewWillDisappear Tasks", tasks)
+//        if searchController.isActive {
+//               searchController.isActive = false // 검색 컨트롤러 비활성화
+//           }
+//        tasks = repository.fetchRestaurant()
+//
+//        switch sortedType {
+//        case .lastest:
+////            tasks = repository.fetchRestaurant()
+//            print("lateset")
+//        case .rates:
+//            self.sortedRestaurantTable = self.tasks.sorted(by: { $0.avgRate > $1.avgRate })
+//        case .times:
+//            self.sortedRestaurantTable = self.tasks.sorted(by: { restaurant1, restaurant2 in
+//                return restaurant1.history.count > restaurant2.history.count
+//            })
+//        }
+//        restaurantTable.reloadData()
+        
+        
     }
     
     override func configureView() {
@@ -263,8 +301,39 @@ extension RegistedRestaurantListViewController: UISearchResultsUpdating, UISearc
         guard let query = searchBar.text else {return}
         
         tasks = repository.restaurantSearchFilter(query: query)
+        
+//        if tasks.count == 0 {
+//            tasks = repository.fetchRestaurant()
+//            print("SearchingResultNil")
+//            switch sortedType {
+//            case .lastest:
+//    //            tasks = repository.fetchRestaurant()
+//                print("lateset")
+//            case .rates:
+//                self.sortedRestaurantTable = self.tasks.sorted(by: { $0.avgRate > $1.avgRate })
+//            case .times:
+//                self.sortedRestaurantTable = self.tasks.sorted(by: { restaurant1, restaurant2 in
+//                    return restaurant1.history.count > restaurant2.history.count
+//                })
+//            }
+//
+////            restaurantTable.reloadData()
+//        }
         restaurantTable.reloadData()
     }
+    
+//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//        print("searchBarTextDidEndEditing")
+//        tasks = repository.fetchRestaurant()
+//        restaurantTable.reloadData()
+//    }
+//    
+//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//        print("searchBarTextDidBeginEditing")
+//        tasks = repository.fetchRestaurant()
+//        restaurantTable.reloadData()
+//    }
+
     
 }
 
@@ -304,3 +373,47 @@ extension RegistedRestaurantListViewController {
         present(alert, animated: true)
     }
 }
+
+
+extension RegistedRestaurantListViewController: UITabBarControllerDelegate {
+//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//        if viewController == self {
+//            print("SelfSelf")
+//            // Returning to this view controller
+//            tasks = repository.fetchRestaurant()
+//
+//            switch sortedType {
+//            case .lastest:
+//                break // No need to update tasks
+//            case .rates:
+//                self.sortedRestaurantTable = self.tasks.sorted(by: { $0.avgRate > $1.avgRate })
+//            case .times:
+//                self.sortedRestaurantTable = self.tasks.sorted(by: { $0.history.count > $1.history.count })
+//            }
+//            restaurantTable.reloadData()
+//        } else {
+//            // Moving away from this view controller
+//            print("SelfSelf")
+//            deactivateSearchController()
+//        }
+//    }
+//    
+//    private func deactivateSearchController() {
+//        searchController.isActive = false
+//    }
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController == self {
+            print("RegistedRestaurantListViewController selected")
+        }
+    }
+}
+
+
+//extension RegistedRestaurantListViewController: UITabBarDelegate {
+//    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+//        if item.title == "방문한 식당" {
+//            // 탭 바 아이템 "방문한 식당"이 선택될 때 실행되는 코드
+//            print("RegistedRestaurantListViewController selected")
+//        }
+//    }
+//}
