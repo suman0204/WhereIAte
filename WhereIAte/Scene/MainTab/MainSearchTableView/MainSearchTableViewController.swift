@@ -15,7 +15,7 @@ class MainSearchTableViewController: UITableViewController {
     
     let viewModel = MainSearchViewModel()
     
-    var handleMapSearchDelegate: HandleMapSearch? = nil
+    weak var handleMapSearchDelegate: HandleMapSearch? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()

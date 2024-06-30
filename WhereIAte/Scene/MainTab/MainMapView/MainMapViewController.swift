@@ -10,7 +10,7 @@ import CoreLocation
 import MapKit
 import RealmSwift
 
-protocol HandleMapSearch {
+protocol HandleMapSearch: AnyObject {
     func dropPinZoomIn(center: CLLocationCoordinate2D, restaurantName: String, retaurantRoadAddress: String)
     
     func presentSheet(data: RestaurantDocument)

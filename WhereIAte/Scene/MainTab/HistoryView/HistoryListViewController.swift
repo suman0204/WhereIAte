@@ -85,6 +85,11 @@ class HistoryListViewController: BaseViewController {
         let view = UILabel()
         view.font = .systemFont(ofSize: 17)
         view.text = "📞 031-945-8233"
+        
+//        view.isUserInteractionEnabled = true
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handlePhoneNumberTap(_:)))
+//        view.addGestureRecognizer(tapGesture)
+        
         return view
     }()
     
@@ -116,6 +121,11 @@ class HistoryListViewController: BaseViewController {
         view.backgroundColor = .white
         
         navigationItem.rightBarButtonItem = plusButton
+        
+//        //전화연결
+//        restaurantPhoneNumber.addge
+        print("식당 기록 리스트")
+
         
         switch tapType {
         case .mapTap:
@@ -171,6 +181,9 @@ class HistoryListViewController: BaseViewController {
         } else {
             emptyHistoryLabel.isHidden = false
         }
+
+
+        
     }
     
     @objc func plusButtonClicked(_ sender: Any) {
@@ -195,6 +208,11 @@ class HistoryListViewController: BaseViewController {
     }
     
     override func configureView() {
+        
+        restaurantPhoneNumber.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handlePhoneNumberTap(_:)))
+        restaurantPhoneNumber.addGestureRecognizer(tapGesture)
+
         [restaurantName, restaurantCategory].forEach {
             nameCategoryView.addSubview($0)
         }
@@ -292,6 +310,18 @@ class HistoryListViewController: BaseViewController {
             restaurantPhoneNumber.text = ""
         } else {
             restaurantPhoneNumber.text = "📞" + data.restaurantPhoneNumber
+        }
+    }
+    
+    @objc func handlePhoneNumberTap(_ gesture: UITapGestureRecognizer) {
+        if let fullText = restaurantPhoneNumber.text {
+            let phoneNumber = fullText.replacingOccurrences(of: "📞", with: "").trimmingCharacters(in: .whitespaces)
+            print("Phone number tapped: \(phoneNumber)")
+            if let url = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                print("Unable to open URL for phone number: \(phoneNumber)")
+            }
         }
     }
 }
