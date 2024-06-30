@@ -23,6 +23,13 @@
 
 ## 프로젝트 소개
 
+> 개발 환경
+> 
+- 최소 버전 : iOS 16.0
+- 개발 인원: 1인
+- 개발 기간: 2023.10.06 ~ 2023.10.27
+
+---
 
 > 앱 소개
 > 
@@ -33,28 +40,20 @@
 
 ---
 
+> 기술 스택
+> 
+- UIKit(CodeBase), CoreLocation, MapKit, PhotosUI
+- MVC, Repository
+- Snapkit, Alamofire, Realm, Firebase(Crashlytics, FCM), IQKeyboardManager, Cosmos
+
+---
+
 > 주요 기능
 > 
 - **Kakao Map API**를 활용한 음식점 검색 및 **Delegate Pattern**을 활용한 검색결과 선택 시 해당 음식점의 위치와 정보 확인 화면 구현
 - **CoreLocation**, **MapKit**을 활용한 실시간 위치 탐색 및 내가 방문한 식당 위치 확인
 - **Repository Pattern**을 활용한 **To-Many Relationship** **RealmDB 구성**을 통해 방문한 식당 정보 및 후기 저장 및 관리
 - **Firebase Crashlytics**를 통한 앱 충돌 및 오류 모니터링
-
----
-
-> 개발 환경
-> 
-- 최소 버전 : iOS 16.0
-- 개발 인원: 1인
-- 개발 기간: 2023.10.06 ~ 2023.10.27
-
----
-
-> 기술 스택
-> 
-- UIKit, CoreLocation, MapKit, PhotosUI
-- MVC, Repository
-- Snapkit, Alamofire, Realm, Firebase(Crashlytics, FCM), IQKeyboardManager, Cosmos
 
 ---
 
