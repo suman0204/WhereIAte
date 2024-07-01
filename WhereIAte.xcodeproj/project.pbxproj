@@ -46,6 +46,8 @@
 		8B51FF7F2B00DCD6009F1E50 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8B51FF7E2B00DCD6009F1E50 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		8B51FF812B00DCD6009F1E50 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8B51FF802B00DCD6009F1E50 /* FirebaseCrashlytics */; };
 		8B51FF832B00DCD6009F1E50 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8B51FF822B00DCD6009F1E50 /* FirebaseMessaging */; };
+		8B543BF72C32C9B400A37706 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B543BF92C32C9B400A37706 /* Localizable.strings */; };
+		8B543BFD2C32D48E00A37706 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B543BFC2C32D48E00A37706 /* Extension+String.swift */; };
 		8BB2D7DD2ADFF5CC00510018 /* HistoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7DC2ADFF5CC00510018 /* HistoryDetailViewController.swift */; };
 		8BB2D7F42AE10C6800510018 /* RestaurantListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7F32AE10C6800510018 /* RestaurantListCell.swift */; };
 		8BB2D7F82AE28BF400510018 /* TapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2D7F72AE28BF400510018 /* TapType.swift */; };
@@ -89,6 +91,10 @@
 		8B43CE8D2ADE856500E5250C /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		8B43CE912ADEC6BB00E5250C /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		8B51FF842B00DE87009F1E50 /* WhereIAte.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhereIAte.entitlements; sourceTree = "<group>"; };
+		8B543BF82C32C9B400A37706 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B543BFA2C32CA4000A37706 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		8B543BFB2C32CA4000A37706 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B543BFC2C32D48E00A37706 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		8BB2D7DC2ADFF5CC00510018 /* HistoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailViewController.swift; sourceTree = "<group>"; };
 		8BB2D7F32AE10C6800510018 /* RestaurantListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListCell.swift; sourceTree = "<group>"; };
 		8BB2D7F72AE28BF400510018 /* TapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapType.swift; sourceTree = "<group>"; };
@@ -123,6 +129,7 @@
 		8B43CE002ACFFE5100E5250C = {
 			isa = PBXGroup;
 			children = (
+				8B543BF92C32C9B400A37706 /* Localizable.strings */,
 				8B43CE0B2ACFFE5100E5250C /* WhereIAte */,
 				8B43CE0A2ACFFE5100E5250C /* Products */,
 			);
@@ -172,6 +179,7 @@
 		8B43CE332AD1BC7500E5250C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				8B543BFC2C32D48E00A37706 /* Extension+String.swift */,
 				8B43CE342AD1BC8100E5250C /* MainTab */,
 				8B43CE352AD1BC9C00E5250C /* ListTab */,
 			);
@@ -325,6 +333,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 8B43CE002ACFFE5100E5250C;
 			packageReferences = (
@@ -350,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B43CE2C2AD158DD00E5250C /* .gitignore in Resources */,
+				8B543BF72C32C9B400A37706 /* Localizable.strings in Resources */,
 				8B43CE192ACFFE5200E5250C /* LaunchScreen.storyboard in Resources */,
 				8B43CE162ACFFE5200E5250C /* Assets.xcassets in Resources */,
 				8B43CE2E2AD1590A00E5250C /* GoogleService-Info.plist in Resources */,
@@ -405,6 +415,7 @@
 				8B43CE412AD2F2E700E5250C /* Restaurant.swift in Sources */,
 				8B43CE3D2AD2E71D00E5250C /* KakaoLocalAPI.swift in Sources */,
 				8B43CE3F2AD2EF9D00E5250C /* Network.swift in Sources */,
+				8B543BFD2C32D48E00A37706 /* Extension+String.swift in Sources */,
 				8B43CE542AD5212900E5250C /* MainSearchTableViewController.swift in Sources */,
 				8B43CE832ADBDF6900E5250C /* RestaurantTable.swift in Sources */,
 				8BB2D7DD2ADFF5CC00510018 /* HistoryDetailViewController.swift in Sources */,
@@ -438,8 +449,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				8B43CE182ACFFE5200E5250C /* Base */,
+				8B543BFA2C32CA4000A37706 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8B543BF92C32C9B400A37706 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8B543BF82C32C9B400A37706 /* en */,
+				8B543BFB2C32CA4000A37706 /* ko */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -449,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -509,6 +531,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -566,7 +589,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WhereIAte/WhereIAte.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZB66AY8DJC;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -584,7 +607,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SoomanHong.WhereIAte;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -603,7 +626,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WhereIAte/WhereIAte.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = ZB66AY8DJC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhereIAte/Info.plist;
@@ -620,7 +643,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SoomanHong.WhereIAte;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

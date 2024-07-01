@@ -1,0 +1,52 @@
+/* 
+  Localizable.strings
+  WhereIAte
+
+  Created by 홍수만 on 7/1/24.
+  
+*/
+
+//탭바
+"tab_map" = "Map";
+"tab_list" = "Visited Restaurants";
+
+// 메인 지도 뷰
+"map_searchBar_placeholder" = "Search visited restaurants";
+"map_searchBar_cancel" = "Cancel";
+
+// 검색 결과 시트 뷰
+"sheet_regist" = "Write Review";
+
+// 방문 기록 리스트 뷰
+"historyList_navTitle" = "Reviews";
+"historyList_empty" = "Please write a review";
+
+// 기록 남기기 뷰
+"historyRegister_navTitle" = "Writing a review";
+"historyRegister_save" = "Save";
+"historyRegister_title" = "Title";
+"historyRegister_title_placeholder" = "Enter title";
+"historyRegister_menu" = "Menu";
+"historyRegister_menu_placeholder" = "Enter dishes you had ex) Pasta/Risotto/Salad";
+"historyRegister_date" = "Visited Date";
+"historyRegister_description" = "Description";
+
+// 리스트 탭
+"registedRestaurant_searchBar_placeholder" = "Search by restaurant name or category";
+"registedRestaurant_searchBar_cancel" = "Cancel";
+"registedRestaurant_sort_recent" = "Recent";
+"registedRestaurant_sort_rate" = "Rating";
+"registedRestaurant_sort_count" = "Visit Count";
+
+// 기록 상세 뷰
+"historyDetailView_edit" = "Edit";
+"historyDetailView_delete" = "Delete";
+
+// 기록 수정 뷰
+"historyEdit_navTitle" = "Edit";
+
+// 기록 삭제 alert
+"deleteHistory_title" = "Are you sure you want to delete it?";
+"deleteHistory_description" = "If you delete it, your contents and photos will be deleted.";
+"deleteHistory_delete" = "Delete";
+"deleteHistory_cancel" = "Cancel";
