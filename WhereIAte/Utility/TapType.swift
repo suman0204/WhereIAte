@@ -24,9 +24,9 @@ enum registEditType {
     var titleName: String {
         switch self {
         case .register:
-            return "기록 남기기"
+            return "historyRegister_navTitle".localized
         case .edit:
-            return "수정하기"
+            return "historyEdit_navTitle".localized
         }
     }
     

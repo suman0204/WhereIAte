@@ -107,7 +107,7 @@ class HistoryListViewController: BaseViewController {
     
     let emptyHistoryLabel = {
         let view = UILabel()
-        view.text = "방문 기록을 남겨보세요"
+        view.text = "historyList_empty".localized
         view.font = .systemFont(ofSize: 20)
         view.textColor = .systemGray
         return view
@@ -144,7 +144,7 @@ class HistoryListViewController: BaseViewController {
         
 //        title = "방문 기록"
         
-        self.navigationController?.navigationBar.topItem?.title = "방문 기록"
+        self.navigationController?.navigationBar.topItem?.title = "historyList_navTitle".localized
         
         tasks = repository.fetchRestaurant()
 

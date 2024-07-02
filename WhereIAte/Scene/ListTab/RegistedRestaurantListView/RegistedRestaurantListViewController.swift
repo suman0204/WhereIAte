@@ -24,16 +24,16 @@ class RegistedRestaurantListViewController: BaseViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = "식당 이름 및 카테고리로 검색해보세요"
+        searchController.searchBar.placeholder = "registedRestaurant_searchBar_placeholder".localized
         searchController.searchBar.tintColor = UIColor(named: "mainColor")
-        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
+        searchController.searchBar.setValue("registedRestaurant_searchBar_cancel".localized, forKey: "cancelButtonText")
         searchController.searchBar.searchTextField.leftView?.tintColor = .black
         return searchController
     }()
     
     lazy var sortButton = {
         let view = UIButton()
-        view.setTitle("최신순", for: .normal)
+        view.setTitle("registedRestaurant_sort_recent".localized, for: .normal)
         view.setTitleColor(UIColor(named: "mainColor"), for: .normal)
         view.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         view.tintColor = UIColor(named: "mainColor")
@@ -42,12 +42,12 @@ class RegistedRestaurantListViewController: BaseViewController {
         view.showsMenuAsPrimaryAction = true
         view.changesSelectionAsPrimaryAction = true
         view.menu = UIMenu(children: [
-                   UIAction(title: "최신순", state: .on, handler: { action in
+            UIAction(title: "registedRestaurant_sort_recent".localized, state: .on, handler: { action in
                        self.tasks = self.repository.fetchRestaurant()
                        self.restaurantTable.reloadData()
                        self.sortedType = .lastest
                    }),
-                   UIAction(title: "별점순", handler: { action in
+            UIAction(title: "registedRestaurant_sort_rate".localized, handler: { action in
                        print("별점순")
                        self.tasks = self.repository.fetchRestaurant()
                        self.sortedRestaurantTable = self.tasks.sorted(by: { $0.avgRate > $1.avgRate })
@@ -56,7 +56,7 @@ class RegistedRestaurantListViewController: BaseViewController {
 
                        print(self.sortedRestaurantTable)
                    }),
-                   UIAction(title: "방문횟수순", handler: { action in
+            UIAction(title: "registedRestaurant_sort_count".localized, handler: { action in
                        print("방문횟수순")
                        self.tasks = self.repository.fetchRestaurant()
                        self.sortedRestaurantTable = self.tasks.sorted(by: { restaurant1, restaurant2 in
@@ -158,7 +158,7 @@ class RegistedRestaurantListViewController: BaseViewController {
     }
     
     override func configureView() {
-        title = "방문한 식당"
+        title = "tab_list".localized
         [/*searchBar,*/sortButton, restaurantTable].forEach {
             view.addSubview($0)
         }
@@ -257,7 +257,7 @@ extension RegistedRestaurantListViewController: UITableViewDelegate, UITableView
         }
         guard let data = data else {return UISwipeActionsConfiguration()}
         
-        let delete = UIContextualAction(style: .normal, title: "삭제하기") { previewAction, view, completionHandler in
+        let delete = UIContextualAction(style: .normal, title: "registedRestaurant_delete".localized) { previewAction, view, completionHandler in
             print("delete")
             self.deleteAlert(restaurantTable: data)
 //            self.tasks = self.repository.fetchRestaurant()
@@ -339,11 +339,11 @@ extension RegistedRestaurantListViewController: UISearchResultsUpdating, UISearc
 
 extension RegistedRestaurantListViewController {
     func deleteAlert(restaurantTable: RestaurantTable) {
-        let alert = UIAlertController(title: "정말 삭제하시겠습니까?", message: "등록된 식당 정보와 방문 기록이 삭제됩니다.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "registedRestaurant_deleteAlert_title".localized, message: "registedRestaurant_deleteAlert_description".localized, preferredStyle: .alert)
         
-        let cancel = UIAlertAction(title: "취소", style: .default)
+        let cancel = UIAlertAction(title: "registedRestaurant_deleteAlert_cancel".localized, style: .default)
         
-        let delete = UIAlertAction(title: "삭제", style: .destructive) {_ in
+        let delete = UIAlertAction(title: "registedRestaurant_deleteAlert_delete".localized, style: .destructive) {_ in
             restaurantTable.history.forEach {
                 self.repository.deleteHistory(historyID: $0._id)
             }

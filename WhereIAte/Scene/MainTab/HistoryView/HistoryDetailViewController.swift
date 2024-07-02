@@ -19,7 +19,7 @@ class HistoryDetailViewController: BaseViewController {
     
     lazy var menu: UIMenu = {
         let menu = UIMenu(children: [
-            UIAction(title: "수정", image: UIImage(systemName: "square.and.pencil"), handler: { action in
+            UIAction(title: "historyDetailView_edit".localized, image: UIImage(systemName: "square.and.pencil"), handler: { action in
                 print("edit")
                 let registerVC = HistoryRegisterViewController()
                 registerVC.registEditType = .edit
@@ -28,7 +28,7 @@ class HistoryDetailViewController: BaseViewController {
                 registerVC.historyID = historyTable._id
                 self.navigationController?.pushViewController(registerVC, animated: true)
             }),
-            UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { action in
+            UIAction(title: "historyDetailView_delete".localized, image: UIImage(systemName: "trash"), attributes: .destructive, handler: { action in
                 print("delete")
                 self.deleteAlert()
             })
@@ -368,11 +368,11 @@ extension HistoryDetailViewController: UICollectionViewDelegate, UICollectionVie
 
 extension HistoryDetailViewController {
     func deleteAlert() {
-        let alert = UIAlertController(title: "정말 삭제하시겠습니까?", message: "삭제하시면 작성하신 내용과 사진이 삭제됩니다.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "deleteHistory_title".localized, message: "deleteHistory_description".localized, preferredStyle: .alert)
         
-        let cancel = UIAlertAction(title: "취소", style: .default)
+        let cancel = UIAlertAction(title: "deleteHistory_cancel".localized, style: .default)
         
-        let delete = UIAlertAction(title: "삭제", style: .destructive) {_ in
+        let delete = UIAlertAction(title: "deleteHistory_delete".localized, style: .destructive) {_ in
             guard let historyTable = self.historyTable else {return}
             self.repository.deleteHistory(historyID: historyTable._id)
             

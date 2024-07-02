@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  WhereIAte
+
+  Created by 홍수만 on 7/1/24.
+  
+*/
+
+NSLocationWhenInUseUsageDescription = "사용자의 현재 위치와 검색한 식당의 위치를 함께 확인 하기 위해 위치 정보가 필요합니다.";

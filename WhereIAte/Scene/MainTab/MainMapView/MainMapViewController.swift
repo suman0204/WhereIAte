@@ -45,8 +45,8 @@ class MainMapViewController: BaseViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         
-        searchController.searchBar.placeholder = "방문하신 식당을 검색해보세요"
-        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
+        searchController.searchBar.placeholder = "map_searchBar_placeholder".localized
+        searchController.searchBar.setValue("map_searchBar_cancel".localized, forKey: "cancelButtonText")
         searchController.searchBar.tintColor = UIColor(named: "mainColor")
 //        searchController.searchBar.setShowsCancelButton(true, animated: true)
        
@@ -334,14 +334,14 @@ extension MainMapViewController {
     }
     
     func showRequestLocationSettingAlert() {
-        let alert = UIAlertController(title: "위치 정보 이용", message: "위치 서비스를 사용할 수 없습니다. 기기의 '설정 -> 개인정보 보호'에서 위치 서비스를 켜주세요!", preferredStyle: .alert)
-        let goSetting = UIAlertAction(title: "설정으로 이동", style: .default) { _ in
+        let alert = UIAlertController(title: "locationSettingAlert_title".localized, message: "locationSettingAlert_message".localized, preferredStyle: .alert)
+        let goSetting = UIAlertAction(title: "locationSettingAlert_goToSetting".localized, style: .default) { _ in
             if let appSetting = URL(string: UIApplication.openSettingsURLString){
                 UIApplication.shared.open(appSetting)
             }
         }
         
-        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let cancel = UIAlertAction(title: "locationSettingAlert_cancel".localized, style: .cancel)
         
         alert.addAction(goSetting)
         alert.addAction(cancel)

@@ -30,6 +30,27 @@
 "historyRegister_menu_placeholder" = "Enter dishes you had ex) Pasta/Risotto/Salad";
 "historyRegister_date" = "Visited Date";
 "historyRegister_description" = "Description";
+//정보 미기입시 alert
+"historyRegister_noPhotos_title" = "Choose photos";
+"historyRegister_noPhotos_message" = "Please your photos.";
+"historyRegister_noPhotos_ok" = "Okay";
+
+"historyRegister_notTitle_title" = "Input title";
+"historyRegister_noTitle_message" = "Please input title.";
+"historyRegister_noTitle_ok" = "Okay";
+
+"historyRegister_noMenu_title" = "Input menu";
+"historyRegister_noMenu_message" = "Please input menu.";
+"historyRegister_noMenu_ok" = "Okay";
+
+"historyRegister_noRate_title" = "Input rating";
+"historyRegister_noRate_message" = "Please input rating.";
+"historyRegister_noRate_ok" = "Okay";
+
+
+"historyRegister_noDescription_title" = "Input description";
+"historyRegister_noDescription_message" = "Please input description.";
+"historyRegister_noDescription_ok" = "Okay";
 
 // 리스트 탭
 "registedRestaurant_searchBar_placeholder" = "Search by restaurant name or category";
@@ -37,6 +58,12 @@
 "registedRestaurant_sort_recent" = "Recent";
 "registedRestaurant_sort_rate" = "Rating";
 "registedRestaurant_sort_count" = "Visit Count";
+"registedRestaurant_delete" = "Delete";
+"registedRestaurant_deleteAlert_title" = "Are you sure you want to delete it?";
+"registedRestaurant_deleteAlert_description" = "Registered restaurant information and reviews will be deleted.";
+"registedRestaurant_deleteAlert_delete" = "Delete";
+"registedRestaurant_deleteAlert_cancel" = "Cancel";
+"registedRestaurant_times" = "%d times";
 
 // 기록 상세 뷰
 "historyDetailView_edit" = "Edit";
@@ -50,3 +77,9 @@
 "deleteHistory_description" = "If you delete it, your contents and photos will be deleted.";
 "deleteHistory_delete" = "Delete";
 "deleteHistory_cancel" = "Cancel";
+
+//위치 활성화 alert
+"locationSettingAlert_title" = "Using Location Information";
+"locationSettingAlert_message" = "Location services are not available. Please turn on location services in ‘Settings -> Privacy & Security’ on your device!";
+"locationSettingAlert_goToSetting" = "Go to setting";
+"locationSettingAlert_cancel" = "Cancel";

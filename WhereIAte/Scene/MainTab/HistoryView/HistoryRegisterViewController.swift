@@ -34,7 +34,7 @@ class HistoryRegisterViewController: BaseViewController {
     private var selectedAssetIdentifiers = [String]()
     
     lazy var saveButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
+        let button = UIBarButtonItem(title: "historyRegister_save".localized, style: .plain, target: self, action: #selector(saveButtonClicked))
         button.tintColor = UIColor(named: "mainColor")
         return button
     }()
@@ -120,20 +120,20 @@ class HistoryRegisterViewController: BaseViewController {
     
     let historyTitleLabel = {
         let view = UILabel()
-        view.text = "제목"
+        view.text = "historyRegister_title".localized
         view.font = .boldSystemFont(ofSize: 17)
         return view
     }()
     
     let titleTextField = {
         let view = UITextField()
-        view.placeholder = "제목을 입력해주세요"
+        view.placeholder = "historyRegister_title_placeholder".localized
         return view
     }()
     
     let visitedDateLabel = {
         let view = UILabel()
-        view.text = "방문 날짜"
+        view.text = "historyRegister_date".localized
         view.font = .boldSystemFont(ofSize: 17)
         return view
     }()
@@ -162,14 +162,14 @@ class HistoryRegisterViewController: BaseViewController {
     
     let menuLabel = {
         let view = UILabel()
-        view.text = "메뉴"
+        view.text = "historyRegister_menu".localized
         view.font = .boldSystemFont(ofSize: 17)
         return view
     }()
     
     let insertMenuTextField = {
         let view = UITextField()
-        view.placeholder = "드신 메뉴를 입력하세요 ex)파스타/리조또/샐러드..."
+        view.placeholder = "historyRegister_menu_placeholder".localized
         return view
     }()
     
@@ -188,7 +188,7 @@ class HistoryRegisterViewController: BaseViewController {
     
     let commentLabel = {
         let view = UILabel()
-        view.text = "기록"
+        view.text = "historyRegister_description".localized
         view.font = .boldSystemFont(ofSize: 17)
         return view
     }()
@@ -234,28 +234,28 @@ class HistoryRegisterViewController: BaseViewController {
         
         if registEditType == .register {
             if selectedAssetIdentifiers.isEmpty {
-                showAlert(title: "사진 선택", message: "사진을 선택하세요.")
+                showAlert(title: "historyRegister_noPhotos_title".localized, message: "historyRegister_noPhotos_message".localized)
                 return
             }
         }
         
         guard let title = titleTextField.text, !title.isEmpty else {
-            showAlert(title: "제목 입력", message: "제목을 입력하세요.")
+            showAlert(title: "historyRegister_notTitle_title".localized, message: "historyRegister_noTitle_message".localized)
             return
         }
         
         guard let menu = insertMenuTextField.text, !menu.isEmpty else {
-            showAlert(title: "메뉴 입력", message: "메뉴를 입력하세요.")
+            showAlert(title: "historyRegister_noMenu_title".localized, message: "historyRegister_noMenu_message".localized)
             return
         }
         
         if ratingView.rating == 0.0 {
-            showAlert(title: "별점 입력", message: "별점을 입력하세요.")
+            showAlert(title: "historyRegister_noRate_title".localized, message: "historyRegister_noRate_message".localized)
             return
         }
         
         guard let comment = commentTextView.text, !comment.isEmpty else {
-            showAlert(title: "기록 입력", message: "기록을 입력하세요.")
+            showAlert(title: "historyRegister_noDescription_title".localized, message: "historyRegister_noDescription_message".localized)
             return
         }
         

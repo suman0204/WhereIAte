@@ -75,7 +75,7 @@ class MainMapViewBottomSheetView: BaseViewController {
     
     let imageTitle = {
         let view = UILabel()
-        view.text = "방문기록 등록하기"
+        view.text = "sheet_regist".localized
         view.font = .boldSystemFont(ofSize: 13)
         view.textColor =  UIColor(named: "mainColor")
         view.textAlignment = .center

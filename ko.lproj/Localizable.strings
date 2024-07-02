@@ -27,9 +27,31 @@
 "historyRegister_title" = "제목";
 "historyRegister_title_placeholder" = "제목을 입력해주세요";
 "historyRegister_menu" = "메뉴";
-"historyRegister_menu_placeholder" = "드신 메뉴를 입력하세요 ex)파스타/리조또/샐러드";
+"historyRegister_menu_placeholder" = "드신 메뉴를 입력하세요 ex)파스타/리조또/샐러드...";
 "historyRegister_date" = "방문 날짜";
 "historyRegister_description" = "기록";
+//정보 미기입시 alert
+"historyRegister_noPhotos_title" = "사진 선택";
+"historyRegister_noPhotos_message" = "사진을 선택하세요.";
+"historyRegister_noPhotos_ok" = "확인";
+
+"historyRegister_notTitle_title" = "제목 입력";
+"historyRegister_noTitle_message" = "제목을 입력하세요.";
+"historyRegister_noTitle_ok" = "확인";
+
+"historyRegister_noMenu_title" = "메뉴 입력";
+"historyRegister_noMenu_message" = "메뉴를 입력하세요.";
+"historyRegister_noMenu_ok" = "확인";
+
+"historyRegister_noRate_title" = "별점 입력";
+"historyRegister_noRate_message" = "별점을 입력하세요.";
+"historyRegister_noRate_ok" = "확인";
+
+
+"historyRegister_noDescription_title" = "기록 입력";
+"historyRegister_noDescription_message" = "기록을 입력하세요.";
+"historyRegister_noDescription_ok" = "확인";
+
 
 //리스트 탭
 "registedRestaurant_searchBar_placeholder" = "식당 및 카테고리로 검색해보세요";
@@ -37,6 +59,13 @@
 "registedRestaurant_sort_recent" = "최신순";
 "registedRestaurant_sort_rate" = "별점순";
 "registedRestaurant_sort_count" = "방문횟수순";
+"registedRestaurant_delete" = "삭제하기";
+"registedRestaurant_deleteAlert_title" = "정말 삭제하시겠습니까?";
+"registedRestaurant_deleteAlert_description" = "등록된 식당 정보와 방문 기록이 삭제됩니다.";
+"registedRestaurant_deleteAlert_delete" = "삭제";
+"registedRestaurant_deleteAlert_cancel" = "취소";
+"registedRestaurant_times" = "방문 %d회";
+
 
 //기록 상세 뷰
 "historyDetailView_edit" = "수정";
@@ -50,3 +79,10 @@
 "deleteHistory_description" = "삭제하시면 작성하신 내용과 사진이 삭제됩니다.";
 "deleteHistory_delete" = "삭제";
 "deleteHistory_cancel" = "취소";
+
+//위치 활성화 alert
+"locationSettingAlert_title" = "위치 정보 이용";
+"locationSettingAlert_message" = "위치 서비스를 사용할 수 없습니다. 기기의 '설정 -> 개인정보 보호'에서 위치 서비스를 켜주세요!";
+"locationSettingAlert_goToSetting" = "설정으로 이동";
+"locationSettingAlert_cancel" = "취소";
+

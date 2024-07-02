@@ -179,7 +179,9 @@ class RestaurantListCell: BaseTableViewCell {
         restaurantCategory.text = data.restaurantCategory
         restaurantRoadAddress.text = data.restaurantRoadAddress
         rateLabel.text = data.avgRate
-        visitedTimesLabel.text = "방문 \(data.historyCount)회"
+//        visitedTimesLabel.text = "방문 \(data.historyCount)회"
+        visitedTimesLabel.text = "registedRestaurant_times".localized(number: data.historyCount)
+
 //        restaurantPhoneNumber.text = data.restaurantPhoneNumber
 //        restaurantImage.image = loadImageForDocument(fileName: "\(data.imageNameList.first)_image.jpg")
     }
